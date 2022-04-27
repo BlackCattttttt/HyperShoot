@@ -42,6 +42,12 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.mathematics": {
+      "version": "file:C:/Users/Admin/Downloads/Unity.Mathematics-master/src",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.nuget.newtonsoft-json": {
       "version": "2.0.0",
       "depth": 1,

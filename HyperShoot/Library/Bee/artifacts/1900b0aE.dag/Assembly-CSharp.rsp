@@ -367,6 +367,7 @@
 "Assets/Script/Core/EventSystem/fp_StateEventHandler.cs"
 "Assets/Script/Core/EventSystem/fp_TargetEvent.cs"
 "Assets/Script/Core/EventSystem/fp_Value.cs"
+"Assets/Script/Core/Motion/fp_Spring.cs"
 "Assets/Script/Core/Utility/fp_3DUtility.cs"
 "Assets/Script/Core/Utility/fp_AudioUtility.cs"
 "Assets/Script/Core/Utility/fp_Layer.cs"

@@ -12,7 +12,15 @@ namespace HyperShoot.Player
         public Vector3 Velocity { get { return characterController.velocity; } }
         protected bool m_IsFirstPerson = true;
 
+        public Vector3 GroundNormal { get { return m_GroundHit.normal; } }
         public float GroundAngle { get { return Vector3.Angle(m_GroundHit.normal, Vector3.up); } }
+        protected RaycastHit m_CeilingHit;                  // contains info about any ceilings we may have bumped into
+        protected RaycastHit m_WallHit;						// contains info about any horizontal blockers we may have collided with
+
+        // physics trigger
+        protected CapsuleCollider m_TriggerCollider = null;     // trigger collider for incoming objects to detect us
+        public bool PhysicsHasCollisionTrigger = true;          // whether to automatically generate a child object with a trigger on startup
+        protected GameObject m_Trigger = null;					// trigger gameobject for detection of incoming objects
 
         // motor
         public float MotorAcceleration = 0.18f;
@@ -26,14 +34,91 @@ namespace HyperShoot.Player
         protected Vector3 m_MotorThrottle = Vector3.zero;
         protected float m_MotorAirSpeedModifier = 1.0f;
         protected float m_CurrentAntiBumpOffset = 0.0f;
-
+        // jump
+        public float MotorJumpForce = 0.18f;
+        public float MotorJumpForceDamping = 0.08f;
+        public float MotorJumpForceHold = 0.003f;
+        public float MotorJumpForceHoldDamping = 0.5f;
+        protected int m_MotorJumpForceHoldSkipFrames = 0;
+        protected float m_MotorJumpForceAcc = 0.0f;
+        protected bool m_MotorJumpDone = true;
+        // physics
+        public float PhysicsForceDamping = 0.05f;           // damping of external forces
+        public float PhysicsSlopeSlideLimit = 30.0f;        // steepness in angles above which controller will start to slide
+        public float PhysicsSlopeSlidiness = 0.15f;         // slidiness of the surface that we're standing on. will be additive if steeper than CharacterController.slopeLimit
+        public float PhysicsWallBounce = 0.0f;              // how much to bounce off walls
+        public float PhysicsWallFriction = 0.0f;
+        protected Vector3 m_ExternalForce = Vector3.zero;   // current velocity from external forces (explosion knockback, jump pads, rocket packs)
+        protected Vector3[] m_SmoothForceFrame = new Vector3[120];
+        protected bool m_Slide = false;                     // are sliding on a steep surface without moving?
+        protected bool m_SlideFast = false;                 // have we accumulated a quick speed from standing on a slope above 'slopeLimit'
+        protected float m_SlideFallSpeed = 0.0f;            // fall speed resulting from sliding fast into free fall
+        protected float m_OnSteepGroundSince = 0.0f;        // the point in time at which we started standing on a slope above 'slopeLimit'. used to calculate slide speed accumulation
+        protected float m_SlopeSlideSpeed = 0.0f;           // current velocity from sliding
         protected Vector3 m_PredictedPos = Vector3.zero;
+        protected Vector3 m_PrevDir = Vector3.zero;
+        protected Vector3 m_NewDir = Vector3.zero;
+        protected float m_ForceImpact = 0.0f;
+        protected float m_ForceMultiplier = 0.0f;
+        protected Vector3 CapsuleBottom = Vector3.zero;
+        protected Vector3 CapsuleTop = Vector3.zero;
 
         protected override void Start()
         {
             base.Start();
 
             SetPosition(Transform.position);
+
+            if (PhysicsHasCollisionTrigger)
+            {
+
+                m_Trigger = new GameObject("Trigger");
+                m_Trigger.transform.parent = m_Transform;
+                m_Trigger.layer = fp_Layer.LocalPlayer;
+                m_Trigger.transform.localPosition = Vector3.zero;
+
+                m_TriggerCollider = m_Trigger.AddComponent<CapsuleCollider>();
+                m_TriggerCollider.isTrigger = true;
+                m_TriggerCollider.radius = characterController.radius + SkinWidth;
+                m_TriggerCollider.height = characterController.height + (SkinWidth * 2.0f);
+                m_TriggerCollider.center = characterController.center;
+
+              //  m_Trigger.gameObject.AddComponent<vp_DamageTransfer>();
+
+                // if we have a SurfaceIdentifier, copy it along with its values onto the trigger.
+                // this will make the trigger emit the same fx as the controller when hit by bullets
+                //if (SurfaceIdentifier != null)
+                //{
+                //    fp_Timer.In(0.05f, () =>    // wait atleast one frame for this to take effect properly
+                //    {
+                //        vp_SurfaceIdentifier triggerSurfaceIdentifier = m_Trigger.gameObject.AddComponent<vp_SurfaceIdentifier>();
+                //        triggerSurfaceIdentifier.SurfaceType = SurfaceIdentifier.SurfaceType;
+                //        triggerSurfaceIdentifier.AllowDecals = SurfaceIdentifier.AllowDecals;
+                //    });
+                //}
+
+            }
+        }
+        protected override void RefreshCollider()
+        {
+
+            base.RefreshCollider();
+
+            // update physics trigger size
+            if (m_TriggerCollider != null)
+            {
+                m_TriggerCollider.radius = characterController.radius + SkinWidth;
+                m_TriggerCollider.height = characterController.height + (SkinWidth * 2.0f);
+                m_TriggerCollider.center = characterController.center;
+            }
+
+        }
+        public override void EnableCollider(bool isEnabled = true)
+        {
+
+            if (characterController != null)
+                characterController.enabled = isEnabled;
+
         }
         protected override void Update()
         {
@@ -62,7 +147,7 @@ namespace HyperShoot.Player
             //UpdateJump();
 
             // handle external forces like gravity, explosion shockwaves or wind
-            //UpdateForces();
+            UpdateForces();
 
             // apply sliding in slopes
             //UpdateSliding();
@@ -74,7 +159,7 @@ namespace HyperShoot.Player
             FixedMove();
 
             // respond to environment collisions that may have happened during the move
-            //UpdateCollisions();
+            UpdateCollisions();
 
             // move and rotate player along with rigidbodies & moving platforms
             //UpdatePlatformMove();
@@ -112,6 +197,31 @@ namespace HyperShoot.Player
             // dampen motor force
             m_MotorThrottle.x /= (1.0f + (MotorDamping * m_MotorAirSpeedModifier * Time.timeScale));
             m_MotorThrottle.z /= (1.0f + (MotorDamping * m_MotorAirSpeedModifier * Time.timeScale));
+        }
+        protected override void UpdateForces()
+        {
+
+            base.UpdateForces();
+
+            // apply smooth force (forces applied over several frames)
+            if (m_SmoothForceFrame[0] != Vector3.zero)
+            {
+                AddForceInternal(m_SmoothForceFrame[0]);
+                for (int v = 0; v < 120; v++)
+                {
+                    m_SmoothForceFrame[v] = (v < 119) ? m_SmoothForceFrame[v + 1] : Vector3.zero;
+                    if (m_SmoothForceFrame[v] == Vector3.zero)
+                        break;
+                }
+            }
+
+            // dampen external forces
+            m_ExternalForce /= (1.0f + (PhysicsForceDamping * fp_TimeUtility.AdjustedTimeScale));
+
+        }
+        protected virtual void AddForceInternal(Vector3 force)
+        {
+            m_ExternalForce += force;
         }
         /// <summary>
         /// this method calculates a controller velocity multiplier
@@ -172,9 +282,9 @@ namespace HyperShoot.Player
 
             // --- apply forces ---
             m_MoveDirection = Vector3.zero;
-            //m_MoveDirection += m_ExternalForce;
+            m_MoveDirection += m_ExternalForce;
             m_MoveDirection += m_MotorThrottle;
-            //m_MoveDirection.y += m_FallSpeed;
+            m_MoveDirection.y += m_FallSpeed;
 
             // --- apply anti-bump offset ---
             // this pushes the controller towards the ground to prevent the character
@@ -246,6 +356,126 @@ namespace HyperShoot.Player
 
             }
         }
+        protected override void UpdateCollisions()
+        {
+
+            base.UpdateCollisions();
+
+            if (m_OnNewGround)
+            {
+
+                // deflect the controller sideways under some circumstances
+                if (m_WasFalling)
+                {
+
+                    DeflectDownForce();
+
+                    // sync camera y pos
+                    m_SmoothPosition.y = Transform.position.y;
+
+                    // reset all the jump variables
+                    m_MotorThrottle.y = 0.0f;
+                    m_MotorJumpForceAcc = 0.0f;
+                    m_MotorJumpForceHoldSkipFrames = 0;
+                }
+                // detect and store moving platforms	// TODO: should be in base class for AI
+                //if (m_GroundHit.collider.gameObject.layer == fp_Layer.MovingPlatform)
+                //{
+                //    m_Platform = m_GroundHitTransform;
+                //    m_LastPlatformAngle = m_Platform.eulerAngles.y;
+                //}
+               // else
+                //    m_Platform = null;
+
+            }
+
+            // --- respond to wall collision ---
+            // if the controller didn't end up at the predicted position, some
+            // external object has blocked its way, so deflect the movement forces
+            // to avoid getting stuck at walls
+            if ((m_PredictedPos.x != Transform.position.x) ||
+                (m_PredictedPos.z != Transform.position.z) &&
+                (m_ExternalForce != Vector3.zero))
+                DeflectHorizontalForce();
+
+        }
+        public virtual void DeflectDownForce()
+        {
+
+            // if we land on a surface tilted above the slide limit, convert
+            // fall speed into slide speed on impact
+            //if (GroundAngle > PhysicsSlopeSlideLimit)
+            //{
+            //    m_SlopeSlideSpeed = m_FallImpact * (0.25f * Time.timeScale);
+            //}
+
+            // deflect away from nearly vertical surfaces. this serves to make
+            // falling along walls smoother, and to prevent the controller
+            // from getting stuck on vertical walls when falling into them
+            if (GroundAngle > 85)
+            {
+                m_MotorThrottle += (fp_3DUtility.HorizontalVector((GroundNormal * m_FallImpact)));
+                m_Grounded = false;
+            }
+
+        }
+        protected virtual void DeflectHorizontalForce()
+        {
+            // flatten positions (this is 2d) and get our direction at point of impact
+            m_PredictedPos.y = Transform.position.y;
+            m_PrevPosition.y = Transform.position.y;
+            m_PrevDir = (m_PredictedPos - m_PrevPosition).normalized;
+
+            // get the origins of the controller capsule's spheres at prev position
+            CapsuleBottom = m_PrevPosition + Vector3.up * (Player.Radius.Get());
+            CapsuleTop = CapsuleBottom + Vector3.up * (Player.Height.Get() - (Player.Radius.Get() * 2));
+
+            // capsule cast from the previous position to the predicted position to find
+            // the exact impact point. this capsule cast does not include the skin width
+            // (it's not really needed plus we don't want ground collisions)
+            if (!(Physics.CapsuleCast(CapsuleBottom, CapsuleTop, Player.Radius.Get(), m_PrevDir,
+                out m_WallHit, Vector3.Distance(m_PrevPosition, m_PredictedPos), fp_Layer.Mask.ExternalBlockers)))
+                return;
+
+            // the force will be deflected perpendicular to the impact normal, and to the
+            // left or right depending on whether the previous position is to our left or
+            // right when looking back at the impact point from the current position
+            m_NewDir = Vector3.Cross(m_WallHit.normal, Vector3.up).normalized;
+            if ((Vector3.Dot(Vector3.Cross((m_WallHit.point - Transform.position),
+                (m_PrevPosition - Transform.position)), Vector3.up)) > 0.0f)
+                m_NewDir = -m_NewDir;
+
+            // calculate how the current force gets absorbed depending on angle of impact.
+            // if we hit a wall head-on, almost all force will be absorbed, but if we
+            // barely glance it, force will be almost unaltered (depending on friction)
+            m_ForceMultiplier = Mathf.Abs(Vector3.Dot(m_PrevDir, m_NewDir)) * (1.0f - (PhysicsWallFriction));
+
+            // if the controller has wall bounciness, apply it
+            if (PhysicsWallBounce > 0.0f)
+            {
+                m_NewDir = Vector3.Lerp(m_NewDir, Vector3.Reflect(m_PrevDir, m_WallHit.normal), PhysicsWallBounce);
+                m_ForceMultiplier = Mathf.Lerp(m_ForceMultiplier, 1.0f, (PhysicsWallBounce * (1.0f - (PhysicsWallFriction))));
+            }
+
+            // deflect current force and report the impact
+            m_ForceImpact = 0.0f;
+            float yBak = m_ExternalForce.y;
+            m_ExternalForce.y = 0.0f;
+            m_ForceImpact = m_ExternalForce.magnitude;
+            m_ExternalForce = m_NewDir * m_ExternalForce.magnitude * m_ForceMultiplier;
+            m_ForceImpact = m_ForceImpact - m_ExternalForce.magnitude;
+            for (int v = 0; v < 120; v++)
+            {
+                if (m_SmoothForceFrame[v] == Vector3.zero)
+                    break;
+                m_SmoothForceFrame[v] = m_SmoothForceFrame[v].magnitude * m_NewDir * m_ForceMultiplier;
+            }
+            m_ExternalForce.y = yBak;
+
+            // TIP: the force that was absorbed by the bodies during the impact can be used for
+            // things like damage, so an event could be sent here with the amount of absorbed force
+
+        }
         /// <summary>
         /// since the controller is moved in FixedUpdate and the
         /// camera in Update there will be noticeable camera jitter.
@@ -291,11 +521,45 @@ namespace HyperShoot.Player
             base.Stop();
 
             m_MotorThrottle = Vector3.zero;
-            //	m_MotorJumpDone = true;
-            //	m_MotorJumpForceAcc = 0.0f;
-            //	m_ExternalForce = Vector3.zero;
+            m_MotorJumpDone = true;
+            m_MotorJumpForceAcc = 0.0f;
+            m_ExternalForce = Vector3.zero;
             //	StopSoftForce();
             m_SmoothPosition = Transform.position;
+
+        }
+
+        protected virtual Vector3 OnValue_MotorThrottle
+        {
+            get { return m_MotorThrottle; }
+            set { m_MotorThrottle = value; }
+        }
+
+
+        /// <summary>
+        /// returns true if the current jump has ended, false if not
+        /// </summary>
+        protected virtual bool OnValue_MotorJumpDone
+        {
+            get { return m_MotorJumpDone; }
+        }
+
+
+        /// <summary>
+        /// always returns true if the player is in 1st person mode,
+        /// and false in 3rd person
+        /// </summary>
+        protected virtual bool OnValue_IsFirstPerson
+        {
+
+            get
+            {
+                return m_IsFirstPerson;
+            }
+            set
+            {
+                m_IsFirstPerson = value;
+            }
 
         }
     }

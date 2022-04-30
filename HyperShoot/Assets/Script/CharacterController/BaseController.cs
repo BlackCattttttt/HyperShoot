@@ -18,6 +18,11 @@ namespace HyperShoot.Player
         protected bool m_OnNewGround = false;
         protected bool m_WasFalling = false;
 
+        // gravity
+        public float PhysicsGravityModifier = 0.2f;         // affects fall speed
+        protected float m_FallSpeed = 0.0f;                 // determines how quickly the controller falls in the world
+        protected const float PHYSICS_GRAVITY_MODIFIER_INTERNAL = 0.002f;	// retained for backwards compatibility
+
         // crouching
         protected float m_NormalHeight = 0.0f;              // height of the player controller when not crouching (stored from the character controller in Start)
         protected Vector3 m_NormalCenter = Vector3.zero;    // forced to half of the controller height (for crouching logic)
@@ -34,7 +39,9 @@ namespace HyperShoot.Player
         protected Vector3 m_Velocity = Vector3.zero;            // velocity calculated in same way as unity's character controller
         protected Vector3 m_PrevPosition = Vector3.zero;    // position on end of each fixed timestep
         protected Vector3 m_PrevVelocity = Vector3.zero;    // used for calculating velocity, and detecting the start of a fall 
-                                                            // event handler property cast as a playereventhandler
+
+        public float SkinWidth { get { return CHARACTER_CONTROLLER_SKINWIDTH; } }
+
         private CharacterEventHandler m_Player = null;
         protected CharacterEventHandler Player
         {
@@ -102,19 +109,83 @@ namespace HyperShoot.Player
                 return;
 
             // updates external forces like gravity
-            //UpdateForces();
+            UpdateForces();
 
             // update controller position based on current motor- & external forces
             FixedMove();
 
             // respond to environment collisions that may have happened during the move
-            //UpdateCollisions();
+            UpdateCollisions();
 
             // move and rotate player along with rigidbodies & moving platforms
             //UpdatePlatformMove();
 
             // store final position and velocity for next frame's physics calculations
             UpdateVelocity();
+
+        }
+        protected virtual void UpdateForces()
+        {
+
+            // store ground for detecting fall impact and loss of grounding this frame
+            m_LastGroundHitTransform = m_GroundHitTransform;
+
+            // accumulate gravity
+            if (m_Grounded && (m_FallSpeed <= 0.0f))
+            // when not falling, stick controller to the ground by a small, fixed gravity
+            {
+                m_FallSpeed = (Physics.gravity.y * (PhysicsGravityModifier * PHYSICS_GRAVITY_MODIFIER_INTERNAL) * fp_TimeUtility.AdjustedTimeScale);
+                return;
+            }
+            else
+            {
+
+                m_FallSpeed += (Physics.gravity.y * (PhysicsGravityModifier * PHYSICS_GRAVITY_MODIFIER_INTERNAL) * fp_TimeUtility.AdjustedTimeScale);
+
+                // detect starting to fall MID-JUMP (for fall impact)
+                if ((m_Velocity.y < 0) && (m_PrevVelocity.y >= 0.0f))
+                    SetFallHeight(Transform.position.y);
+
+            }
+
+        }
+        protected virtual void UpdateCollisions()
+        {
+
+            // if climbing, abort any ongoing fall
+            //if (Player.Climb.Active)
+            //    m_FallStartHeight = NOFALL;
+
+            m_FallImpact = 0.0f;
+            m_OnNewGround = false;
+            m_WasFalling = false;
+
+            // respond to ground collision
+            if ((m_GroundHitTransform != null)
+             && (m_GroundHitTransform != m_LastGroundHitTransform))
+            {
+
+                // just standing on a new surface (important to detect even if
+                // not falling, e.g. if walking onto a moving platform)
+                m_OnNewGround = true;
+
+                // if we were falling, transmit fall impact to the player. fall impact
+                // is based on the distance from the impact position to the start point
+                // of a mid-jump fall (detected in 'UpdateForces') or off-an-edge fall
+                // (detected in 'StoreGroundInfo')
+                if (m_LastGroundHitTransform == null)
+                {
+                    m_WasFalling = true;
+                    if ((m_FallStartHeight > Transform.position.y) && m_Grounded)
+                    {
+                        m_FallImpact = FallDistance * FALL_IMPACT_MULTIPLIER;
+                        Player.FallImpact.Send(m_FallImpact);
+                        //Debug.Log("DISTANCE: " + FallDistance);
+                    }
+                }
+                m_FallStartHeight = NOFALL;
+
+            }
 
         }
         /// <summary>
@@ -139,7 +210,7 @@ namespace HyperShoot.Player
 
             Player.Move.Send(Vector3.zero);
             Player.InputMoveVector.Set(Vector2.zero);
-            //m_FallSpeed = 0.0f;
+            m_FallSpeed = 0.0f;
             m_FallStartHeight = NOFALL;
 
         }
@@ -209,10 +280,10 @@ namespace HyperShoot.Player
             }
 
             // detect walking OFF AN EDGE into a fall (for fall impact)
-            //if ((m_Velocity.y < 0) && (m_GroundHitTransform == null)
-            //	&& (m_LastGroundHitTransform != null)
-            //	&& !Player.Jump.Active)
-            //	SetFallHeight(Transform.position.y);
+            if ((m_Velocity.y < 0) && (m_GroundHitTransform == null)
+                && (m_LastGroundHitTransform != null)
+                && !Player.Jump.Active)
+                SetFallHeight(Transform.position.y);
 
             return;
 
@@ -345,6 +416,17 @@ namespace HyperShoot.Player
         protected virtual bool OnValue_Grounded
         {
             get { return m_Grounded; }
+        }
+        protected virtual float OnValue_FallSpeed
+        {
+            get { return m_FallSpeed; }
+            set { m_FallSpeed = value; }
+        }
+
+        protected virtual Vector3 OnValue_Velocity
+        {
+            get { return m_Velocity; }
+            set { m_Velocity = value; }
         }
 
     }

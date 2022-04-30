@@ -9,11 +9,21 @@ namespace HyperShoot.Player
 		[HideInInspector] public FPCharacterController FPController = null;
 		// camera position
 		public Vector3 PositionOffset = new Vector3(0.0f, 1.75f, 0.1f);
+		public float PositionGroundLimit = 0.1f;
+		public float PositionSpringStiffness = 0.01f;
+		public float PositionSpringDamping = 0.25f;
+		protected fp_Spring m_PositionSpring = null;        // spring for external forces (falling impact, bob, earthquakes)
 		// camera rotation
 		public Vector2 RotationPitchLimit = new Vector2(90.0f, -90.0f);
 		public Vector2 RotationYawLimit = new Vector2(-360.0f, 360.0f);
 		protected float m_Pitch = 0.0f;
 		protected float m_Yaw = 0.0f;
+		protected fp_Spring m_RotationSpring = null;
+		// camera collision
+		protected Vector3 m_CollisionVector = Vector3.zero;                     // holds the direction and distance of a camera collision
+		protected Vector3 m_CameraCollisionStartPos = Vector3.zero;
+		protected Vector3 m_CameraCollisionEndPos = Vector3.zero;
+		protected RaycastHit m_CameraHit;
 
 		private FPCharacterEventHandler m_Player = null;
 		public FPCharacterEventHandler Player
@@ -109,9 +119,9 @@ namespace HyperShoot.Player
 
 			// --- primary position spring ---
 			// this is used for all sorts of positional force acting on the camera
-			//m_PositionSpring = new vp_Spring(Transform, vp_Spring.UpdateMode.Position, false);
-			//m_PositionSpring.MinVelocity = 0.0f;
-			//m_PositionSpring.RestState = PositionOffset;
+			m_PositionSpring = new fp_Spring(Transform, fp_Spring.UpdateMode.Position, false);
+			m_PositionSpring.MinVelocity = 0.0f;
+			m_PositionSpring.RestState = PositionOffset;
 
 			// --- secondary position spring ---
 			// this is mainly intended for positional force from recoil, stomping and explosions
@@ -120,8 +130,8 @@ namespace HyperShoot.Player
 
 			// --- rotation spring ---
 			// this is used for all sorts of angular force acting on the camera
-		//	m_RotationSpring = new vp_Spring(Transform, vp_Spring.UpdateMode.RotationAdditiveLocal, false);
-		//	m_RotationSpring.MinVelocity = 0.0f;
+			m_RotationSpring = new fp_Spring(Transform, fp_Spring.UpdateMode.RotationAdditiveLocal, false);
+			m_RotationSpring.MinVelocity = 0.0f;
 		}
 		protected override void OnEnable()
 		{
@@ -182,7 +192,7 @@ namespace HyperShoot.Player
 
 			//UpdateShakes();
 
-			//UpdateSprings();
+			UpdateSprings();
 
 		}
 
@@ -205,14 +215,12 @@ namespace HyperShoot.Player
 			m_Transform.position = FPController.SmoothPosition;
 
 			// apply current spring offsets
-			//if (Player.IsFirstPerson.Get())
-			//	m_Transform.localPosition += (m_PositionSpring.State + m_PositionSpring2.State);
-			//else
-			//	m_Transform.localPosition += (m_PositionSpring.State +
-			//									(Vector3.Scale(m_PositionSpring2.State, Vector3.up)));  // don't shake camera sideways in third person
+			m_Transform.localPosition += (m_PositionSpring.State );
+				//+ m_PositionSpring2.State);
+
 
 			// prevent camera from intersecting objects
-			//TryCameraCollision();
+			TryCameraCollision();
 
 			// rotate the parent gameobject (i.e. player model)
 			// NOTE: this rotation does not pitch the player model, it only applies yaw
@@ -227,8 +235,40 @@ namespace HyperShoot.Player
 				fp_MathUtility.NaNSafeQuaternion((xQuaternion * yQuaternion), Transform.rotation);
 
 			// roll the camera
-			//Transform.localEulerAngles +=
-			//	fp_MathUtility.NaNSafeVector3(Vector3.forward * m_RotationSpring.State.z);
+			Transform.localEulerAngles +=
+				fp_MathUtility.NaNSafeVector3(Vector3.forward * m_RotationSpring.State.z);
+
+		}
+		public virtual void TryCameraCollision()
+		{
+			// start position is the center of the character controller
+			// and height of the camera PositionOffset. this will detect
+			// objects between the camera and controller even if the
+			// camera PositionOffset is far from the controller
+
+			m_CameraCollisionStartPos = FPController.Transform.TransformPoint(0, PositionOffset.y, 0);
+
+			// end position is the current camera position plus we'll move it
+			// back the distance of our Controller.radius in order to reduce
+			// camera clipping issues very close to walls
+			// TIP: for solving such issues, you can also try reducing the
+			// main camera's near clipping plane 
+			m_CameraCollisionEndPos = Transform.position + (Transform.position - m_CameraCollisionStartPos).normalized * FPController.characterController.radius;
+			m_CollisionVector = Vector3.zero;
+			if (Physics.Linecast(m_CameraCollisionStartPos, m_CameraCollisionEndPos, out m_CameraHit, fp_Layer.Mask.ExternalBlockers))
+			{
+				if (!m_CameraHit.collider.isTrigger)
+				{
+					Transform.position = m_CameraHit.point - (m_CameraHit.point - m_CameraCollisionStartPos).normalized * FPController.characterController.radius;
+					m_CollisionVector = (m_CameraHit.point - m_CameraCollisionEndPos);
+				}
+			}
+
+			// also, prevent the camera from ever going below the player's
+			// feet (not even when up in the air)
+			if (Transform.localPosition.y < PositionGroundLimit)
+				Transform.localPosition = new Vector3(Transform.localPosition.x,
+												PositionGroundLimit, Transform.localPosition.z);
 
 		}
 		protected virtual void UpdateInput()
@@ -252,6 +292,13 @@ namespace HyperShoot.Player
 			m_Pitch = m_Pitch > 360.0f ? m_Pitch -= 360.0f : m_Pitch;
 			m_Pitch = Mathf.Clamp(m_Pitch, -RotationPitchLimit.x, -RotationPitchLimit.y);
 
+		}
+		protected virtual void UpdateSprings()
+		{
+
+			m_PositionSpring.FixedUpdate();
+			//m_PositionSpring2.FixedUpdate();
+			m_RotationSpring.FixedUpdate();
 		}
 		/// <summary>
 		/// sets camera rotation and snaps springs and zoom to a halt

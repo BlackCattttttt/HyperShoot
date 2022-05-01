@@ -300,6 +300,19 @@ namespace HyperShoot.Player
 			//m_PositionSpring2.FixedUpdate();
 			m_RotationSpring.FixedUpdate();
 		}
+		protected virtual bool CanStart_Run()
+		{
+
+			if (Player == null)
+				return true;
+
+			// can't start running while zooming
+			if (Player.Zoom.Active)
+				return false;
+
+			return true;
+
+		}
 		/// <summary>
 		/// sets camera rotation and snaps springs and zoom to a halt
 		/// </summary>

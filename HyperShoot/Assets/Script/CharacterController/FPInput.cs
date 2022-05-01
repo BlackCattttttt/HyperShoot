@@ -88,8 +88,8 @@ namespace HyperShoot.Player
             // manage input for moving
             InputMove();
             InputRun();
-            //InputJump();
-            //InputCrouch();
+            InputJump();
+            InputCrouch();
 
             // manage input for weapons
             //	InputAttack();

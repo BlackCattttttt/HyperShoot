@@ -38,7 +38,7 @@ namespace HyperShoot.Player
         public fp_Activity Run;
         public fp_Activity Jump;
         public fp_Activity Crouch;
-        //public fp_Activity Zoom;
+        public fp_Activity Zoom;
         //public fp_Activity Attack;
         //public fp_Activity Reload;
         //public fp_Activity Climb;
@@ -114,7 +114,7 @@ namespace HyperShoot.Player
             BindStateToActivity(Run);
             BindStateToActivity(Jump);
             BindStateToActivity(Crouch);
-            //BindStateToActivity(Zoom);
+            BindStateToActivity(Zoom);
             //BindStateToActivity(Reload);
             BindStateToActivity(Dead);
             //BindStateToActivity(Climb);

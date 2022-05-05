@@ -835,9 +835,9 @@ public sealed class fp_ComponentPreset
 			{ "fp_FPCamera.MouseSmoothWeight", new string [] {"fp_FPInput", "MouseLookSmoothWeight"} },
 			{ "fp_FPCamera.MouseAccelerationThreshold", new string [] {"fp_FPInput", "MouseLookAccelerationThreshold"} },
 			{ "fp_FPInput.ForceCursor", new string [] {"fp_FPInput", "MouseCursorForced"} },
-			{ "fp_FPController.m_Velocity", new string [] {"", ""} },
-			{ "fp_FPController.m_PositionOnPlatform", new string [] {"", ""} },
-			{ "fp_Controller.m_PositionOnPlatform", new string [] {"fp_Controller", "PositionOnPlatform"} },
+			{ "FPCharacterController.m_Velocity", new string [] {"", ""} },
+			{ "FPCharacterController.m_PositionOnPlatform", new string [] {"", ""} },
+			{ "BaseController.m_PositionOnPlatform", new string [] {"fp_Controller", "PositionOnPlatform"} },
 		};
 
 	

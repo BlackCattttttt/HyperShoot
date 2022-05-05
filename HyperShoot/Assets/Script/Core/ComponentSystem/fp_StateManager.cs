@@ -48,6 +48,11 @@ public class fp_StateManager
 				Debug.LogWarning("Warning: " + m_Component.GetType() + " on '" + m_Component.name + "' has more than one state named: '" + s.Name + "'. Only the topmost one will be used.");
 				m_States[m_DefaultId].StatesToBlock.Add(m_States.IndexOf(s));
 			}
+			// load up the preset of each user assigned state and
+			if (s.Preset == null)
+				s.Preset = new fp_ComponentPreset();
+			if (s.TextAsset != null)
+				s.Preset.LoadFromTextAsset(s.TextAsset);
 		}
 
 		// the default state of a component is always the last one in the list
@@ -184,15 +189,15 @@ public class fp_StateManager
 
 			}
 
-			//if (m_States[v].Preset == null)
-			//	continue;
+            if (m_States[v].Preset == null)
+                continue;
 
-			//if (m_States[v].Preset.ComponentType == null)
-			//	continue;
+            if (m_States[v].Preset.ComponentType == null)
+                continue;
 
-			//vp_ComponentPreset.Apply(m_Component, m_States[v].Preset);
+            fp_ComponentPreset.Apply(m_Component, m_States[v].Preset);
 
-		}
+        }
 
 
 #if UNITY_EDITOR

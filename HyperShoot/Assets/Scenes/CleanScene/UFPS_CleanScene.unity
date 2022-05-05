@@ -865,13 +865,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Persist: 0
-  States: []
+  States:
+  - TypeName: FPCharacterController
+    Name: Run
+    TextAsset: {fileID: 4900000, guid: bc8f29f3e3f471c48a1961a327e5f20e, type: 3}
+    StatesToBlock: 
+  - TypeName: FPCharacterController
+    Name: Crouch
+    TextAsset: {fileID: 4900000, guid: 6ff826a04e7101a4ca8a1b40ba233f63, type: 3}
+    StatesToBlock: 
+  - TypeName: FPCharacterController
+    Name: Default
+    TextAsset: {fileID: 0}
+    StatesToBlock: 
   Children: []
   Siblings: []
   Family: []
   Renderers: []
   AudioSources: []
   PhysicsGravityModifier: 0.2
+  PhysicsPushForce: 5
+  PhysicsCrouchHeightModifier: 0.5
   PhysicsHasCollisionTrigger: 1
   MotorAcceleration: 0.18
   MotorDamping: 0.17

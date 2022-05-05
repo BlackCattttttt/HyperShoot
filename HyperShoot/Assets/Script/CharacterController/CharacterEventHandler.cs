@@ -44,7 +44,7 @@ namespace HyperShoot.Player
         //public fp_Activity Climb;
         //public fp_Activity Interact;
         //	public fp_Activity<int> SetWeapon;
-        //	public fp_Activity OutOfControl;
+        public fp_Activity OutOfControl;
 
         // weapon object events
         //public fp_Message<int> Wield;
@@ -118,7 +118,7 @@ namespace HyperShoot.Player
             //BindStateToActivity(Reload);
             BindStateToActivity(Dead);
             //BindStateToActivity(Climb);
-            //BindStateToActivity(OutOfControl);
+            BindStateToActivity(OutOfControl);
             //BindStateToActivityOnStart(Attack); // <--
             // in this default setup the 'Attack' activity will enable
             // - but not disable - the component attack states when toggled.

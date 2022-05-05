@@ -36,6 +36,9 @@ namespace HyperShoot.Player
         protected const float FALL_IMPACT_MULTIPLIER = 0.075f;          // for backwards compatibility (pre 1.5.0)
         protected const float NOFALL = -99999;                          // when fall height is set to this value it means no fall impact will be reported
 
+        //physic
+        public float PhysicsPushForce = 5.0f;				// mass for pushing around rigidbodies
+        public float PhysicsCrouchHeightModifier = 0.5f;	// how much to downscale the controller when crouching
         protected Vector3 m_Velocity = Vector3.zero;            // velocity calculated in same way as unity's character controller
         protected Vector3 m_PrevPosition = Vector3.zero;    // position on end of each fixed timestep
         protected Vector3 m_PrevVelocity = Vector3.zero;    // used for calculating velocity, and detecting the start of a fall 

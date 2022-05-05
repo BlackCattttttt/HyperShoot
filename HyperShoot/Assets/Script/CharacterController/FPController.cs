@@ -34,8 +34,8 @@ namespace HyperShoot.Player
             m_NormalHeight = characterController.height;
             characterController.center = m_NormalCenter = (m_NormalHeight * (Vector3.up * 0.5f));
             characterController.radius = m_NormalHeight * DEFAULT_RADIUS_MULTIPLIER;
-            //	m_CrouchHeight = m_NormalHeight * PhysicsCrouchHeightModifier;
-            //	m_CrouchCenter = m_NormalCenter * PhysicsCrouchHeightModifier;
+            m_CrouchHeight = m_NormalHeight * PhysicsCrouchHeightModifier;
+            m_CrouchCenter = m_NormalCenter * PhysicsCrouchHeightModifier;
 
             //Collider.transform.localPosition = Vector3.zero;
 
@@ -49,16 +49,16 @@ namespace HyperShoot.Player
         protected override void RefreshCollider()
         {
 
-            //if (Player.Crouch.Active && !(MotorFreeFly && !Grounded))   // crouching & not flying
-            //{
-            //	characterController.height = m_NormalHeight * PhysicsCrouchHeightModifier;
-            //	characterController.center = m_NormalCenter * PhysicsCrouchHeightModifier;
-            //}
-            //else    // standing up (whether flying or not)
-            //{
-            characterController.height = m_NormalHeight;
-            characterController.center = m_NormalCenter;
-            //		}
+            if (Player.Crouch.Active)   // crouching
+            {
+                characterController.height = m_NormalHeight * PhysicsCrouchHeightModifier;
+                characterController.center = m_NormalCenter * PhysicsCrouchHeightModifier;
+            }
+            else    // standing up 
+            {
+                characterController.height = m_NormalHeight;
+                characterController.center = m_NormalCenter;
+            }
 
         }
 

@@ -128,11 +128,6 @@ namespace HyperShoot.Player
             // simulate high-precision movement for smoothest possible camera motion
             SmoothMove();
 
-            // TIP: uncomment either of these lines to debug print the
-            // speed of the character controller
-            //Debug.Log(Velocity.magnitude);		// speed in meters per second
-            //Debug.Log(Controller.Velocity.sqrMagnitude);	// speed as used by the camera bob
-
         }
         protected override void FixedUpdate()
         {
@@ -150,10 +145,10 @@ namespace HyperShoot.Player
             UpdateForces();
 
             // apply sliding in slopes
-            //UpdateSliding();
+            UpdateSliding();
 
             // detect when player falls, slides or gets pushed out of control
-            //UpdateOutOfControl();
+            UpdateOutOfControl();
 
             // update controller position based on current motor- & external forces
             FixedMove();
@@ -261,14 +256,98 @@ namespace HyperShoot.Player
         {
             m_ExternalForce += force;
         }
-        /// <summary>
-        /// this method calculates a controller velocity multiplier
-        /// depending on ground slope. at 'MotorSlopeSpeed' 1.0,
-        /// velocity in slopes will be kept roughly the same as on
-        /// flat ground. values lower or higher than 1 will make the
-        /// controller slow down / speed up, depending on whether
-        /// we're moving uphill or downhill
-        /// </summary>
+        public virtual void AddForce(float x, float y, float z)
+        {
+            AddForce(new Vector3(x, y, z));
+        }
+
+        public virtual void AddForce(Vector3 force)
+        {
+            AddForceInternal(force);
+        }
+        protected virtual void UpdateSliding()
+        {
+
+            bool wasSlidingFast = m_SlideFast;
+            bool wasSliding = m_Slide;
+
+            // --- handle slope sliding ---
+            // TIP: alter 'PhysicsSlopeSlidiness' and 'SlopeSlideLimit' in realtime
+            // using the state manager, depending on the current ground surface
+            m_Slide = false;
+            if (!m_Grounded)
+            {
+                m_OnSteepGroundSince = 0.0f;
+                m_SlideFast = false;
+            }
+            // start sliding if ground is steep enough in angles
+            else if (GroundAngle > PhysicsSlopeSlideLimit)
+            {
+                m_Slide = true;
+
+                // if ground angle is within slopelimit, slide at a constant speed
+                if (GroundAngle <= Player.SlopeLimit.Get())
+                {
+                    m_SlopeSlideSpeed = Mathf.Max(m_SlopeSlideSpeed, (PhysicsSlopeSlidiness * 0.01f));
+                    m_OnSteepGroundSince = 0.0f;
+                    m_SlideFast = false;
+                    // apply slope speed damping (and snap to zero if miniscule, to avoid
+                    // floating point errors)
+                    m_SlopeSlideSpeed = (Mathf.Abs(m_SlopeSlideSpeed) < 0.0001f) ? 0.0f :
+                        (m_SlopeSlideSpeed / (1.0f + (0.05f * fp_TimeUtility.AdjustedTimeScale)));
+                }
+                else    // if steeper than slopelimit, slide with accumulating slide speed
+                {
+                    if ((m_SlopeSlideSpeed) > 0.01f)
+                        m_SlideFast = true;
+                    if (m_OnSteepGroundSince == 0.0f)
+                        m_OnSteepGroundSince = Time.time;
+                    m_SlopeSlideSpeed += (((PhysicsSlopeSlidiness * 0.01f) * ((Time.time - m_OnSteepGroundSince) * 0.125f)) * fp_TimeUtility.AdjustedTimeScale);
+                    m_SlopeSlideSpeed = Mathf.Max((PhysicsSlopeSlidiness * 0.01f), m_SlopeSlideSpeed);  // keep minimum slidiness
+                }
+
+                // add horizontal force in the slope direction, multiplied by slidiness
+                AddForce(Vector3.Cross(Vector3.Cross(GroundNormal, Vector3.down), GroundNormal) *
+                    m_SlopeSlideSpeed * fp_TimeUtility.AdjustedTimeScale);
+
+            }
+            else
+            {
+                m_OnSteepGroundSince = 0.0f;
+                m_SlideFast = false;
+                m_SlopeSlideSpeed = 0.0f;
+            }
+
+            // if player is moving by its own, external components should not
+            // consider it slow-sliding. this is intended for retaining movement
+            // fx (like weapon bob) on less slidy surfaces
+            if (m_MotorThrottle != Vector3.zero)
+                m_Slide = false;
+
+            // handle fast sliding into free fall
+            if (m_SlideFast)
+                m_SlideFallSpeed = Transform.position.y;    // store y to calculate difference next frame
+            else if (wasSlidingFast && !Grounded)
+                m_FallSpeed = Transform.position.y - m_SlideFallSpeed;  // lost grounding while sliding fast: kickstart gravity at slide fall speed
+
+            // detect whether the slide variables have changed, and broadcast
+            // messages so external components can update accordingly
+
+            if (wasSliding != m_Slide)
+                Player.SetState("Slide", m_Slide);
+
+        }
+        void UpdateOutOfControl()
+        {
+
+            if ((m_ExternalForce.magnitude > 0.2f) ||       // TODO: make 0.2 a constant
+                (m_FallSpeed < -0.2f) ||    // TODO: make 0.2 a constant
+                    (m_SlideFast == true))
+                Player.OutOfControl.Start();
+            else if (Player.OutOfControl.Active)
+                Player.OutOfControl.Stop();
+
+        }
         protected virtual void UpdateSlopeFactor()
         {
 
@@ -442,10 +521,10 @@ namespace HyperShoot.Player
 
             // if we land on a surface tilted above the slide limit, convert
             // fall speed into slide speed on impact
-            //if (GroundAngle > PhysicsSlopeSlideLimit)
-            //{
-            //    m_SlopeSlideSpeed = m_FallImpact * (0.25f * Time.timeScale);
-            //}
+            if (GroundAngle > PhysicsSlopeSlideLimit)
+            {
+                m_SlopeSlideSpeed = m_FallImpact * (0.25f * Time.timeScale);
+            }
 
             // deflect away from nearly vertical surfaces. this serves to make
             // falling along walls smoother, and to prevent the controller
@@ -562,7 +641,6 @@ namespace HyperShoot.Player
             m_MotorJumpDone = true;
             m_MotorJumpForceAcc = 0.0f;
             m_ExternalForce = Vector3.zero;
-            //	StopSoftForce();
             m_SmoothPosition = Transform.position;
 
         }
@@ -608,12 +686,7 @@ namespace HyperShoot.Player
             get { return m_MotorThrottle; }
             set { m_MotorThrottle = value; }
         }
-        protected virtual void OnStart_Run()
-        {
-            MotorAcceleration = 0.252f;
-            MotorDamping = 0.15f;
-            MotorAirSpeed = 0.9f;
-        }
+
         protected virtual bool CanStart_Run()
         {
 
@@ -624,15 +697,29 @@ namespace HyperShoot.Player
             return true;
 
         }
-        protected virtual void OnStop_Run()
+
+        protected virtual bool CanStop_Crouch()
         {
-            MotorAcceleration = 0.18f;
-            MotorDamping = 0.17f;
-            MotorAirSpeed = 0.35f;
+
+            // can't stop crouching if there is a blocking object above us
+            if (Physics.SphereCast(new Ray(Transform.position, Vector3.up),
+                    Player.Radius.Get(),
+                    (m_NormalHeight - Player.Radius.Get() + 0.01f),
+                    fp_Layer.Mask.ExternalBlockers))
+            {
+
+                // regulate stop test interval to reduce amount of sphere casts
+                Player.Crouch.NextAllowedStopTime = Time.time + 1.0f;
+
+                // found a low ceiling above us - abort getting up
+                return false;
+
+            }
+
+            // nothing above us - okay to get up!
+            return true;
+
         }
-        /// <summary>
-        /// returns true if the current jump has ended, false if not
-        /// </summary>
         protected virtual bool OnValue_MotorJumpDone
         {
             get { return m_MotorJumpDone; }

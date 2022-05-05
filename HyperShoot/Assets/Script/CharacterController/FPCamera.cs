@@ -16,6 +16,8 @@ namespace HyperShoot.Player
 		// camera rotation
 		public Vector2 RotationPitchLimit = new Vector2(90.0f, -90.0f);
 		public Vector2 RotationYawLimit = new Vector2(-360.0f, 360.0f);
+		public float RotationSpringStiffness = 0.01f;
+		public float RotationSpringDamping = 0.25f;
 		protected float m_Pitch = 0.0f;
 		protected float m_Yaw = 0.0f;
 		protected fp_Spring m_RotationSpring = null;
@@ -87,16 +89,10 @@ namespace HyperShoot.Player
 			Parent.gameObject.layer = fp_Layer.LocalPlayer;
 
 			// main camera initialization
-			// render everything except body and weapon
 			Camera.cullingMask &= ~((1 << fp_Layer.LocalPlayer) | (1 << fp_Layer.Weapon));
 			Camera.depth = 0;
 
 			// weapon camera initialization
-			// find a regular Unity Camera component existing in a child
-			// gameobject to the FPSCamera's gameobject. if we don't find
-			// a weapon cam, that's OK (some games don't have weapons).
-			// NOTE: we don't use GetComponentInChildren here because that
-			// would return the MainCamera (on this transform)
 			Camera weaponCam = null;
 			foreach (Transform t in Transform)
 			{
@@ -123,11 +119,6 @@ namespace HyperShoot.Player
 			m_PositionSpring.MinVelocity = 0.0f;
 			m_PositionSpring.RestState = PositionOffset;
 
-			// --- secondary position spring ---
-			// this is mainly intended for positional force from recoil, stomping and explosions
-		//	m_PositionSpring2 = new vp_Spring(Transform, vp_Spring.UpdateMode.PositionAdditiveLocal, false);
-			//m_PositionSpring2.MinVelocity = 0.0f;
-
 			// --- rotation spring ---
 			// this is used for all sorts of angular force acting on the camera
 			m_RotationSpring = new fp_Spring(Transform, fp_Spring.UpdateMode.RotationAdditiveLocal, false);
@@ -136,15 +127,11 @@ namespace HyperShoot.Player
 		protected override void OnEnable()
 		{
 			base.OnEnable();
-		//	vp_TargetEvent<float>.Register(m_Root, "CameraBombShake", OnMessage_CameraBombShake);
-		//	vp_TargetEvent<float>.Register(m_Root, "CameraGroundStomp", OnMessage_CameraGroundStomp);
 		}
 
 		protected override void OnDisable()
 		{
 			base.OnDisable();
-		//	vp_TargetEvent<float>.Unregister(m_Root, "CameraBombShake", OnMessage_CameraBombShake);
-		//	vp_TargetEvent<float>.Unregister(m_Root, "CameraGroundStomp", OnMessage_CameraGroundStomp);
 		}
 		protected override void Start()
 		{
@@ -170,10 +157,6 @@ namespace HyperShoot.Player
 
 		}
 
-
-		/// <summary>
-		/// 
-		/// </summary>
 		protected override void FixedUpdate()
 		{
 
@@ -185,12 +168,6 @@ namespace HyperShoot.Player
 			//UpdateZoom();
 
 			//UpdateSwaying();
-
-			//UpdateBob();
-
-			//UpdateEarthQuake();
-
-			//UpdateShakes();
 
 			UpdateSprings();
 
@@ -216,14 +193,11 @@ namespace HyperShoot.Player
 
 			// apply current spring offsets
 			m_Transform.localPosition += (m_PositionSpring.State );
-				//+ m_PositionSpring2.State);
-
 
 			// prevent camera from intersecting objects
 			TryCameraCollision();
 
 			// rotate the parent gameobject (i.e. player model)
-			// NOTE: this rotation does not pitch the player model, it only applies yaw
 			Quaternion xQuaternion = Quaternion.AngleAxis(m_Yaw, Vector3.up);
 			Quaternion yQuaternion = Quaternion.AngleAxis(0, Vector3.left);
 			Parent.rotation =
@@ -297,7 +271,6 @@ namespace HyperShoot.Player
 		{
 
 			m_PositionSpring.FixedUpdate();
-			//m_PositionSpring2.FixedUpdate();
 			m_RotationSpring.FixedUpdate();
 		}
 		protected virtual bool CanStart_Run()
@@ -313,9 +286,34 @@ namespace HyperShoot.Player
 			return true;
 
 		}
-		/// <summary>
-		/// sets camera rotation and snaps springs and zoom to a halt
-		/// </summary>
+		public override void Refresh()
+		{
+
+			if (!Application.isPlaying)
+				return;
+			if (m_PositionSpring != null)
+			{
+				m_PositionSpring.Stiffness =
+					new Vector3(PositionSpringStiffness, PositionSpringStiffness, PositionSpringStiffness);
+				m_PositionSpring.Damping = Vector3.one -
+					new Vector3(PositionSpringDamping, PositionSpringDamping, PositionSpringDamping);
+
+				m_PositionSpring.MinState.y = PositionGroundLimit;
+				m_PositionSpring.RestState = PositionOffset;
+
+			}
+
+			if (m_RotationSpring != null)
+			{
+				m_RotationSpring.Stiffness =
+				new Vector3(RotationSpringStiffness, RotationSpringStiffness, RotationSpringStiffness);
+				m_RotationSpring.Damping = Vector3.one -
+					new Vector3(RotationSpringDamping, RotationSpringDamping, RotationSpringDamping);
+			}
+
+			//Zoom();
+
+		}
 		public virtual void SetRotation(Vector2 eulerAngles)
 		{
 
@@ -331,6 +329,33 @@ namespace HyperShoot.Player
 			//SnapSprings();
 			//SnapZoom();
 			Refresh();
+		}
+		protected virtual void OnMessage_FallImpact(float impact)
+		{
+
+			impact = (float)Mathf.Abs((float)impact * 55.0f);
+			// ('55' is for preset backwards compatibility)
+
+			float posImpact = (float)impact * 0.025f;
+			float rotImpact = (float)impact * 0.025f;
+
+			// smooth step the impacts to make the springs react more subtly
+			// from short falls, and more aggressively from longer falls
+			posImpact = Mathf.SmoothStep(0, 1, posImpact);
+			rotImpact = Mathf.SmoothStep(0, 1, rotImpact);
+			rotImpact = Mathf.SmoothStep(0, 1, rotImpact);
+
+			// apply impact to camera position spring
+			if (m_PositionSpring != null)
+				m_PositionSpring.AddSoftForce(Vector3.down * posImpact, 1);
+
+			// apply impact to camera rotation spring
+			if (m_RotationSpring != null)
+			{
+				float roll = Random.value > 0.5f ? (rotImpact * 2) : -(rotImpact * 2);
+				m_RotationSpring.AddSoftForce(Vector3.forward * roll, 1);
+			}
+
 		}
 	}
 }

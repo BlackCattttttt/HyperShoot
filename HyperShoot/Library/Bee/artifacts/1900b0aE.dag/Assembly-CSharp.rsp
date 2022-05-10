@@ -379,6 +379,9 @@
 "Assets/Script/Core/Utility/fp_Utility.cs"
 "Assets/Script/Singletons/Singleton.cs"
 "Assets/Script/Singletons/SingletonClass.cs"
+"Assets/Script/Weapon/BaseWeapon.cs"
+"Assets/Script/Weapon/FPWeapon.cs"
+"Assets/Script/Weapon/WeaponHandler.cs"
 -langversion:8.0
 
 /deterministic

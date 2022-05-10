@@ -37,9 +37,6 @@ namespace HyperShoot.Player
             }
         }
 
-
-        /// <summary>
-        /// registers this component with the event handler (if any)
         /// </summary>
         protected override void OnEnable()
         {
@@ -48,11 +45,6 @@ namespace HyperShoot.Player
                 FPPlayer.Register(this);
 
         }
-
-
-        /// <summary>
-        /// unregisters this component from the event handler (if any)
-        /// </summary>
         protected override void OnDisable()
         {
 
@@ -61,10 +53,6 @@ namespace HyperShoot.Player
 
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void Update()
         {
 
@@ -92,9 +80,9 @@ namespace HyperShoot.Player
             InputCrouch();
 
             // manage input for weapons
-            //	InputAttack();
+            InputAttack();
             //	InputReload();
-            //	InputSetWeapon();
+            InputSetWeapon();
 
             // manage camera related input
             InputCamera();
@@ -115,28 +103,11 @@ namespace HyperShoot.Player
 
         //}
 
-
-        /// <summary>
-        /// move the player forward, backward, left and right
-        /// </summary>
         protected virtual void InputMove()
         {
-
-            // NOTE: you could also use 'GetAxis', but that would add smoothing
-            // to the input from both UFPS and from Unity, and might require some
-            // tweaking in order not to feel laggy
-
             FPPlayer.InputMoveVector.Set(new Vector2(InputManager.GetAxisRaw("Horizontal"), InputManager.GetAxisRaw("Vertical")));
         }
 
-
-        /// <summary>
-        /// tell the player to enable or disable the 'Run' state.
-        /// NOTE: since running is a state, it's not sent to the
-        /// controller code (which doesn't know the state names).
-        /// instead, the player class is responsible for feeding the
-        /// 'Run' state to every affected component.
-        /// </summary>
         protected virtual void InputRun()
         {
 
@@ -146,106 +117,46 @@ namespace HyperShoot.Player
                 FPPlayer.Run.TryStop();
 
         }
-
-
-        /// <summary>
-        /// ask controller to jump when button is pressed (the current
-        /// controller preset determines jump force).
-        /// NOTE: if its 'MotorJumpForceHold' is non-zero, this
-        /// also makes the controller accumulate jump force until
-        /// button release.
-        /// </summary>
         protected virtual void InputJump()
         {
-
-            // TIP: to find out what determines if 'Jump.TryStart'
-            // succeeds and where it is hooked up, search the project
-            // for 'CanStart_Jump'
-
             if (InputManager.GetButton("Jump"))
                 FPPlayer.Jump.TryStart();
             else
                 FPPlayer.Jump.Stop();
-
         }
 
-
-        /// <summary>
-        /// asks the controller to halve the height of its Unity
-        /// CharacterController collision capsule while player is
-        /// holding the crouch modifier key. this activity will also
-        /// typically trigger states on the camera and weapons. note
-        /// that getting up again won't always succeed (for example
-        /// the player might be crawling through a ventilation shaft
-        /// or hiding under a table).
-        /// </summary>
         protected virtual void InputCrouch()
         {
-
-            // IMPORTANT: using the 'Crouch' activity for crouching
-            // ensures that CharacterController (collision) height is only
-            // updated when needed. this is important because changing its
-            // height every frame will make trigger detection break!
-
             if (InputManager.GetButton("Crouch"))
                 FPPlayer.Crouch.TryStart();
             else
                 FPPlayer.Crouch.TryStop();
-
-            // TIP: to find out what determines if 'Crouch.TryStop'
-            // succeeds and where it is hooked up, search the project
-            // for 'CanStop_Crouch'
-
         }
 
-
-        /// <summary>
-        /// camera related input
-        /// </summary>
         protected virtual void InputCamera()
         {
-
             // zoom / ADS
-            //if (InputManager.GetButton("Zoom"))
-            //	FPPlayer.Zoom.TryStart();
-            //else
-            //	FPPlayer.Zoom.TryStop();
-
-            // toggle 3rd person mode
-            //if (InputManager.GetButtonDown("Toggle3rdPerson"))
-            //	FPPlayer.CameraToggle3rdPerson.Send();
-
+            if (InputManager.GetButton("Zoom"))
+                FPPlayer.Zoom.TryStart();
+            else
+                FPPlayer.Zoom.TryStop();
         }
 
+        protected virtual void InputAttack()
+        {
+            if (FPPlayer.Run.Active)
+            	return;
 
-        /// <summary>
-        /// broadcasts a message to any listening components telling
-        /// them to go into 'attack' mode. fp_FPWeaponShooter uses this
-        /// to repeatedly fire the current weapon while the fire button
-        /// is being pressed, but it could also be used by, for example,
-        /// an animation script to make the player model loop an 'attack
-        /// stance' animation.
-        /// </summary>
-        //protected virtual void InputAttack()
-        //{
+            // if mouse cursor is visible, an extra click is needed
+            // before we can attack
+            if (!fp_Utility.LockCursor)
+                return;
 
-        //	// TIP: you could do this to prevent player from attacking while running
-        //	//if (Player.Run.Active)
-        //	//	return;
-
-        //	// if mouse cursor is visible, an extra click is needed
-        //	// before we can attack
-        //	if (!fp_Utility.LockCursor)
-        //		return;
-
-        //	if (InputManager.GetButton("Attack")
-        //		  || InputManager.GetAxisRaw("RightTrigger") > 0.5f     // fire using the right gamepad trigger
-        //		)
-        //		FPPlayer.Attack.TryStart();
-        //	else
-        //		FPPlayer.Attack.TryStop();
-
-        //}
+            if (InputManager.GetButton("Attack"))
+                FPPlayer.Attack.TryStart();
+            else
+                FPPlayer.Attack.TryStop();
+        }
 
 
         /// <summary>
@@ -261,40 +172,30 @@ namespace HyperShoot.Player
 
         //}
 
+        protected virtual void InputSetWeapon()
+        {
+            //if (InputManager.GetButtonDown("SetPrevWeapon"))
+            //    FPPlayer.SetPrevWeapon.Try();
 
-        /// <summary>
-        /// handles cycling through carried weapons, wielding specific
-        /// ones and clearing the current one
-        /// </summary>
-        //protected virtual void InputSetWeapon()
-        //{
+           // if (InputManager.GetButtonDown("SetNextWeapon"))
+           //     FPPlayer.SetNextWeapon.Try();
 
-        //	// --- cycle to the next or previous weapon ---
+            if (InputManager.GetButtonDown("SetWeapon1")) FPPlayer.SetWeapon.TryStart(1);
+            if (InputManager.GetButtonDown("SetWeapon2")) FPPlayer.SetWeapon.TryStart(2);
+            if (InputManager.GetButtonDown("SetWeapon3")) FPPlayer.SetWeapon.TryStart(3);
+            if (InputManager.GetButtonDown("SetWeapon4")) FPPlayer.SetWeapon.TryStart(4);
+            if (InputManager.GetButtonDown("SetWeapon5")) FPPlayer.SetWeapon.TryStart(5);
+            if (InputManager.GetButtonDown("SetWeapon6")) FPPlayer.SetWeapon.TryStart(6);
+            if (InputManager.GetButtonDown("SetWeapon7")) FPPlayer.SetWeapon.TryStart(7);
+            if (InputManager.GetButtonDown("SetWeapon8")) FPPlayer.SetWeapon.TryStart(8);
+            if (InputManager.GetButtonDown("SetWeapon9")) FPPlayer.SetWeapon.TryStart(9);
+            if (InputManager.GetButtonDown("SetWeapon10")) FPPlayer.SetWeapon.TryStart(10);
 
-        //	if (InputManager.GetButtonDown("SetPrevWeapon"))
-        //		FPPlayer.SetPrevWeapon.Try();
+            // --- unwield current weapon by direct button press ---
 
-        //	if (InputManager.GetButtonDown("SetNextWeapon"))
-        //		FPPlayer.SetNextWeapon.Try();
-
-        //	// --- switch to weapon 1-10 by direct button press ---
-
-        //	if (InputManager.GetButtonDown("SetWeapon1")) FPPlayer.SetWeapon.TryStart(1);
-        //	if (InputManager.GetButtonDown("SetWeapon2")) FPPlayer.SetWeapon.TryStart(2);
-        //	if (InputManager.GetButtonDown("SetWeapon3")) FPPlayer.SetWeapon.TryStart(3);
-        //	if (InputManager.GetButtonDown("SetWeapon4")) FPPlayer.SetWeapon.TryStart(4);
-        //	if (InputManager.GetButtonDown("SetWeapon5")) FPPlayer.SetWeapon.TryStart(5);
-        //	if (InputManager.GetButtonDown("SetWeapon6")) FPPlayer.SetWeapon.TryStart(6);
-        //	if (InputManager.GetButtonDown("SetWeapon7")) FPPlayer.SetWeapon.TryStart(7);
-        //	if (InputManager.GetButtonDown("SetWeapon8")) FPPlayer.SetWeapon.TryStart(8);
-        //	if (InputManager.GetButtonDown("SetWeapon9")) FPPlayer.SetWeapon.TryStart(9);
-        //	if (InputManager.GetButtonDown("SetWeapon10")) FPPlayer.SetWeapon.TryStart(10);
-
-        //	// --- unwield current weapon by direct button press ---
-
-        //	if (InputManager.GetButtonDown("ClearWeapon")) FPPlayer.SetWeapon.TryStart(0);
-
-        //}
+            if (InputManager.GetButtonDown("ClearWeapon"))
+                FPPlayer.SetWeapon.TryStart(0);
+        }
 
 
         /// <summary>
@@ -308,25 +209,12 @@ namespace HyperShoot.Player
 
         //}
 
-
-        /// <summary>
-        /// this method handles toggling between mouse pointer and
-        /// firing modes. it can be used to deal with screen regions
-        /// for button menus, inventory panels et cetera.
-        /// NOTE: if your game supports multiple screen resolutions,
-        /// make sure your 'MouseCursorZones' are always adapted to
-        /// the current resolution. see 'fp_FPSDemo1.Start' for one
-        /// example of how to this
-        /// </summary>
         protected virtual void UpdateCursorLock()
         {
 
             // store the current mouse position as GUI coordinates
             m_MousePos.x = Input.mousePosition.x;
             m_MousePos.y = (Screen.height - Input.mousePosition.y);
-
-            // uncomment this line to print the current mouse position
-            //Debug.Log("X: " + (int)m_MousePos.x + ", Y:" + (int)m_MousePos.y);
 
             // if 'ForceCursor' is active, the cursor will always be visible
             // across the whole screen and firing will be disabled
@@ -383,13 +271,8 @@ namespace HyperShoot.Player
 
         }
 
-
-        // <summary>
-        // mouselook implementation with smooth filtering and acceleration
-        // </summary>
         protected virtual Vector2 GetMouseLook()
         {
-
             // don't allow mouselook if we are using the mouse cursor
             if (MouseCursorBlocksMouseLook && !fp_Utility.LockCursor)
                 return Vector2.zero;
@@ -446,14 +329,8 @@ namespace HyperShoot.Player
 
         }
 
-
-        // <summary>
-        // returns the difference in raw(un-smoothed) mouse input
-        // since last frame
-        // </summary>
         protected virtual Vector2 GetMouseLookRaw()
         {
-
             // TEST: this directive addresses an issue with bluetooth gamepads.
             // please report if it causes any trouble
 #if ((!UNITY_ANDROID && !UNITY_IOS) || (UNITY_ANDROID && UNITY_EDITOR) || (UNITY_IOS && UNITY_EDITOR))
@@ -470,12 +347,6 @@ namespace HyperShoot.Player
             return m_MouseLookRawMove;
 
         }
-
-
-        /// <summary>
-        /// returns the current horizontal and vertical input vector depending
-        /// on the current platform and / or input control type
-        /// </summary>
         protected virtual Vector2 OnValue_InputMoveVector
         {
             get { return m_MoveVector; }
@@ -491,12 +362,6 @@ namespace HyperShoot.Player
 #endif
         }
 
-
-        /// <summary>
-        /// move vector for climbing. this event callback always returns
-        /// a value (unlike 'InputMoveVector' which gets disabled during
-        /// climbing)
-        /// </summary>
         protected virtual float OnValue_InputClimbVector
         {
             get
@@ -528,37 +393,21 @@ namespace HyperShoot.Player
         //	set { fp_Gameplay.IsPaused = value; }
         //}
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected virtual bool OnMessage_InputGetButton(string button)
         {
             return InputManager.GetButton(button);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected virtual bool OnMessage_InputGetButtonUp(string button)
         {
             return InputManager.GetButtonUp(button);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected virtual bool OnMessage_InputGetButtonDown(string button)
         {
             return InputManager.GetButtonDown(button);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected virtual Vector2 OnValue_InputSmoothLook
         {
             get
@@ -570,10 +419,6 @@ namespace HyperShoot.Player
             }
         }
 
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
         protected virtual Vector2 OnValue_InputRawLook
         {
             get

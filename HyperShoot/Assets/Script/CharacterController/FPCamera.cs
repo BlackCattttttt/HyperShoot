@@ -7,6 +7,16 @@ namespace HyperShoot.Player
 	{
 		// character controller of the parent gameobject
 		[HideInInspector] public FPCharacterController FPController = null;
+		// camera rendering
+		public float RenderingFieldOfView = 60.0f;
+		public float RenderingZoomDamping = 0.2f;
+		protected float m_FinalZoomTime = 0.0f;
+		protected float m_ZoomOffset = 0.0f;
+		public float ZoomOffset
+		{
+			get { return m_ZoomOffset; }    // this can be set by an external script that needs to manipulate zoom
+			set { m_ZoomOffset = value; }
+		} 
 		// camera position
 		public Vector3 PositionOffset = new Vector3(0.0f, 1.75f, 0.1f);
 		public float PositionGroundLimit = 0.1f;
@@ -135,19 +145,17 @@ namespace HyperShoot.Player
 		}
 		protected override void Start()
 		{
-
 			base.Start();
 
 			Refresh();
 
 			// snap the camera to its start values when first activated
 			//SnapSprings();
-			//SnapZoom();
+			SnapZoom();
 
 		}
 		protected override void Update()
 		{
-
 			base.Update();
 
 			if (Time.timeScale == 0.0f)
@@ -165,7 +173,7 @@ namespace HyperShoot.Player
 			if (Time.timeScale == 0.0f)
 				return;
 
-			//UpdateZoom();
+			UpdateZoom();
 
 			//UpdateSwaying();
 
@@ -212,6 +220,28 @@ namespace HyperShoot.Player
 			Transform.localEulerAngles +=
 				fp_MathUtility.NaNSafeVector3(Vector3.forward * m_RotationSpring.State.z);
 
+		}
+		protected virtual void UpdateZoom()
+		{
+			if (m_FinalZoomTime <= Time.time)
+				return;
+
+			RenderingZoomDamping = Mathf.Max(RenderingZoomDamping, 0.01f);
+			float zoom = 1.0f - ((m_FinalZoomTime - Time.time) / RenderingZoomDamping);
+			Camera.fieldOfView = Mathf.SmoothStep(Camera.fieldOfView, RenderingFieldOfView + ZoomOffset, zoom);
+		}
+		public void RefreshZoom()
+		{
+			float zoom = 1.0f - ((m_FinalZoomTime - Time.time) / RenderingZoomDamping);
+			Camera.fieldOfView = Mathf.SmoothStep(Camera.fieldOfView, RenderingFieldOfView + ZoomOffset, zoom);
+		}
+		public virtual void Zoom()
+		{
+			m_FinalZoomTime = Time.time + RenderingZoomDamping;
+		}
+		public virtual void SnapZoom()
+		{
+			Camera.fieldOfView = RenderingFieldOfView + ZoomOffset;
 		}
 		public virtual void TryCameraCollision()
 		{
@@ -269,7 +299,6 @@ namespace HyperShoot.Player
 		}
 		protected virtual void UpdateSprings()
 		{
-
 			m_PositionSpring.FixedUpdate();
 			m_RotationSpring.FixedUpdate();
 		}
@@ -288,7 +317,6 @@ namespace HyperShoot.Player
 		}
 		public override void Refresh()
 		{
-
 			if (!Application.isPlaying)
 				return;
 			if (m_PositionSpring != null)
@@ -311,15 +339,12 @@ namespace HyperShoot.Player
 					new Vector3(RotationSpringDamping, RotationSpringDamping, RotationSpringDamping);
 			}
 
-			//Zoom();
-
+			Zoom();
 		}
 		public virtual void SetRotation(Vector2 eulerAngles)
 		{
-
 			Angle = eulerAngles;
 			Stop();
-
 		}
 		/// <summary>
 		/// stops the springs and zoom
@@ -327,8 +352,16 @@ namespace HyperShoot.Player
 		public virtual void Stop()
 		{
 			//SnapSprings();
-			//SnapZoom();
+			SnapZoom();
 			Refresh();
+		}
+		protected virtual void OnStart_Zoom()
+		{
+			if (Player == null)
+				return;
+
+			Player.Run.Stop();
+
 		}
 		protected virtual void OnMessage_FallImpact(float impact)
 		{

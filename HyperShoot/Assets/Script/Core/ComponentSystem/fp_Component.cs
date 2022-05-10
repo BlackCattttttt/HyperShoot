@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class fp_Component : MonoBehaviour
 {
-	[HideInInspector] public bool Persist = false;
+	public bool Persist = false;
 	protected fp_StateManager m_StateManager = null;
 
     protected fp_EventHandler m_EventHandler = null;
@@ -32,12 +32,12 @@ public class fp_Component : MonoBehaviour
 	protected Collider m_Collider = null;
 	protected Camera m_Camera = null;
 
-	[HideInInspector] public List<fp_State> States = new List<fp_State>();                // list of state presets for this vp_Component
-	[HideInInspector] public List<fp_Component> Children = new List<fp_Component>();      // list of  child vp_Components
-	[HideInInspector] public List<fp_Component> Siblings = new List<fp_Component>();      // list of vp_Components sharing the same gameobject
-	[HideInInspector] public List<fp_Component> Family = new List<fp_Component>();        // list of vp_Components sharing the same root object
-	[HideInInspector] public List<Renderer> Renderers = new List<Renderer>();             // list of Renderers in this and all child vp_Components
-	[HideInInspector] public List<AudioSource> AudioSources = new List<AudioSource>();    // list of AudioSources in this and all child vp_Components
+	public List<fp_State> States = new List<fp_State>();                // list of state presets for this vp_Component
+	public List<fp_Component> Children = new List<fp_Component>();      // list of  child vp_Components
+	public List<fp_Component> Siblings = new List<fp_Component>();      // list of vp_Components sharing the same gameobject
+	public List<fp_Component> Family = new List<fp_Component>();        // list of vp_Components sharing the same root object
+	public List<Renderer> Renderers = new List<Renderer>();             // list of Renderers in this and all child vp_Components
+	public List<AudioSource> AudioSources = new List<AudioSource>();    // list of AudioSources in this and all child vp_Components
 
 	protected Type m_Type = null;
 	protected System.Reflection.FieldInfo[] m_Fields = null;

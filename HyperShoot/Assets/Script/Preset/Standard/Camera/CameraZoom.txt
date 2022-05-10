@@ -4,9 +4,5 @@
 
 // NOTE: mouselook settings have been moved to the 'InputZoom' preset
 
-ComponentType vp_FPCamera
-BobAmplitude 0 0.85 0 0.5
-ShakeAmplitude 5 5 0
+ComponentType HyperShoot.Player.FPCamera
 RenderingFieldOfView 45
-ShakeSpeed 0.1
-BobRate -0.5 1 0.5 0.5

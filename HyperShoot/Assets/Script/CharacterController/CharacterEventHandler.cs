@@ -39,17 +39,17 @@ namespace HyperShoot.Player
         public fp_Activity Jump;
         public fp_Activity Crouch;
         public fp_Activity Zoom;
-        //public fp_Activity Attack;
+        public fp_Activity Attack;
         //public fp_Activity Reload;
         //public fp_Activity Climb;
         //public fp_Activity Interact;
-        //	public fp_Activity<int> SetWeapon;
+        public fp_Activity<int> SetWeapon;
         public fp_Activity OutOfControl;
 
         // weapon object events
-        //public fp_Message<int> Wield;
-        //public fp_Message Unwield;
-        //public fp_Attempt Fire;
+        public fp_Message<int> Wield;
+        public fp_Message Unwield;
+        public fp_Attempt Fire;
         //public fp_Message DryFire;
 
         //// weapon handler events
@@ -57,7 +57,7 @@ namespace HyperShoot.Player
         //public fp_Attempt SetNextWeapon;
         //public fp_Attempt<string> SetWeaponByName;
         //public fp_Value<int> CurrentWeaponID;   // renamed to avoid confusion with fp_ItemType.ID
-        //public fp_Value<int> CurrentWeaponIndex;
+        public fp_Value<int> CurrentWeaponIndex;
         //public fp_Value<string> CurrentWeaponName;
         //public fp_Value<bool> CurrentWeaponWielded;
         //public fp_Attempt AutoReload;
@@ -119,24 +119,24 @@ namespace HyperShoot.Player
             BindStateToActivity(Dead);
             //BindStateToActivity(Climb);
             BindStateToActivity(OutOfControl);
-            //BindStateToActivityOnStart(Attack); // <--
+            BindStateToActivityOnStart(Attack); // <--
             // in this default setup the 'Attack' activity will enable
             // - but not disable - the component attack states when toggled.
 
             // --- activity AutoDurations ---
             // automatically stops an activity after a set timespan
-            //SetWeapon.AutoDuration = 1.0f;      // NOTE: altered at runtime by each weapon
+            SetWeapon.AutoDuration = 1.0f;      // NOTE: altered at runtime by each weapon
             //Reload.AutoDuration = 1.0f;         // NOTE: altered at runtime by each weapon
 
             //// --- activity MinDurations ---
             //// prevents player from aborting an activity too soon after starting
             //Zoom.MinDuration = 0.2f;
-            //Crouch.MinDuration = 0.5f;
+            Crouch.MinDuration = 0.5f;
 
             //// --- activity MinPauses ---
             //// prevents player from restarting an activity too soon after stopping
-            //Jump.MinPause = 0.0f;           // increase this to enforce a certain delay between jumps
-            //SetWeapon.MinPause = 0.2f;
+            Jump.MinPause = 0.0f;           // increase this to enforce a certain delay between jumps
+            SetWeapon.MinPause = 0.2f;
 
         }
     }

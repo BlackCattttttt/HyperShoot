@@ -230,7 +230,25 @@ namespace HyperShoot.Weapon
 
             m_Player.Fire.Try();
         }
+        protected virtual bool CanStart_SetWeapon()
+        {
+            // fetch weapon index from when 'SetWeapon.TryStart' was called
+            int weapon = (int)m_Player.SetWeapon.Argument;
 
+            // can't set a weapon that is already set
+            if (weapon == m_CurrentWeaponIndex)
+                return false;
+
+            // can't set an unexisting weapon
+            if (weapon < 0 || weapon > Weapons.Count)
+                return false;
+
+            // can't set a new weapon while reloading
+           // if (m_Player.Reload.Active)
+           //     return false;
+
+            return true;
+        }
         protected virtual void OnStart_SetWeapon()
         {
             // prevent these player activities during the weapon switch (unless switching to a melee weapon)

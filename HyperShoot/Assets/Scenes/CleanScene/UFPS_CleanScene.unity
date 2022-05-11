@@ -533,6 +533,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 878090874}
+  - {fileID: 965067654}
   - {fileID: 488932064}
   m_Father: {fileID: 1592114001}
   m_RootOrder: 0
@@ -656,7 +657,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 159325363}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &488932065
 AudioListener:
@@ -822,11 +823,11 @@ MonoBehaviour:
   - TypeName: FPWeapon
     Name: Crouch
     TextAsset: {fileID: 4900000, guid: b9da03374705f6c4592e4c5e61ad24a7, type: 3}
-    StatesToBlock: 
+    StatesToBlock: 00000000
   - TypeName: FPWeapon
     Name: Zoom
     TextAsset: {fileID: 4900000, guid: 339945a302603004ba11faef72fff091, type: 3}
-    StatesToBlock: 
+    StatesToBlock: 0000000001000000
   - TypeName: FPWeapon
     Name: Default
     TextAsset: {fileID: 0}
@@ -867,6 +868,103 @@ MonoBehaviour:
   RotationFallSway: {x: 2, y: 0, z: 0}
   RotationSlopeSway: 0.75
   RotationMaxInputVelocity: 15
+--- !u!1 &965067653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 965067654}
+  - component: {fileID: 965067655}
+  m_Layer: 0
+  m_Name: 2Revolver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &965067654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965067653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 159325363}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &965067655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965067653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5d42e15734f67c45853121cf6f4217c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Persist: 0
+  States:
+  - TypeName: FPWeapon
+    Name: Run
+    TextAsset: {fileID: 4900000, guid: b1aa01824d65f544087e30ed46f6b0c1, type: 3}
+    StatesToBlock: 
+  - TypeName: FPWeapon
+    Name: Crouch
+    TextAsset: {fileID: 4900000, guid: 8de08ab03393e014ebc30ac3fc620d7f, type: 3}
+    StatesToBlock: 00000000
+  - TypeName: FPWeapon
+    Name: Zoom
+    TextAsset: {fileID: 4900000, guid: 87c4dea27dc72bf4d93da0a042aab92c, type: 3}
+    StatesToBlock: 0100000000000000
+  - TypeName: FPWeapon
+    Name: Default
+    TextAsset: {fileID: 0}
+    StatesToBlock: 
+  Children: []
+  Siblings: []
+  Family: []
+  Renderers: []
+  AudioSources: []
+  PositionOffset: {x: 0.1001131, y: -0.2834134, z: 0.496078}
+  PositionSpring2Stiffness: 0.6782609
+  PositionSpring2Damping: 0.7789855
+  RotationOffset: {x: -3, y: -5, z: 0}
+  RotationSpring2Stiffness: 0.352
+  RotationSpring2Damping: 0.371
+  AnimationType: 1
+  AnimationGrip: 1
+  WeaponPrefab: {fileID: 100010, guid: 6b5efb76f83e7dd4ba7b3291b5590327, type: 3}
+  RenderingZoomDamping: 0.5
+  RenderingFieldOfView: 21.84506
+  RenderingClippingPlanes: {x: 0.5, y: 10}
+  PositionSpringStiffness: 0.01
+  PositionSpringDamping: 0.25
+  PositionKneeling: 0.108
+  PositionKneelingSoftness: 1
+  RotationSpringStiffness: 0.01
+  RotationSpringDamping: 0.213
+  RotationKneeling: 0
+  RotationKneelingSoftness: 1
+  PositionExitOffset: {x: 0, y: -1, z: 0}
+  RotationExitOffset: {x: 40, y: 0, z: 0}
+  AnimationWield: {fileID: 0}
+  AnimationUnWield: {fileID: 0}
+  PositionMaxInputVelocity: 20
+  PositionWalkSlide: {x: 1, y: 2, z: 3}
+  RotationLookSway: {x: 1, y: 1, z: 0}
+  RotationStrafeSway: {x: 2, y: 1, z: 1}
+  RotationFallSway: {x: 2, y: 0, z: 0}
+  RotationSlopeSway: 1
+  RotationMaxInputVelocity: 5
 --- !u!1 &1211905102
 GameObject:
   m_ObjectHideFlags: 1

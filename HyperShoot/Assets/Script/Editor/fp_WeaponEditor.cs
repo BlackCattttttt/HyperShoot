@@ -25,6 +25,7 @@ public class fp_WeaponEditor : Editor
     public static bool m_WeaponRenderingFoldout;
     public static bool m_WeaponPositionFoldout;
     public static bool m_WeaponRotationFoldout;
+    public static bool m_WeaponAnimationFoldout;
     public static bool m_StateFoldout;
     public static bool m_PresetFoldout = true;
 
@@ -124,6 +125,7 @@ public class fp_WeaponEditor : Editor
             DoRenderingFoldout();
             DoPositionFoldout();
             DoRotationFoldout();
+            DoAnimationFoldout();
         }
         else
             fp_PresetEditorGUIUtility.DefaultStateOverrideMessage();
@@ -205,7 +207,7 @@ public class fp_WeaponEditor : Editor
         m_WeaponPositionFoldout = EditorGUILayout.Foldout(m_WeaponPositionFoldout, "Position Springs");
         if (m_WeaponPositionFoldout)
         {
-
+            GUI.enabled = true;
             m_Component.PositionOffset = EditorGUILayout.Vector3Field("Offset", m_Component.PositionOffset);
             m_Component.PositionExitOffset = EditorGUILayout.Vector3Field("Exit Offset", m_Component.PositionExitOffset);
 
@@ -263,6 +265,24 @@ public class fp_WeaponEditor : Editor
             GUILayout.Label("SlopeSway multiplies FallSway when grounded\nand will take effect on slopes.", fp_EditorGUIUtility.NoteStyle);
             GUI.enabled = true;
             m_Component.RotationMaxInputVelocity = EditorGUILayout.FloatField("Max Input Rot.", m_Component.RotationMaxInputVelocity);
+
+            fp_EditorGUIUtility.Separator();
+        }
+    }
+    public virtual void DoAnimationFoldout()
+    {
+        m_WeaponAnimationFoldout = EditorGUILayout.Foldout(m_WeaponAnimationFoldout, "Animation");
+        if (m_WeaponAnimationFoldout)
+        {
+            m_Component.AnimationWield = (AnimationClip)EditorGUILayout.ObjectField("Wield", m_Component.AnimationWield, typeof(AnimationClip), false);
+            m_Component.AnimationUnWield = (AnimationClip)EditorGUILayout.ObjectField("Unwield", m_Component.AnimationUnWield, typeof(AnimationClip), false);
+
+            m_Component.AnimationGrip = (int)((BaseWeapon.Grip)EditorGUILayout.EnumPopup("Grip", (BaseWeapon.Grip)m_Component.AnimationGrip));
+            m_Component.AnimationType = (int)((BaseWeapon.Type)EditorGUILayout.EnumPopup("Type", (BaseWeapon.Type)m_Component.AnimationType));
+
+            GUI.enabled = false;
+            GUILayout.Label("Should the character use one-handed or two-handed firearm\nor melee animations for this weapon in 3rd person?", fp_EditorGUIUtility.NoteStyle);
+            GUI.enabled = true;
 
             fp_EditorGUIUtility.Separator();
         }

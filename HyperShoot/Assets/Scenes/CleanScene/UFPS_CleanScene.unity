@@ -780,7 +780,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 878090874}
+  - component: {fileID: 878090877}
   - component: {fileID: 878090875}
+  - component: {fileID: 878090876}
+  - component: {fileID: 878090878}
   m_Layer: 0
   m_Name: 1Pistol
   m_TagString: Untagged
@@ -829,6 +832,10 @@ MonoBehaviour:
     TextAsset: {fileID: 4900000, guid: 339945a302603004ba11faef72fff091, type: 3}
     StatesToBlock: 0000000001000000
   - TypeName: FPWeapon
+    Name: Attack
+    TextAsset: {fileID: 0}
+    StatesToBlock: 0000000001000000
+  - TypeName: FPWeapon
     Name: Default
     TextAsset: {fileID: 0}
     StatesToBlock: 
@@ -839,7 +846,7 @@ MonoBehaviour:
   AudioSources: []
   PositionOffset: {x: 0.1493672, y: -0.2665937, z: 0.1704005}
   PositionSpring2Stiffness: 0.2
-  PositionSpring2Damping: 0.5615942
+  PositionSpring2Damping: 0.6
   RotationOffset: {x: -3.158258, y: -5, z: 0}
   RotationSpring2Stiffness: 0.85
   RotationSpring2Damping: 0.6
@@ -849,25 +856,206 @@ MonoBehaviour:
   RenderingZoomDamping: 0.5
   RenderingFieldOfView: 35
   RenderingClippingPlanes: {x: 0.01, y: 10}
+  RenderingZScale: 1
   PositionSpringStiffness: 0.01
   PositionSpringDamping: 0.25
+  PositionFallRetract: 1
+  PositionPivotSpringStiffness: 0.01
+  PositionPivotSpringDamping: 0.25
   PositionKneeling: 0.06
   PositionKneelingSoftness: 1
+  PositionWalkSlide: {x: 1, y: 1, z: 1}
+  PositionPivot: {x: 0, y: 0, z: -0.2741375}
+  RotationPivot: {x: 0, y: 0, z: 0}
+  PositionInputVelocityScale: 1
+  PositionMaxInputVelocity: 25
   RotationSpringStiffness: 0.01
   RotationSpringDamping: 0.25
+  RotationPivotSpringStiffness: 0.01
+  RotationPivotSpringDamping: 0.25
   RotationKneeling: 0
   RotationKneelingSoftness: 1
-  PositionExitOffset: {x: 0, y: -1, z: 0}
-  RotationExitOffset: {x: 40, y: 0, z: 0}
-  AnimationWield: {fileID: 0}
-  AnimationUnWield: {fileID: 0}
-  PositionMaxInputVelocity: 25
-  PositionWalkSlide: {x: 1, y: 1, z: 1}
   RotationLookSway: {x: 1, y: 1, z: 0}
   RotationStrafeSway: {x: 1, y: 1, z: -1}
   RotationFallSway: {x: 2, y: 0, z: 0}
   RotationSlopeSway: 0.75
+  RotationInputVelocityScale: 1
   RotationMaxInputVelocity: 15
+  SoundWield: {fileID: 0}
+  SoundUnWield: {fileID: 0}
+  AnimationWield: {fileID: 0}
+  AnimationUnWield: {fileID: 0}
+  AnimationAmbient: []
+  AmbientInterval: {x: 2.5, y: 7.5}
+  PositionExitOffset: {x: 0, y: -1, z: 0}
+  RotationExitOffset: {x: 40, y: 0, z: 0}
+--- !u!114 &878090876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878090873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aece08c431426c84c886b72bb90abb97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Persist: 0
+  States:
+  - TypeName: FPWeaponShooter
+    Name: Zoom
+    TextAsset: {fileID: 4900000, guid: 0b0d44f482a71e442b3cffbfc7dc7616, type: 3}
+    StatesToBlock: 
+  - TypeName: FPWeaponShooter
+    Name: Default
+    TextAsset: {fileID: 0}
+    StatesToBlock: 
+  Children: []
+  Siblings: []
+  Family: []
+  Renderers: []
+  AudioSources: []
+  m_ProjectileSpawnPoint: {fileID: 0}
+  ProjectilePrefab: {fileID: 6050951628923512214, guid: f242031478a7d04418cfd664d48d0905, type: 3}
+  ProjectileScale: 0.4
+  ProjectileFiringRate: 0.4
+  ProjectileSpawnDelay: 0
+  ProjectileCount: 1
+  ProjectileSpread: 1
+  ProjectileSourceIsRoot: 1
+  FireMessage: 
+  MuzzleFlashPosition: {x: 0.1152683, y: -0.076066, z: 0.9020651}
+  MuzzleFlashScale: {x: 0.35, y: 0.35, z: 0.35}
+  MuzzleFlashFadeSpeed: 0.075
+  MuzzleFlashPrefab: {fileID: 100000, guid: 253c19e9e67a40946b655eb0c2f14527, type: 3}
+  MuzzleFlashDelay: 0
+  m_MuzzleFlashSpawnPoint: {fileID: 0}
+  FirePosition: {x: 0, y: 0, z: 0}
+  ProjectileTapFiringRate: 0.15
+  MotionPositionRecoil: {x: 0, y: 0, z: -0.035}
+  MotionRotationRecoil: {x: -10, y: 0, z: 0}
+  MotionRotationRecoilDeadZone: 0.5
+  MotionDryFireRecoil: -0.1
+  MotionRecoilDelay: 0
+  MuzzleFlashFirstShotMaxDeviation: 180
+  SoundDryFire: {fileID: 0}
+  MotionPositionReset: 0.5
+  MotionRotationReset: 0.5
+  MotionPositionPause: 0
+  MotionRotationPause: 1
+  AnimationFire: {fileID: 7400016, guid: 6430f79e6f5e5d943985886a1fb8d3c0, type: 3}
+  AnimationOutOfAmmo: {fileID: 7400000, guid: 6430f79e6f5e5d943985886a1fb8d3c0, type: 3}
+--- !u!82 &878090877
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878090873}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &878090878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878090873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 293ed848a8f5a4d4ab89cc1ab464d265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReloadDuration: 1
+  AnimationReload: {fileID: 7400020, guid: 6430f79e6f5e5d943985886a1fb8d3c0, type: 3}
 --- !u!1 &965067653
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,25 +1134,39 @@ MonoBehaviour:
   RenderingZoomDamping: 0.5
   RenderingFieldOfView: 21.84506
   RenderingClippingPlanes: {x: 0.5, y: 10}
+  RenderingZScale: 1
   PositionSpringStiffness: 0.01
   PositionSpringDamping: 0.25
+  PositionFallRetract: 1
+  PositionPivotSpringStiffness: 0.01
+  PositionPivotSpringDamping: 0.25
   PositionKneeling: 0.108
   PositionKneelingSoftness: 1
+  PositionWalkSlide: {x: 1, y: 2, z: 3}
+  PositionPivot: {x: 0, y: 0, z: 0}
+  RotationPivot: {x: 0, y: 0, z: 0}
+  PositionInputVelocityScale: 1
+  PositionMaxInputVelocity: 20
   RotationSpringStiffness: 0.01
   RotationSpringDamping: 0.213
+  RotationPivotSpringStiffness: 0.01
+  RotationPivotSpringDamping: 0.25
   RotationKneeling: 0
   RotationKneelingSoftness: 1
-  PositionExitOffset: {x: 0, y: -1, z: 0}
-  RotationExitOffset: {x: 40, y: 0, z: 0}
-  AnimationWield: {fileID: 0}
-  AnimationUnWield: {fileID: 0}
-  PositionMaxInputVelocity: 20
-  PositionWalkSlide: {x: 1, y: 2, z: 3}
   RotationLookSway: {x: 1, y: 1, z: 0}
   RotationStrafeSway: {x: 2, y: 1, z: 1}
   RotationFallSway: {x: 2, y: 0, z: 0}
   RotationSlopeSway: 1
+  RotationInputVelocityScale: 1
   RotationMaxInputVelocity: 5
+  SoundWield: {fileID: 0}
+  SoundUnWield: {fileID: 0}
+  AnimationWield: {fileID: 0}
+  AnimationUnWield: {fileID: 0}
+  AnimationAmbient: []
+  AmbientInterval: {x: 2.5, y: 7.5}
+  PositionExitOffset: {x: 0, y: -1, z: 0}
+  RotationExitOffset: {x: 40, y: 0, z: 0}
 --- !u!1 &1211905102
 GameObject:
   m_ObjectHideFlags: 1

@@ -210,6 +210,10 @@ public class fp_WeaponEditor : Editor
             GUI.enabled = true;
             m_Component.PositionOffset = EditorGUILayout.Vector3Field("Offset", m_Component.PositionOffset);
             m_Component.PositionExitOffset = EditorGUILayout.Vector3Field("Exit Offset", m_Component.PositionExitOffset);
+            Vector3 currentPivot = m_Component.PositionPivot;
+            m_Component.PositionPivot = EditorGUILayout.Vector3Field("Pivot", m_Component.PositionPivot);
+            m_Component.PositionPivotSpringStiffness = EditorGUILayout.Slider("Pivot Stiffness", m_Component.PositionPivotSpringStiffness, 0, 1);
+            m_Component.PositionPivotSpringDamping = EditorGUILayout.Slider("Pivot Damping", m_Component.PositionPivotSpringDamping, 0, 1);
 
             GUI.enabled = true;
 
@@ -241,8 +245,10 @@ public class fp_WeaponEditor : Editor
         {
             m_Component.RotationOffset = EditorGUILayout.Vector3Field("Offset", m_Component.RotationOffset);
             m_Component.RotationExitOffset = EditorGUILayout.Vector3Field("Exit Offset", m_Component.RotationExitOffset);
-            if (!Application.isPlaying)
-                GUI.enabled = false;
+
+            m_Component.RotationPivot = EditorGUILayout.Vector3Field("Pivot", m_Component.RotationPivot);
+            m_Component.RotationPivotSpringStiffness = EditorGUILayout.Slider("Pivot Stiffness", m_Component.RotationPivotSpringStiffness, 0, 1);
+            m_Component.RotationPivotSpringDamping = EditorGUILayout.Slider("Pivot Damping", m_Component.RotationPivotSpringDamping, 0, 1);
 
             GUI.enabled = true;
             m_Component.RotationSpringStiffness = EditorGUILayout.Slider("Spring Stiffness", m_Component.RotationSpringStiffness, 0, 1);

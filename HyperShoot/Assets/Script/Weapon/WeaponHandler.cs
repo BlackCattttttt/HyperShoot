@@ -44,7 +44,20 @@ namespace HyperShoot.Weapon
         public int CurrentWeaponIndex { get { return m_CurrentWeaponIndex; } }
         protected BaseWeapon m_CurrentWeapon = null;
         public BaseWeapon CurrentWeapon { get { return m_CurrentWeapon; } }
+        protected BaseShooter m_CurrentShooter = null;
+        public BaseShooter CurrentShooter
+        {
+            get
+            {
+                if (CurrentWeapon == null)
+                    return null;
 
+                if ((m_CurrentShooter != null) && ((!m_CurrentShooter.enabled) || (!fp_Utility.IsActive(m_CurrentShooter.gameObject))))
+                    return null;
+
+                return m_CurrentShooter;    // NOTE: this is set in 'ActivateWeapon'
+            }
+        }
         protected class WeaponComparer : IComparer
         {
             int IComparer.Compare(System.Object x, System.Object y)
@@ -197,7 +210,7 @@ namespace HyperShoot.Weapon
                 weapon.ActivateGameObject(false);
             }
 
-            //  m_CurrentShooter = null;
+            m_CurrentShooter = null;
         }
         public void ActivateWeapon(int index)
         {
@@ -210,15 +223,14 @@ namespace HyperShoot.Weapon
                     m_CurrentWeapon.ActivateGameObject(true);
             }
 
-            // if (m_CurrentWeapon != null)
-            //      m_CurrentShooter = CurrentWeapon.GetComponent<BaseShooter>();
+             if (m_CurrentWeapon != null)
+                  m_CurrentShooter = CurrentWeapon.GetComponent<BaseShooter>();
 
         }
         protected virtual void UpdateFiring()
         {
-            if (!m_Player.IsLocal.Get() && !m_Player.IsAI.Get())
-                return;
-
+            //if (!m_Player.IsLocal.Get() && !m_Player.IsAI.Get())
+            //    return;
             // we continuously try to fire the weapon while player is in attack
             // mode, but if it's not: bail out
             if (!m_Player.Attack.Active)

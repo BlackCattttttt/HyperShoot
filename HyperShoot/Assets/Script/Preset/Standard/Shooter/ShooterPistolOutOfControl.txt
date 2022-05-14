@@ -2,7 +2,7 @@
 // Component Preset Script
 ///////////////////////////////////////////////////////////
 
-ComponentType vp_FPWeaponShooter
+ComponentType HyperShoot.Weapon.FPWeaponShooter
 //MuzzleFlashPosition 0.16 -0.1 0.9020651
 MotionPositionReset 1
 MotionRotationReset 1

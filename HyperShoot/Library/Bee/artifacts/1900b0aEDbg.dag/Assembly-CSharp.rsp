@@ -377,11 +377,15 @@
 "Assets/Script/Core/Utility/fp_Timer.cs"
 "Assets/Script/Core/Utility/fp_TimeUtility.cs"
 "Assets/Script/Core/Utility/fp_Utility.cs"
+"Assets/Script/Effect/fp_MuzzleFlash.cs"
 "Assets/Script/Singletons/Singleton.cs"
 "Assets/Script/Singletons/SingletonClass.cs"
+"Assets/Script/Weapon/BaseShooter.cs"
 "Assets/Script/Weapon/BaseWeapon.cs"
 "Assets/Script/Weapon/FPWeapon.cs"
+"Assets/Script/Weapon/FPWeaponShooter.cs"
 "Assets/Script/Weapon/WeaponHandler.cs"
+"Assets/Script/Weapon/WeaponShooter.cs"
 -langversion:8.0
 
 /deterministic

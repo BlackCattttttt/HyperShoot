@@ -2,7 +2,7 @@
 // Component Preset Script
 ///////////////////////////////////////////////////////////
 
-ComponentType vp_FPWeaponShooter
+ComponentType HyperShoot.Weapon.FPWeaponShooter
 MotionPositionRecoil 0 0 -0.035
 MotionRotationRecoil -10 0 0
 MotionRotationRecoilDeadZone 0.5
@@ -22,11 +22,5 @@ MuzzleFlashPosition 0.1152683 -0.076066 0.9020651
 MuzzleFlashScale 0.35 0.35 1
 MuzzleFlashFadeSpeed 0.075
 MuzzleFlashDelay 0
-ShellScale 0.05
-ShellEjectDirection 2 1 1
-ShellEjectPosition 0.2 -0.05 0.5
-ShellEjectVelocity 0.2
-ShellEjectDelay 0
-ShellEjectSpin 1
 SoundFireDelay 0
 SoundFirePitch 1 1

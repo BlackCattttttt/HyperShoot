@@ -371,6 +371,7 @@
 "Assets/Script/Core/Utility/fp_TimeUtility.cs"
 "Assets/Script/Core/Utility/fp_Utility.cs"
 "Assets/Script/Effect/fp_MuzzleFlash.cs"
+"Assets/Script/Inventory/PlayInventory.cs"
 "Assets/Script/Player/BaseController.cs"
 "Assets/Script/Player/CharacterEventHandler.cs"
 "Assets/Script/Player/FPCamera.cs"

@@ -40,22 +40,17 @@ namespace HyperShoot.Player
         /// </summary>
         protected override void OnEnable()
         {
-
             if (FPPlayer != null)
                 FPPlayer.Register(this);
-
         }
         protected override void OnDisable()
         {
-
             if (FPPlayer != null)
                 FPPlayer.Unregister(this);
-
         }
 
         protected override void Update()
         {
-
             // manage input for GUI
             UpdateCursorLock();
 
@@ -81,7 +76,7 @@ namespace HyperShoot.Player
 
             // manage input for weapons
             InputAttack();
-            //	InputReload();
+            InputReload();
             InputSetWeapon();
 
             // manage camera related input
@@ -89,10 +84,6 @@ namespace HyperShoot.Player
 
         }
 
-
-        /// <summary>
-        /// handles interaction with the game world
-        /// </summary>
         //protected virtual void InputInteract()
         //{
 
@@ -158,19 +149,11 @@ namespace HyperShoot.Player
                 FPPlayer.Attack.TryStop();
         }
 
-
-        /// <summary>
-        /// when the reload button is pressed, broadcasts a message
-        /// to any listening components asking them to reload
-        /// NOTE: reload may not succeed due to ammo status etc.
-        /// </summary>
-        //protected virtual void InputReload()
-        //{
-
-        //	if (InputManager.GetButtonDown("Reload"))
-        //		FPPlayer.Reload.TryStart();
-
-        //}
+        protected virtual void InputReload()
+        {
+            if (InputManager.GetButtonDown("Reload"))
+                FPPlayer.Reload.TryStart();
+        }
 
         protected virtual void InputSetWeapon()
         {

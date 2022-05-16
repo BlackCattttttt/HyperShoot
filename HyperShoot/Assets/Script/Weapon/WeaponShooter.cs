@@ -198,16 +198,13 @@ namespace HyperShoot.Weapon
 			if (Time.time < m_NextAllowedFireTime)
 				return false;
 
-			// weapon can only be fired if it has ammo (or doesn't require ammo).
-			// NOTE: on success this call will remove ammo, so it's done only once
-			// everything else checks out
-			//if (!Player.DepleteAmmo.Try())
-			//{
-			//	DryFire();
-			//	return false;
-			//}
+            if (!Player.DepleteAmmo.Try())
+            {
+                DryFire();
+                return false;
+            }
 
-			Fire();
+            Fire();
 
 			return true;
 		}

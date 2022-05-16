@@ -19,6 +19,8 @@ namespace HyperShoot.Weapon
         public float SetWeaponZoomSleepDuration = 0.3f;     // amount of time to prohibit zooming during set weapon
         public float SetWeaponAttackSleepDuration = 0.3f;   // amount of time to prohibit attacking during set weapon
         public float ReloadAttackSleepDuration = 0.3f;      // amount of time to prohibit attacking during reloading
+                                                            // reloading
+        public bool ReloadAutomatically = true;
 
         protected fp_Timer.Handle m_SetWeaponRefreshTimer = new fp_Timer.Handle();
 
@@ -256,8 +258,8 @@ namespace HyperShoot.Weapon
                 return false;
 
             // can't set a new weapon while reloading
-           // if (m_Player.Reload.Active)
-           //     return false;
+            if (m_Player.Reload.Active)
+                return false;
 
             return true;
         }
@@ -267,7 +269,7 @@ namespace HyperShoot.Weapon
             if ((WeaponBeingSet == null))
             //|| (WeaponBeingSet.AnimationType != (int)BaseWeapon.Type.Melee))
             {
-                // m_Player.Reload.Stop(SetWeaponDuration + SetWeaponReloadSleepDuration);
+                m_Player.Reload.Stop(SetWeaponDuration + SetWeaponReloadSleepDuration);
                 m_Player.Zoom.Stop(SetWeaponDuration + SetWeaponZoomSleepDuration);
                 m_Player.Attack.Stop(SetWeaponDuration + SetWeaponAttackSleepDuration);
             }
@@ -299,10 +301,10 @@ namespace HyperShoot.Weapon
 
                     if (m_CurrentWeapon != null)
                     {
-                        //  if (m_Player.CurrentWeaponAmmoCount.Get() == 0)
-                        //  {
-                        //     m_Player.AutoReload.Try();  // try to auto-reload
-                        //  }
+                          if (m_Player.CurrentWeaponAmmoCount.Get() == 0)
+                          {
+                             m_Player.AutoReload.Try();  // try to auto-reload
+                          }
                     }
                 }
             }, m_SetWeaponRefreshTimer);
@@ -313,6 +315,28 @@ namespace HyperShoot.Weapon
             {
                 return m_CurrentWeaponIndex;
             }
+        }
+        protected virtual bool OnValue_CurrentWeaponWielded
+        {
+            get
+            {
+                if (m_CurrentWeapon == null)
+                    return false;
+                return m_CurrentWeapon.Wielded;
+            }
+        }
+        protected virtual bool OnAttempt_AutoReload()
+        {
+            if (!ReloadAutomatically)
+                return false;
+
+            if (CurrentWeapon == null)
+                return false;
+
+            //if (CurrentWeapon.AnimationType == (int)BaseWeapon.Type.Melee)
+            //    return false;
+
+            return m_Player.Reload.TryStart();
         }
         public virtual void OnMessage_Unwield()
         {

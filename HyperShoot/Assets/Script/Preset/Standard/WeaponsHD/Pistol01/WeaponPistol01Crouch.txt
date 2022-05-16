@@ -1,0 +1,14 @@
+///////////////////////////////////////////////////////////
+// Component Preset Script
+///////////////////////////////////////////////////////////
+
+ComponentType HyperShoot.Weapon.FPWeapon
+RenderingClippingPlanes 0.1 10
+PositionWalkSlide 1 1 0.5
+RotationLookSway 2 0.5 0
+RotationFallSway 2 -2 -3
+RotationPivot 0 0 0
+PositionFallRetract 0
+PositionOffset 0.05 -0.41 -0.1
+PositionPivot 0.02 -0.21 -0.76
+RotationOffset 15 -20.3 -15

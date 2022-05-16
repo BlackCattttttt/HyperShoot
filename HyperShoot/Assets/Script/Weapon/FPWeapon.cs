@@ -24,7 +24,6 @@ namespace HyperShoot.Weapon
 		// weapon position spring
 		public float PositionSpringStiffness = 0.01f;
 		public float PositionSpringDamping = 0.25f;
-		public float PositionFallRetract = 1.0f;
 		public float PositionPivotSpringStiffness = 0.01f;
 		public float PositionPivotSpringDamping = 0.25f;
 		public float PositionKneeling = 0.06f;
@@ -32,7 +31,6 @@ namespace HyperShoot.Weapon
 		public Vector3 PositionWalkSlide = new Vector3(0.5f, 0.75f, 0.5f);
 		public Vector3 PositionPivot = Vector3.zero;
 		public Vector3 RotationPivot = Vector3.zero;
-		public float PositionInputVelocityScale = 1.0f;
 		public float PositionMaxInputVelocity = 25;
 		protected fp_Spring m_PositionSpring = null;        // spring for player motion (shake, falling impact, sway, bob etc.)
 		protected fp_Spring m_PositionPivotSpring = null;
@@ -53,7 +51,6 @@ namespace HyperShoot.Weapon
 		public Vector3 RotationStrafeSway = new Vector3(0.3f, 1.0f, 1.5f);
 		public Vector3 RotationFallSway = new Vector3(1.0f, -0.5f, -3.0f);
 		public float RotationSlopeSway = 0.5f;
-		public float RotationInputVelocityScale = 1.0f;
 		public float RotationMaxInputVelocity = 15;
 		protected fp_Spring m_RotationSpring = null;        // spring for player motion (falling impact, sway, bob etc.)
 		protected Vector3 m_SwayVel = Vector3.zero;
@@ -66,11 +63,6 @@ namespace HyperShoot.Weapon
 		// animation
 		public AnimationClip AnimationWield = null;
 		public AnimationClip AnimationUnWield = null;
-		public List<UnityEngine.Object> AnimationAmbient = new List<UnityEngine.Object>();
-		protected List<bool> m_AmbAnimPlayed = new List<bool>();
-		public Vector2 AmbientInterval = new Vector2(2.5f, 7.5f);
-		protected int m_CurrentAmbientAnimation = 0;
-		protected fp_Timer.Handle m_AnimationAmbientTimer = new fp_Timer.Handle();
 
 		// weapon switching
 		public Vector3 PositionExitOffset = new Vector3(0.0f, -1.0f, 0.0f);     // used by the camera when switching the weapon out of view
@@ -264,7 +256,6 @@ namespace HyperShoot.Weapon
 			m_LookInput = FPPlayer.InputRawLook.Get() / Delta * Time.timeScale * Time.timeScale;
 
 			// limit rotation velocity to protect against extreme input sensitivity
-			m_LookInput *= RotationInputVelocityScale;
 			m_LookInput = Vector3.Min(m_LookInput, Vector3.one * RotationMaxInputVelocity);
 			m_LookInput = Vector3.Max(m_LookInput, Vector3.one * -RotationMaxInputVelocity);
 		}
@@ -309,7 +300,6 @@ namespace HyperShoot.Weapon
 		protected virtual void UpdateSwaying()
 		{
 			// limit position velocity to protect against extreme speeds
-			m_SwayVel = Controller.velocity * PositionInputVelocityScale;
 			m_SwayVel = Vector3.Min(m_SwayVel, Vector3.one * PositionMaxInputVelocity);
 			m_SwayVel = Vector3.Max(m_SwayVel, Vector3.one * -PositionMaxInputVelocity);
 
@@ -338,7 +328,7 @@ namespace HyperShoot.Weapon
 			m_RotationSpring.AddForce(m_FallSway);
 
 			// drag weapon towards ourselves
-			m_PositionSpring.AddForce(Vector3.forward * -Mathf.Abs((m_SwayVel.y) * (PositionFallRetract * 0.000025f)));
+			m_PositionSpring.AddForce(Vector3.forward * -Mathf.Abs((m_SwayVel.y) * 0.000025f));
 
 			// --- weapon strafe & walk slide ---
 			// PositionWalkSlide x will slide sideways when strafing
@@ -515,7 +505,6 @@ namespace HyperShoot.Weapon
 
 		public virtual void SnapToExit()
 		{
-
 			RotationOffset = RotationExitOffset;
 			PositionOffset = PositionExitOffset;
 			SnapSprings();

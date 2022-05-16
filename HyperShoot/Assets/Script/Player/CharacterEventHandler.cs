@@ -97,7 +97,6 @@ namespace HyperShoot.Player
 
         protected override void Awake()
         {
-
             base.Awake();
 
             BindStateToActivity(Run);
@@ -118,7 +117,6 @@ namespace HyperShoot.Player
 
             Jump.MinPause = 0.0f;           // increase this to enforce a certain delay between jumps
             SetWeapon.MinPause = 0.2f;
-
         }
     }
 }

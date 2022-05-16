@@ -821,20 +821,24 @@ MonoBehaviour:
   States:
   - TypeName: FPWeapon
     Name: Run
-    TextAsset: {fileID: 4900000, guid: dee45e6da0dc2a34abef920c5ad48b6d, type: 3}
+    TextAsset: {fileID: 4900000, guid: 5020a0c4812e0ef40a1308e366a7d3e3, type: 3}
     StatesToBlock: 
   - TypeName: FPWeapon
     Name: Crouch
-    TextAsset: {fileID: 4900000, guid: b9da03374705f6c4592e4c5e61ad24a7, type: 3}
+    TextAsset: {fileID: 4900000, guid: d6d914aed3312574fbfb407e9c69f57f, type: 3}
     StatesToBlock: 00000000
   - TypeName: FPWeapon
     Name: Zoom
-    TextAsset: {fileID: 4900000, guid: 339945a302603004ba11faef72fff091, type: 3}
+    TextAsset: {fileID: 4900000, guid: fb1279aa85f86b24f99b89460f353828, type: 3}
     StatesToBlock: 0000000001000000
   - TypeName: FPWeapon
     Name: Attack
     TextAsset: {fileID: 0}
     StatesToBlock: 0000000001000000
+  - TypeName: FPWeapon
+    Name: Reload
+    TextAsset: {fileID: 4900000, guid: c444ea6d5a94ae44bb4fe1ade1579420, type: 3}
+    StatesToBlock: 000000000100000003000000
   - TypeName: FPWeapon
     Name: Default
     TextAsset: {fileID: 0}
@@ -844,51 +848,46 @@ MonoBehaviour:
   Family: []
   Renderers: []
   AudioSources: []
-  PositionOffset: {x: 0.1493672, y: -0.2665937, z: 0.1704005}
-  PositionSpring2Stiffness: 0.2
+  PositionOffset: {x: 0.13, y: -0.365, z: 0.08}
+  PositionSpring2Stiffness: 0.7
   PositionSpring2Damping: 0.6
-  RotationOffset: {x: -3.158258, y: -5, z: 0}
+  RotationOffset: {x: -2, y: -5.8, z: -1.6}
   RotationSpring2Stiffness: 0.85
-  RotationSpring2Damping: 0.6
+  RotationSpring2Damping: 0.8
   AnimationType: 1
   AnimationGrip: 1
-  WeaponPrefab: {fileID: 100014, guid: 49d795f62fdd8ad49a1f04523d691f9e, type: 3}
+  WeaponPrefab: {fileID: 100158, guid: cccc751e3e1f24e1d8c468d05f8a1fc2, type: 3}
   RenderingZoomDamping: 0.5
   RenderingFieldOfView: 35
-  RenderingClippingPlanes: {x: 0.01, y: 10}
+  RenderingClippingPlanes: {x: 0.1, y: 10}
   RenderingZScale: 1
   PositionSpringStiffness: 0.01
-  PositionSpringDamping: 0.25
-  PositionFallRetract: 1
+  PositionSpringDamping: 0.3
   PositionPivotSpringStiffness: 0.01
   PositionPivotSpringDamping: 0.25
-  PositionKneeling: 0.06
+  PositionKneeling: 0.1
   PositionKneelingSoftness: 1
-  PositionWalkSlide: {x: 1, y: 1, z: 1}
-  PositionPivot: {x: 0, y: 0, z: -0.2741375}
+  PositionWalkSlide: {x: 0.75, y: 0, z: 1}
+  PositionPivot: {x: 0, y: 0, z: -0.58}
   RotationPivot: {x: 0, y: 0, z: 0}
-  PositionInputVelocityScale: 1
-  PositionMaxInputVelocity: 25
-  RotationSpringStiffness: 0.01
-  RotationSpringDamping: 0.25
-  RotationPivotSpringStiffness: 0.01
-  RotationPivotSpringDamping: 0.25
-  RotationKneeling: 0
-  RotationKneelingSoftness: 1
-  RotationLookSway: {x: 1, y: 1, z: 0}
-  RotationStrafeSway: {x: 1, y: 1, z: -1}
-  RotationFallSway: {x: 2, y: 0, z: 0}
+  PositionMaxInputVelocity: 20
+  RotationSpringStiffness: 0.02
+  RotationSpringDamping: 0.5
+  RotationPivotSpringStiffness: 0.15
+  RotationPivotSpringDamping: 0.5
+  RotationKneeling: 20
+  RotationKneelingSoftness: 5
+  RotationLookSway: {x: 2, y: 2.5, z: 0}
+  RotationStrafeSway: {x: 0, y: 1.5, z: -2}
+  RotationFallSway: {x: 5, y: 0, z: 0}
   RotationSlopeSway: 0.75
-  RotationInputVelocityScale: 1
-  RotationMaxInputVelocity: 15
+  RotationMaxInputVelocity: 5
   SoundWield: {fileID: 0}
   SoundUnWield: {fileID: 0}
   AnimationWield: {fileID: 0}
   AnimationUnWield: {fileID: 0}
-  AnimationAmbient: []
-  AmbientInterval: {x: 2.5, y: 7.5}
-  PositionExitOffset: {x: 0, y: -1, z: 0}
-  RotationExitOffset: {x: 40, y: 0, z: 0}
+  PositionExitOffset: {x: 0.13, y: -1, z: -0.01}
+  RotationExitOffset: {x: 75, y: 0, z: 0}
 --- !u!114 &878090876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,10 +924,10 @@ MonoBehaviour:
   ProjectileSpread: 1
   ProjectileSourceIsRoot: 1
   FireMessage: 
-  MuzzleFlashPosition: {x: 0.1152683, y: -0.076066, z: 0.9020651}
-  MuzzleFlashScale: {x: 0.35, y: 0.35, z: 0.35}
+  MuzzleFlashPosition: {x: 0.07, y: -0.045, z: 1.2}
+  MuzzleFlashScale: {x: 0.25, y: 0.25, z: 0.18}
   MuzzleFlashFadeSpeed: 0.075
-  MuzzleFlashPrefab: {fileID: 100000, guid: 253c19e9e67a40946b655eb0c2f14527, type: 3}
+  MuzzleFlashPrefab: {fileID: 100000, guid: 65d0c4d58eab9524aba6540ee563ee66, type: 3}
   MuzzleFlashDelay: 0
   m_MuzzleFlashSpawnPoint: {fileID: 0}
   FirePosition: {x: 0, y: 0, z: 0}
@@ -1137,7 +1136,6 @@ MonoBehaviour:
   RenderingZScale: 1
   PositionSpringStiffness: 0.01
   PositionSpringDamping: 0.25
-  PositionFallRetract: 1
   PositionPivotSpringStiffness: 0.01
   PositionPivotSpringDamping: 0.25
   PositionKneeling: 0.108
@@ -1145,7 +1143,6 @@ MonoBehaviour:
   PositionWalkSlide: {x: 1, y: 2, z: 3}
   PositionPivot: {x: 0, y: 0, z: 0}
   RotationPivot: {x: 0, y: 0, z: 0}
-  PositionInputVelocityScale: 1
   PositionMaxInputVelocity: 20
   RotationSpringStiffness: 0.01
   RotationSpringDamping: 0.213
@@ -1157,14 +1154,11 @@ MonoBehaviour:
   RotationStrafeSway: {x: 2, y: 1, z: 1}
   RotationFallSway: {x: 2, y: 0, z: 0}
   RotationSlopeSway: 1
-  RotationInputVelocityScale: 1
   RotationMaxInputVelocity: 5
   SoundWield: {fileID: 0}
   SoundUnWield: {fileID: 0}
   AnimationWield: {fileID: 0}
   AnimationUnWield: {fileID: 0}
-  AnimationAmbient: []
-  AmbientInterval: {x: 2.5, y: 7.5}
   PositionExitOffset: {x: 0, y: -1, z: 0}
   RotationExitOffset: {x: 40, y: 0, z: 0}
 --- !u!1 &1211905102
@@ -1267,6 +1261,7 @@ GameObject:
   - component: {fileID: 1592114003}
   - component: {fileID: 1592114002}
   - component: {fileID: 1592114005}
+  - component: {fileID: 1592114006}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1417,6 +1412,27 @@ MonoBehaviour:
   SetWeaponZoomSleepDuration: 0.3
   SetWeaponAttackSleepDuration: 0.3
   ReloadAttackSleepDuration: 0.3
+--- !u!114 &1592114006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592113999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8528733f4883d43883f8643fe6540f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Persist: 0
+  States: []
+  Children: []
+  Siblings: []
+  Family: []
+  Renderers: []
+  AudioSources: []
+  maxAmo: 10
+  currentAmo: 0
 --- !u!1 &1717730666
 GameObject:
   m_ObjectHideFlags: 1

@@ -1,0 +1,23 @@
+///////////////////////////////////////////////////////////
+// Component Preset Script
+///////////////////////////////////////////////////////////
+
+ComponentType HyperShoot.Weapon.FPWeapon
+PositionOffset 0 -0.316 0.5
+PositionSpringStiffness 0.55
+PositionSpringDamping 0.85
+RotationPivotSpringStiffness 0.5
+RotationPivotSpringDamping 0.6
+PositionPivotSpringStiffness 0.75
+PositionPivotSpringDamping 0.65
+RotationSpringStiffness 0.05
+RotationSpringDamping 0.5
+RotationOffset 0 0 0
+RenderingFieldOfView 10
+RenderingZoomDamping 0.1
+RenderingClippingPlanes 0.01 10
+RotationLookSway 0 -0.1 0
+RotationStrafeSway 0 0.5 -1
+PositionWalkSlide 0 0 0
+RotationPivot 0 0 0
+

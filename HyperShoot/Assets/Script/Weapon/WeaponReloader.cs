@@ -55,10 +55,10 @@ namespace HyperShoot.Weapon
 				return false;
 
 			// can't reload if the inventory has no additional ammo for this weapon
-			if (m_Player.CurrentWeaponClipCount.Get() < 1)
-			{
-				return false;
-			}
+			//if (m_Player.CurrentWeaponClipCount.Get() < 1)
+			//{
+			//	return false;
+			//}
 
 			return true;
 		}

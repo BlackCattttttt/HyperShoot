@@ -1,3 +1,4 @@
+using HyperShoot.Combat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -93,7 +94,7 @@ namespace HyperShoot.Bullet
             TryAddForce();
 
             // try to make damage in the best supported way
-           // TryDamage();
+            TryDamage();
 
             // remove the bullet - as long as it's invisible and silent
             TryDestroy();
@@ -132,7 +133,19 @@ namespace HyperShoot.Bullet
 
             body.AddForceAtPosition(((m_Ray.direction * Force) / Time.timeScale) / fp_TimeUtility.AdjustedTimeScale, m_Hit.point);
         }
-
+        protected virtual void TryDamage()
+        {
+            var damageable = m_Hit.collider.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(new DamageData
+                {
+                    Type = DamageType.Bullet,
+                    Damage = Damage,
+                    ImpactObject = gameObject
+                });
+            }
+        }
         protected virtual void TryDestroy()
         {
             if (this == null)

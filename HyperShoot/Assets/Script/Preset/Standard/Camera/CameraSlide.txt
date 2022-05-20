@@ -2,7 +2,7 @@
 // Component Preset Script
 ///////////////////////////////////////////////////////////
 
-ComponentType vp_FPCamera
+ComponentType HyperShoot.Player.FPCamera
 BobRate 0.0 0.0 0.0 0.0
 BobAmplitude 0 0 0 0
 BobMaxInputVelocity 0.0

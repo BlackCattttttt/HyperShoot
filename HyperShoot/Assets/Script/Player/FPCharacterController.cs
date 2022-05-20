@@ -101,7 +101,6 @@ namespace HyperShoot.Player
         }
         protected override void RefreshCollider()
         {
-
             base.RefreshCollider();
 
             // update physics trigger size
@@ -111,27 +110,22 @@ namespace HyperShoot.Player
                 m_TriggerCollider.height = characterController.height + (SkinWidth * 2.0f);
                 m_TriggerCollider.center = characterController.center;
             }
-
         }
         public override void EnableCollider(bool isEnabled = true)
         {
-
             if (characterController != null)
                 characterController.enabled = isEnabled;
 
         }
         protected override void Update()
         {
-
             base.Update();
 
             // simulate high-precision movement for smoothest possible camera motion
             SmoothMove();
-
         }
         protected override void FixedUpdate()
         {
-
             if (Time.timeScale == 0.0f)
                 return;
 
@@ -161,7 +155,6 @@ namespace HyperShoot.Player
 
             // store final position and velocity for next frame's physics calculations
             UpdateVelocity();
-
         }
 
         protected virtual void UpdateMotor()
@@ -173,7 +166,6 @@ namespace HyperShoot.Player
         }
         protected virtual void UpdateThrottleWalk()
         {
-
             // if on the ground, make movement speed dependent on ground slope
             UpdateSlopeFactor();
 
@@ -195,7 +187,6 @@ namespace HyperShoot.Player
         }
         protected virtual void UpdateJump()
         {
-
             // abort all jumping activity for 1 second if head touches a ceiling
             //if (m_HeadContact)
             //    Player.Jump.Stop(1.0f);
@@ -212,7 +203,6 @@ namespace HyperShoot.Player
         }
         protected virtual void UpdateJumpForceWalk()
         {
-
             if (Player.Jump.Active)
             {
                 if (!m_Grounded)
@@ -229,11 +219,9 @@ namespace HyperShoot.Player
                         m_MotorJumpForceHoldSkipFrames++;
                 }
             }
-
         }
         protected override void UpdateForces()
         {
-
             base.UpdateForces();
 
             // apply smooth force (forces applied over several frames)
@@ -267,7 +255,6 @@ namespace HyperShoot.Player
         }
         protected virtual void UpdateSliding()
         {
-
             bool wasSlidingFast = m_SlideFast;
             bool wasSliding = m_Slide;
 
@@ -335,11 +322,9 @@ namespace HyperShoot.Player
 
             if (wasSliding != m_Slide)
                 Player.SetState("Slide", m_Slide);
-
         }
         void UpdateOutOfControl()
         {
-
             if ((m_ExternalForce.magnitude > 0.2f) ||       // TODO: make 0.2 a constant
                 (m_FallSpeed < -0.2f) ||    // TODO: make 0.2 a constant
                     (m_SlideFast == true))
@@ -350,7 +335,6 @@ namespace HyperShoot.Player
         }
         protected virtual void UpdateSlopeFactor()
         {
-
             if (!m_Grounded)
             {
                 m_SlopeFactor = 1.0f;
@@ -392,11 +376,9 @@ namespace HyperShoot.Player
                 m_SlopeFactor = (GroundAngle > Player.SlopeLimit.Get()) ? 0.0f : m_SlopeFactor;
 
             }
-
         }
         protected override void FixedMove()
         {
-
             // --- apply forces ---
             m_MoveDirection = Vector3.zero;
             m_MoveDirection += m_ExternalForce;
@@ -424,16 +406,13 @@ namespace HyperShoot.Player
             //if (m_Platform != null && PositionOnPlatform != Vector3.zero)
             //	Player.Move.Send(vp_MathUtility.NaNSafeVector3(m_Platform.TransformPoint(PositionOnPlatform) -
             //															m_Transform.position));
-
-            // move on our own
-            Player.Move.Send(fp_MathUtility.NaNSafeVector3(m_MoveDirection * Delta * Time.timeScale));
-
-            // while there is an active death event, block movement input
             if (Player.Dead.Active)
             {
                 Player.InputMoveVector.Set(Vector2.zero);
                 return;
             }
+            // move on our own
+            Player.Move.Send(fp_MathUtility.NaNSafeVector3(m_MoveDirection * Delta * Time.timeScale));
 
             // --- store ground info ---
             StoreGroundInfo();
@@ -475,12 +454,10 @@ namespace HyperShoot.Player
         }
         protected override void UpdateCollisions()
         {
-
             base.UpdateCollisions();
 
             if (m_OnNewGround)
             {
-
                 // deflect the controller sideways under some circumstances
                 if (m_WasFalling)
                 {
@@ -588,20 +565,10 @@ namespace HyperShoot.Player
                 m_SmoothForceFrame[v] = m_SmoothForceFrame[v].magnitude * m_NewDir * m_ForceMultiplier;
             }
             m_ExternalForce.y = yBak;
-
-            // TIP: the force that was absorbed by the bodies during the impact can be used for
-            // things like damage, so an event could be sent here with the amount of absorbed force
-
         }
-        /// <summary>
-        /// since the controller is moved in FixedUpdate and the
-        /// camera in Update there will be noticeable camera jitter.
-        /// this method simulates the controller move in Update and
-        /// stores the smooth position for the camera to read
-        /// </summary>
+
         protected virtual void SmoothMove()
         {
-
             if (Time.timeScale == 0.0f)
                 return;
 
@@ -626,7 +593,6 @@ namespace HyperShoot.Player
 
         public override void SetPosition(Vector3 position)
         {
-
             base.SetPosition(position);
             m_SmoothPosition = position;
 
@@ -634,7 +600,6 @@ namespace HyperShoot.Player
 
         public override void Stop()
         {
-
             base.Stop();
 
             m_MotorThrottle = Vector3.zero;
@@ -664,7 +629,6 @@ namespace HyperShoot.Player
         }
         protected virtual void OnStart_Jump()
         {
-
             m_MotorJumpDone = false;
 
             // perform impulse jump
@@ -672,12 +636,10 @@ namespace HyperShoot.Player
 
             // sync camera y pos
             m_SmoothPosition.y = Transform.position.y;
-
         }
 
         protected virtual void OnStop_Jump()
         {
-
             m_MotorJumpDone = true;
 
         }
@@ -689,7 +651,6 @@ namespace HyperShoot.Player
 
         protected virtual bool CanStart_Run()
         {
-
             // can't start running while crouching
             if (Player.Crouch.Active)
                 return false;
@@ -700,7 +661,6 @@ namespace HyperShoot.Player
 
         protected virtual bool CanStop_Crouch()
         {
-
             // can't stop crouching if there is a blocking object above us
             if (Physics.SphereCast(new Ray(Transform.position, Vector3.up),
                     Player.Radius.Get(),
@@ -725,11 +685,6 @@ namespace HyperShoot.Player
             get { return m_MotorJumpDone; }
         }
 
-
-        /// <summary>
-        /// always returns true if the player is in 1st person mode,
-        /// and false in 3rd person
-        /// </summary>
         protected virtual bool OnValue_IsFirstPerson
         {
 
@@ -742,6 +697,15 @@ namespace HyperShoot.Player
                 m_IsFirstPerson = value;
             }
 
+        }
+        //protected virtual void OnStart_Dead()
+        //{
+        //    m_Platform = null;
+        //}
+
+        protected virtual void OnStop_Dead()
+        {
+            Player.OutOfControl.Stop();
         }
     }
 }

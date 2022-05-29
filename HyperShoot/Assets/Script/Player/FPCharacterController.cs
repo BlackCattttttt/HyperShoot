@@ -73,6 +73,7 @@ namespace HyperShoot.Player
             {
 
                 m_Trigger = new GameObject("Trigger");
+              //  m_Trigger.tag = "Player";
                 m_Trigger.transform.parent = m_Transform;
                 m_Trigger.layer = fp_Layer.LocalPlayer;
                 m_Trigger.transform.localPosition = Vector3.zero;
@@ -83,6 +84,7 @@ namespace HyperShoot.Player
                 m_TriggerCollider.height = characterController.height + (SkinWidth * 2.0f);
                 m_TriggerCollider.center = characterController.center;
 
+            //    m_Trigger.AddComponent<Rigidbody>().isKinematic = true;
                 //  m_Trigger.gameObject.AddComponent<vp_DamageTransfer>();
 
                 // if we have a SurfaceIdentifier, copy it along with its values onto the trigger.

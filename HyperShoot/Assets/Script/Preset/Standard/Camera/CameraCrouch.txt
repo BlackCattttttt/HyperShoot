@@ -4,5 +4,3 @@
 
 ComponentType HyperShoot.Player.FPCamera
 PositionOffset 0 0.75 0.1
-RotationKneeling 0
-RotationStrafeRoll -2.5

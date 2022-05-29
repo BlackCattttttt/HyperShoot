@@ -115,13 +115,14 @@
 -define:PACKAGE_UITOOLKIT
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
--r:"Assets/Plugin/Sirenix/Assemblies/AOT/Sirenix.Serialization.AOTGenerated.dll"
--r:"Assets/Plugin/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll"
--r:"Assets/Plugin/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll"
--r:"Assets/Plugin/Sirenix/Assemblies/Sirenix.Serialization.Config.dll"
--r:"Assets/Plugin/Sirenix/Assemblies/Sirenix.Serialization.dll"
--r:"Assets/Plugin/Sirenix/Assemblies/Sirenix.Utilities.dll"
--r:"Assets/Plugin/Sirenix/Assemblies/Sirenix.Utilities.Editor.dll"
+-r:"Assets/Plugins/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll"
+-r:"Assets/Plugins/Sirenix/Assemblies/AOT/Sirenix.Serialization.AOTGenerated.dll"
+-r:"Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll"
+-r:"Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll"
+-r:"Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll"
+-r:"Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.dll"
+-r:"Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.dll"
+-r:"Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.27f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.27f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.27f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"

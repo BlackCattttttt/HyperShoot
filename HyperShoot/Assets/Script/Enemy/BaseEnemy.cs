@@ -32,11 +32,13 @@ namespace HyperShoot.Enemy
                 player = GameObject.FindGameObjectWithTag("Player");
             isDead = false;
             _delayAttack = delayAttack;
-
+        }
+        private void Start()
+        {
             enemyDamageHandler.HealthObservable
-                      .Where(hp => hp <= 0f)
-                      .Subscribe(_ => Die())
-                      .AddTo(_healthDisposables);
+              .Where(hp => hp <= 0f)
+              .Subscribe(_ => Die())
+              .AddTo(_healthDisposables);
         }
         protected virtual void Update()
         {
@@ -74,6 +76,7 @@ namespace HyperShoot.Enemy
         }
         public virtual void Patrolling()
         {
+            if (canAttack) canAttack = false;
             if (!walkPointSet) SearchWalkPoint();
 
             if (walkPointSet)
@@ -102,12 +105,14 @@ namespace HyperShoot.Enemy
         }
         public virtual void ChasePlayer()
         {
+            if (canAttack) canAttack = false;
             aIPath.destination = player.transform.position;
+            transform.LookAt(player.transform.position);
             anim.SetBool("run", true);
             anim.SetBool("walk", false);
         }
 
-        public virtual  void AttackPlayer()
+        public virtual void AttackPlayer()
         {
             aIPath.destination = transform.position;
             transform.LookAt(player.transform.position);
@@ -126,9 +131,12 @@ namespace HyperShoot.Enemy
         }
         public virtual void Die()
         {
-            isDead = true;
-            anim.SetTrigger("dead");
-            Destroy(gameObject, 2f);
+            if (!isDead)
+            {
+                isDead = true;
+                anim.SetTrigger("dead");
+                Destroy(gameObject, 2f);
+            }
         }
         private void OnDestroy()
         {

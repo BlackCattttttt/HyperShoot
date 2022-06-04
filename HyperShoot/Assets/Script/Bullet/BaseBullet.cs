@@ -135,16 +135,32 @@ namespace HyperShoot.Bullet
         }
         protected virtual void TryDamage()
         {
-            var damageable = m_Hit.collider.GetComponent<IDamageable>();
-            if (damageable != null)
+            if (m_Hit.collider.CompareTag("Player"))
             {
-                damageable.TakeDamage(new DamageData
+                var damageable = m_Hit.collider.GetComponentInParent<IDamageable>();
+                if (damageable != null)
                 {
-                    Type = DamageType.Bullet,
-                    Damage = Damage,
-                    ImpactObject = gameObject
-                });
+                    damageable.TakeDamage(new DamageData
+                    {
+                        Type = DamageType.Bullet,
+                        Damage = Damage,
+                        ImpactObject = gameObject
+                    });
+                }
             }
+            else
+            {
+                var damageable = m_Hit.collider.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    damageable.TakeDamage(new DamageData
+                    {
+                        Type = DamageType.Bullet,
+                        Damage = Damage,
+                        ImpactObject = gameObject
+                    });
+                }
+            }        
         }
         protected virtual void TryDestroy()
         {

@@ -1,0 +1,1153 @@
+fileFormatVersion: 2
+guid: 4d06cb19e4c5fcf41993d315e74bd5ab
+ModelImporter:
+  serializedVersion: 21100
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: idle
+  - first:
+      74: 2249025299337693773
+    second: idle break
+  - first:
+      74: -3419257869308726280
+    second: walk
+  - first:
+      74: -7885933098395284324
+    second: walk back
+  - first:
+      74: 6200578666267062213
+    second: run
+  - first:
+      74: -8573224158596307760
+    second: jump pack
+  - first:
+      74: -961566201718665412
+    second: hit reaction
+  - first:
+      74: -6758483313513240000
+    second: death
+  - first:
+      74: 7791916682545647297
+    second: attack1
+  - first:
+      74: 1254855225811445056
+    second: attack 2
+  - first:
+      74: -4841054119768082656
+    second: attack 3
+  - first:
+      74: 5129528032370284674
+    second: magic split
+  - first:
+      74: 8895082380160648260
+    second: ground to air
+  - first:
+      74: -6350968543187600264
+    second: fly hit
+  - first:
+      74: 7986352727975618989
+    second: fly forward
+  - first:
+      74: 2616287856327275647
+    second: fly back
+  - first:
+      74: 3331703202917021254
+    second: air to ground
+  - first:
+      74: -3707211071139028890
+    second: fly death
+  - first:
+      74: -6173025332041180341
+    second: explode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BomberBug2_MAT
+    second: {fileID: 2100000, guid: 9dbab62122f24488eae403bf16524aa7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BomberBug_MAT
+    second: {fileID: 2100000, guid: f9a9f1858069c4cf8a41852ac378af1c, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid copied Avatar Rig Configuration:\n\tRequired human
+      bone 'RightHand' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: idle
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: idle break
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 50
+      lastFrame: 140
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: walk
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 150
+      lastFrame: 166
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: walk back
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 170
+      lastFrame: 186
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: run
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 190
+      lastFrame: 206
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: jump pack
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 210
+      lastFrame: 235
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hit reaction
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 240
+      lastFrame: 260
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: death
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 285
+      lastFrame: 310
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack1
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 320
+      lastFrame: 340
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack 2
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 350
+      lastFrame: 390
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack 3
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 400
+      lastFrame: 445
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: magic split
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 445
+      lastFrame: 490
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ground to air
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 495
+      lastFrame: 520
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fly hit
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 600
+      lastFrame: 632
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fly forward
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 640
+      lastFrame: 672
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fly back
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 680
+      lastFrame: 712
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: air to ground
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 720
+      lastFrame: 755
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fly death
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 760
+      lastFrame: 820
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: explode
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 830
+      lastFrame: 940
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.68978965
+        functionName: Explode
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.6
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: BomberBug (Demo)(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: body
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: abdomen
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: carapace
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_wing
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_wing
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: sphere
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: eyes
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_pincer
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_pincer
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_horn
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_horn
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_front_A_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_center_A_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_back_A_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_front_A_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_center_A_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_back_A_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_front_B_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_center_B_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_back_B_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_front_B_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_center_B_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_back_B_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_front_C_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_center_C_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_back_C_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_front_C_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_center_C_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_back_C_leg
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Blendshape_GRP
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ROOT
+      parentName: BomberBug (Demo)(Clone)
+      position: {x: -0.029646482, y: 0.37815607, z: -0.026476175}
+      rotation: {x: 0.59921575, y: 0.1377595, z: 0.11768334, w: 0.7798163}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_leg_center_A_jnt
+      parentName: ROOT
+      position: {x: 0.0930828, y: 0.010427642, z: -0.0028307084}
+      rotation: {x: 0.9532852, y: 0.2889507, z: 0.049163282, w: 0.07306032}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_leg_center_B_jnt
+      parentName: R_leg_center_A_jnt
+      position: {x: 0.15739225, y: 0.009842898, z: 0.0029530688}
+      rotation: {x: -0.068710804, y: -0.19665274, z: 0.703044, w: 0.6799527}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_leg_center_C_jnt
+      parentName: R_leg_center_B_jnt
+      position: {x: 0.18491958, y: 0.011197337, z: -0.011485975}
+      rotation: {x: 0.97046745, y: 0.21016255, z: -0.012533933, w: -0.117760606}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_center_ankle_jnt
+      parentName: R_leg_center_C_jnt
+      position: {x: 0.11732401, y: -0.001098, z: -0.0077040005}
+      rotation: {x: -0.09551666, y: 0.04092469, z: -0.16798978, w: 0.9802965}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_center_contact_jnt
+      parentName: R_center_ankle_jnt
+      position: {x: 0.03600788, y: 0.0007006403, z: -0.0065216217}
+      rotation: {x: 0.5462231, y: 0.6771665, z: -0.309547, w: 0.3837532}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_leg_front_A_jnt
+      parentName: ROOT
+      position: {x: 0.059210222, y: 0.006284641, z: 0.08362809}
+      rotation: {x: 0.73487175, y: 0.012365226, z: 0.50086135, w: 0.45710903}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_leg_front_B_jnt
+      parentName: R_leg_front_A_jnt
+      position: {x: 0.12769692, y: -0.004016449, z: -0.0032762596}
+      rotation: {x: -0.05000005, y: -0.13008562, z: 0.79343927, w: 0.59247947}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_leg_front_C_jnt
+      parentName: R_leg_front_B_jnt
+      position: {x: 0.17218964, y: -0.0000004013996, z: -0.00000035192136}
+      rotation: {x: 0.9185488, y: -0.07462278, z: -0.1850953, w: 0.34123212}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_front_ankle_jnt
+      parentName: R_leg_front_C_jnt
+      position: {x: 0.09921748, y: 0.0039716405, z: -0.0052478765}
+      rotation: {x: -0.80070555, y: 0.2785165, z: -0.513696, w: -0.1319685}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_front_contact_jnt
+      parentName: R_front_ankle_jnt
+      position: {x: 0.034439225, y: 0.0017766902, z: -0.002062361}
+      rotation: {x: 0.56513923, y: 0.772509, z: -0.17096876, w: 0.23370327}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_leg_center_A_jnt
+      parentName: ROOT
+      position: {x: -0.09308258, y: 0.010427733, z: -0.0028309266}
+      rotation: {x: -0.050326277, y: -0.0028870984, z: -0.2993948, w: 0.9527968}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_leg_center_B_jnt
+      parentName: L_leg_center_A_jnt
+      position: {x: -0.15739204, y: -0.009843101, z: -0.002952702}
+      rotation: {x: -0.06695188, y: -0.19610526, z: 0.6701541, w: 0.71270865}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_leg_center_C_jnt
+      parentName: L_leg_center_B_jnt
+      position: {x: -0.1849193, y: -0.011196966, z: 0.011486154}
+      rotation: {x: 0.97220504, y: 0.20164219, z: -0.015472548, w: -0.11797645}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_center_ankle_jnt
+      parentName: L_leg_center_C_jnt
+      position: {x: -0.11732327, y: -0.0011001616, z: 0.007705541}
+      rotation: {x: -0.062243402, y: 0.0362772, z: -0.21077119, w: 0.97487706}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_center_contact_jnt
+      parentName: L_center_ankle_jnt
+      position: {x: -0.03600876, y: 0.0014974563, z: 0.0065203644}
+      rotation: {x: 0.5462231, y: 0.6771665, z: -0.30954698, w: 0.38375315}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_leg_front_A_jnt
+      parentName: ROOT
+      position: {x: -0.05921021, y: 0.006284609, z: 0.08362831}
+      rotation: {x: -0.27269304, y: 0.36347175, z: -0.25259808, w: 0.8542371}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_leg_front_B_jnt
+      parentName: L_leg_front_A_jnt
+      position: {x: -0.12769717, y: 0.0040164026, z: 0.0032761055}
+      rotation: {x: -0.039949976, y: -0.12610923, z: 0.7684078, w: 0.62613887}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_leg_front_C_jnt
+      parentName: L_leg_front_B_jnt
+      position: {x: -0.17218931, y: -8.526513e-17, z: 4.2632565e-17}
+      rotation: {x: 0.9090395, y: -0.05980397, z: -0.21786927, w: 0.35014814}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_front_ankle_jnt
+      parentName: L_leg_front_C_jnt
+      position: {x: -0.099216, y: -0.003972, z: 0.00525}
+      rotation: {x: -0.72023153, y: 0.001796484, z: -0.6929533, w: -0.032849107}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_front_contact_jnt
+      parentName: L_front_ankle_jnt
+      position: {x: -0.034440983, y: -0.0017761575, z: 0.002059921}
+      rotation: {x: 0.56513923, y: 0.772509, z: -0.17096876, w: 0.23370327}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_wing_1_jnt
+      parentName: ROOT
+      position: {x: 0.097893, y: 0.08777544, z: 0.019494692}
+      rotation: {x: 0.9861829, y: -0.032101363, z: -0.08639379, w: 0.13765496}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_wing_2_jnt
+      parentName: R_wing_1_jnt
+      position: {x: 0.1696836, y: -0.19628042, z: 0.15058482}
+      rotation: {x: 0.09391377, y: -0.616578, z: -0.15930909, w: 0.76526624}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_wing_3_jnt
+      parentName: R_wing_2_jnt
+      position: {x: 0.13525441, y: -0.000000054682108, z: 0.00000014305617}
+      rotation: {x: 0.10265117, y: -0.31806076, z: -0.045689672, w: 0.9413886}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_wing_end_jnt
+      parentName: R_wing_3_jnt
+      position: {x: 0.17791836, y: 0.00000066670736, z: -0.0000002772473}
+      rotation: {x: -0.17230271, y: 0.7168756, z: 0.13248876, w: 0.6624559}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_wing_1_jnt
+      parentName: ROOT
+      position: {x: -0.09789313, y: 0.08777524, z: 0.019494692}
+      rotation: {x: -0.10132251, y: -0.08440034, z: 0.010878414, w: 0.99120736}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_wing_2_jnt
+      parentName: L_wing_1_jnt
+      position: {x: -0.1696835, y: 0.1962806, z: -0.15058479}
+      rotation: {x: 0.08445881, y: -0.6049278, z: -0.12561263, w: 0.78176117}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_wing_3_jnt
+      parentName: L_wing_2_jnt
+      position: {x: -0.13525468, y: 3.1974422e-17, z: 0}
+      rotation: {x: 0.108099625, y: -0.32521594, z: -0.044636317, w: 0.9383798}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_wing_end_jnt
+      parentName: L_wing_3_jnt
+      position: {x: -0.17791861, y: 4.2632565e-17, z: -1.0658141e-17}
+      rotation: {x: -0.16957451, y: 0.70089483, z: 0.13832493, w: 0.6788646}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pronotum_jnt
+      parentName: ROOT
+      position: {x: -0, y: -0.01861728, z: 0.09087217}
+      rotation: {x: -0.027005956, y: -0.016988788, z: -0.042464636, w: 0.99858844}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_jnt
+      parentName: pronotum_jnt
+      position: {x: -0, y: 0.030958168, z: 0.060064305}
+      rotation: {x: 0.0018219277, y: 0.011652455, z: 0.010988346, w: 0.9998701}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_pincer_1_jnt
+      parentName: head_jnt
+      position: {x: 0.027991021, y: -0.027254848, z: 0.06089002}
+      rotation: {x: 0.8809038, y: -0.1469347, z: 0.44377857, w: -0.07402231}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_pincer_2_jnt
+      parentName: R_pincer_1_jnt
+      position: {x: 0.082700096, y: -0.00012850024, z: 0.0014729142}
+      rotation: {x: 0.16937585, y: 0.54173195, z: -0.022662485, w: 0.8229974}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_pincer_end_jnt
+      parentName: R_pincer_2_jnt
+      position: {x: 0.0657179, y: -0.0005305732, z: 0.0012502754}
+      rotation: {x: 0.120467596, y: 0.86900705, z: 0.06589827, w: -0.47536486}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_pincer_1_jnt
+      parentName: head_jnt
+      position: {x: -0.027991027, y: -0.027254649, z: 0.060890026}
+      rotation: {x: 0.07402225, y: 0.44377857, z: 0.14693473, w: 0.8809038}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_pincer_2_jnt
+      parentName: L_pincer_1_jnt
+      position: {x: -0.08270053, y: 0.00012816097, z: -0.0014728976}
+      rotation: {x: 0.16937585, y: 0.54173195, z: -0.022662485, w: 0.8229974}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_pincer_end_jnt
+      parentName: L_pincer_2_jnt
+      position: {x: -0.065717734, y: 0.0005308612, z: -0.0012500045}
+      rotation: {x: 0.120467596, y: 0.86900705, z: 0.06589827, w: -0.47536486}
+      scale: {x: 1, y: 1, z: 1}
+    - name: abdomen_jnt
+      parentName: ROOT
+      position: {x: 0.000000006, y: 0.020214776, z: -0.07968088}
+      rotation: {x: -0.20721206, y: -0.03383652, z: -0.09054858, w: 0.9735087}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_leg_back_A_jnt
+      parentName: abdomen_jnt
+      position: {x: 0.14307994, y: 0.0069909096, z: -0.031030456}
+      rotation: {x: 0.9813645, y: 0.10377387, z: -0.009215467, w: -0.1614615}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_leg_back_B_jnt
+      parentName: R_leg_back_A_jnt
+      position: {x: 0.19016099, y: -0.0048881317, z: -0.005034943}
+      rotation: {x: -0.29035738, y: 0.15546179, z: 0.027050473, w: 0.94381803}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_leg_back_C_jnt
+      parentName: R_leg_back_B_jnt
+      position: {x: 0.21082155, y: 0.0037358066, z: -0.0031184654}
+      rotation: {x: 0.85527843, y: 0.1635618, z: 0.009628979, w: -0.49158275}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_back_ankle_jnt
+      parentName: R_leg_back_C_jnt
+      position: {x: 0.13734959, y: 0.0022538207, z: -0.002936903}
+      rotation: {x: 0.07162979, y: 0.05004423, z: 0.07176717, w: 0.99358654}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_back_contact_jnt
+      parentName: R_back_ankle_jnt
+      position: {x: 0.035446934, y: 0.0007726535, z: 0.001868337}
+      rotation: {x: 0.6008718, y: 0.7815977, z: -0.10209193, w: 0.1327984}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_leg_back_A_jnt
+      parentName: abdomen_jnt
+      position: {x: -0.1433587, y: 0.006990899, z: -0.03103045}
+      rotation: {x: 0.113672316, y: -0.15870519, z: 0.013098685, w: 0.98067313}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_leg_back_B_jnt
+      parentName: L_leg_back_A_jnt
+      position: {x: -0.18996933, y: 0.0058043487, z: 0.002293698}
+      rotation: {x: -0.14071445, y: 0.007627636, z: 0.0111294305, w: 0.9899583}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_leg_back_C_jnt
+      parentName: L_leg_back_B_jnt
+      position: {x: -0.21108069, y: -0.002578106, z: 0.001938661}
+      rotation: {x: 0.85425746, y: 0.16962065, z: 0.01133035, w: -0.4912684}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_back_ankle_jnt
+      parentName: L_leg_back_C_jnt
+      position: {x: -0.13735612, y: -0.0021664298, z: 0.0029378776}
+      rotation: {x: 0.11030006, y: -0.1744943, z: -0.035998393, w: 0.97779846}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_back_contact_jnt
+      parentName: L_back_ankle_jnt
+      position: {x: -0.03544504, y: -0.0008640383, z: -0.0018664971}
+      rotation: {x: 0.6008718, y: 0.7815977, z: -0.10209193, w: 0.1327984}
+      scale: {x: 1, y: 1, z: 1}
+    - name: sphere_jnt
+      parentName: abdomen_jnt
+      position: {x: -0.000000006, y: 0.16107012, z: -0.2117043}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine1_jnt
+      parentName: abdomen_jnt
+      position: {x: -0.000000006, y: 0.15793623, z: 0.09208274}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine2_jnt
+      parentName: spine1_jnt
+      position: {x: 5.9952045e-18, y: 0.14471085, z: -0.08117241}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine3_jnt
+      parentName: spine2_jnt
+      position: {x: 1.5987211e-17, y: 0.122549824, z: -0.19516633}
+      rotation: {x: 0.30986965, y: -0.06849857, z: 0.026906153, w: 0.94792664}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine4_jnt
+      parentName: spine3_jnt
+      position: {x: -9.992007e-19, y: -0.06866438, z: -0.17480789}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.6
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

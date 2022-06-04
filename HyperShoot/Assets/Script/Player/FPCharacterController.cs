@@ -63,6 +63,17 @@ namespace HyperShoot.Player
         protected Vector3 CapsuleBottom = Vector3.zero;
         protected Vector3 CapsuleTop = Vector3.zero;
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            fp_TargetEvent<Vector3>.Register(m_Transform, "ForceImpact", AddForce);
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            fp_TargetEvent<Vector3>.Unregister(m_Root, "ForceImpact", AddForce);
+        }
         protected override void Start()
         {
             base.Start();
@@ -73,7 +84,7 @@ namespace HyperShoot.Player
             {
 
                 m_Trigger = new GameObject("Trigger");
-              //  m_Trigger.tag = "Player";
+                m_Trigger.tag = "Player";
                 m_Trigger.transform.parent = m_Transform;
                 m_Trigger.layer = fp_Layer.LocalPlayer;
                 m_Trigger.transform.localPosition = Vector3.zero;
@@ -699,6 +710,10 @@ namespace HyperShoot.Player
                 m_IsFirstPerson = value;
             }
 
+        }
+        protected virtual void OnMessage_ForceImpact(Vector3 force)
+        {
+            AddForce(force);
         }
         //protected virtual void OnStart_Dead()
         //{

@@ -163,8 +163,16 @@ namespace HyperShoot.Weapon
 				p.SendMessage("SetSource", (ProjectileSourceIsRoot ? Root : Transform), SendMessageOptions.DontRequireReceiver);
 				p.transform.localScale = new Vector3(ProjectileScale, ProjectileScale, ProjectileScale);    // preset defined scale
 
-				//SetSpread(m_CurrentFireSeed * (v + 1), p.transform);
+				SetSpread(m_CurrentFireSeed * (v + 1), p.transform);
 			}
+		}
+		public void SetSpread(int seed, Transform target)
+		{
+			fp_MathUtility.SetSeed(seed);
+
+			//vp_MasterClient.DebugMsg = "Firing shot from '" + photonView.viewID + "' with seed: " + Random.seed + ".";
+			target.Rotate(0, 0, Random.Range(0, 360));                                  // first, rotate up to 360 degrees around z for circular spread
+			target.Rotate(0, Random.Range(-ProjectileSpread, ProjectileSpread), 0);     // then rotate around y with user defined deviation
 		}
 		protected virtual void ShowMuzzleFlash()
 		{

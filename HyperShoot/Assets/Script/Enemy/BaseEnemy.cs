@@ -25,7 +25,7 @@ namespace HyperShoot.Enemy
         protected bool canAttack;
         protected float _delayAttack;
         protected bool isDead;
-        private readonly CompositeDisposable _healthDisposables = new CompositeDisposable();
+        protected readonly CompositeDisposable _healthDisposables = new CompositeDisposable();
         protected virtual void Awake()
         {
             if (player == null)
@@ -33,7 +33,7 @@ namespace HyperShoot.Enemy
             isDead = false;
             _delayAttack = delayAttack;
         }
-        private void Start()
+        protected virtual void Start()
         {
             enemyDamageHandler.HealthObservable
               .Where(hp => hp <= 0f)
@@ -62,7 +62,7 @@ namespace HyperShoot.Enemy
                 aIPath.destination = transform.position;
             }
         }
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             if (canAttack)
             {

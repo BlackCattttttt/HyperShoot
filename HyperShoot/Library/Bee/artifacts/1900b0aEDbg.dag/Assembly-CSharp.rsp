@@ -389,6 +389,7 @@
 "Assets/Script/Enemy/BaseShooterEnemy.cs"
 "Assets/Script/Enemy/BaseTurret.cs"
 "Assets/Script/Enemy/BomberBugEnemy.cs"
+"Assets/Script/Enemy/FlameThrower.cs"
 "Assets/Script/Enemy/SecurityCamTurret.cs"
 "Assets/Script/Inventory/PlayInventory.cs"
 "Assets/Script/Player/BaseController.cs"

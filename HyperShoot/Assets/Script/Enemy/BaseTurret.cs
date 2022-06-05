@@ -14,6 +14,7 @@ public class BaseTurret : MonoBehaviour
 	protected Transform m_Target = null;
 	protected Collider m_TargetCollider = null;
 	protected fp_Timer.Handle m_Timer = new fp_Timer.Handle();
+	protected bool isDead;
 
 	protected virtual void Start()
 	{
@@ -23,22 +24,25 @@ public class BaseTurret : MonoBehaviour
 
 	protected virtual void Update()
 	{
-		if (!m_Timer.Active)
+		if (!isDead)
 		{
-			fp_Timer.In(WakeInterval, delegate()
+			if (!m_Timer.Active)
 			{
-				if (m_Target == null)
-					m_Target = ScanForLocalPlayer();
-				else
+				fp_Timer.In(WakeInterval, delegate ()
 				{
-					m_Target = null;
-					m_TargetCollider = null;
-				}
-			}, m_Timer);
-		}
+					if (m_Target == null)
+						m_Target = ScanForLocalPlayer();
+					else
+					{
+						m_Target = null;
+						m_TargetCollider = null;
+					}
+				}, m_Timer);
+			}
 
-		if (m_Target != null)
-			AttackTarget();
+			if (m_Target != null)
+				AttackTarget();
+		}
 	}
 
 	protected virtual Transform ScanForLocalPlayer()

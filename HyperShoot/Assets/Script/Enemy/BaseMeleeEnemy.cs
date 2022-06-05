@@ -18,7 +18,7 @@ namespace HyperShoot.Enemy
                 {
                     if (target[i].CompareTag("Player"))
                     {
-                        var damageble = target[i].GetComponent<IDamageable>();
+                        var damageble = target[i].GetComponentInParent<IDamageable>();
                         if (damageble != null)
                         {
                             damageble.TakeDamage(new DamageData

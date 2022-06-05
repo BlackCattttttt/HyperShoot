@@ -503,6 +503,7 @@ MonoBehaviour:
   SwivelAmp: 100
   SwivelRate: 0.5
   SwivelOffset: 0
+  enemyDamageHandler: {fileID: 4216717699697268824}
 --- !u!1 &100010
 GameObject:
   m_ObjectHideFlags: 0

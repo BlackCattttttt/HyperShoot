@@ -337,7 +337,7 @@ public static class fp_Utility
 
 		List<T> newList = new List<T>();
 		newList.AddRange(list);
-		newList.RandomizeList();
+	//	newList.RandomizeList();
 		return newList.FirstOrDefault();
 
 	}

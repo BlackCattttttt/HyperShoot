@@ -247,7 +247,15 @@ namespace HyperShoot.Weapon
 			m_PositionSpring.AddForce(positional);
 			m_RotationSpring.AddForce(angular);
 		}
-
+		public virtual void AddSoftForce(Vector3 force, int frames)
+		{
+			m_PositionSpring.AddSoftForce(force, frames);
+		}
+		public virtual void AddSoftForce(Vector3 positional, Vector3 angular, int frames)
+		{
+			m_PositionSpring.AddSoftForce(positional, frames);
+		    m_RotationSpring.AddSoftForce(angular, frames);
+		}
 		protected virtual void UpdateInput()
 		{
 			if (Player.Dead.Active)
@@ -316,10 +324,6 @@ namespace HyperShoot.Weapon
 				m_LookInput.x * (RotationLookSway.z * -0.025f)));
 
 			// --- falling ---
-
-			// rotate weapon while falling. this will take effect in reverse when being elevated,
-			// for example walking up a ramp. however, the weapon will only rotate around the z
-			// vector while going down
 			m_FallSway = (RotationFallSway * (m_SwayVel.y * 0.005f));
 			// if grounded, optionally reduce fallsway
 			if (Controller.isGrounded)
@@ -331,18 +335,12 @@ namespace HyperShoot.Weapon
 			m_PositionSpring.AddForce(Vector3.forward * -Mathf.Abs((m_SwayVel.y) * 0.000025f));
 
 			// --- weapon strafe & walk slide ---
-			// PositionWalkSlide x will slide sideways when strafing
-			// PositionWalkSlide y will slide down when strafing (it can't push up)
-			// PositionWalkSlide z will slide forward or backward when walking
 			m_PositionSpring.AddForce(new Vector3(
 				(localVelocity.x * (PositionWalkSlide.x * 0.0016f)),
 				-(Mathf.Abs(localVelocity.x * (PositionWalkSlide.y * 0.0016f))),
 				(-localVelocity.z * (PositionWalkSlide.z * 0.0016f))));
 
 			// --- weapon strafe rotate ---
-			// RotationStrafeSway x will rotate up when strafing (it can't push down)
-			// RotationStrafeSway y will rotate sideways when strafing
-			// RotationStrafeSway z will twist weapon around the forward vector when strafing
 			m_RotationSpring.AddForce(new Vector3(
 				-Mathf.Abs(localVelocity.x * (RotationStrafeSway.x * 0.16f)),
 				-(localVelocity.x * (RotationStrafeSway.y * 0.16f)),
@@ -442,7 +440,6 @@ namespace HyperShoot.Weapon
 				}
 
 				Zoom();
-
 			}
 		}
 		public override void Activate()
@@ -616,9 +613,7 @@ namespace HyperShoot.Weapon
 
 		protected virtual void OnMessage_HeadImpact(float impact)
 		{
-
 			AddForce(Vector3.zero, Vector3.forward * (impact * 20.0f) * Time.timeScale);
-
 		}
 	}
 }

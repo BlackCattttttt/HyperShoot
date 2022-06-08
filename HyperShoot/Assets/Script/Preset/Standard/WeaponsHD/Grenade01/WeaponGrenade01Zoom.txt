@@ -2,6 +2,6 @@
 // Component Preset Script
 ///////////////////////////////////////////////////////////
 
-ComponentType vp_FPWeapon
+ComponentType HyperShoot.Weapon.FPWeapon
 RenderingFieldOfView 35
 RenderingZoomDamping 0.1

@@ -406,6 +406,7 @@
 "Assets/Script/Weapon/BaseShooter.cs"
 "Assets/Script/Weapon/BaseWeapon.cs"
 "Assets/Script/Weapon/FPWeapon.cs"
+"Assets/Script/Weapon/FPWeaponMeleeAttack.cs"
 "Assets/Script/Weapon/FPWeaponReloader.cs"
 "Assets/Script/Weapon/FPWeaponShooter.cs"
 "Assets/Script/Weapon/WeaponHandler.cs"

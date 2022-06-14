@@ -3,7 +3,6 @@
 ///////////////////////////////////////////////////////////
 
 ComponentType HyperShoot.Weapon.FPWeapon
-PositionFallRetract 3.761468
 PositionPivotSpringDamping 0.55
 PositionSpringStiffness 0.01
 PositionSpringDamping 0.264

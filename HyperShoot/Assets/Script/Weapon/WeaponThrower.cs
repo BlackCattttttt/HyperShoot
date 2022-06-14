@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using HyperShoot.Player;
+using HyperShoot.Inventory;
 
 namespace HyperShoot.Weapon
 {
@@ -41,53 +42,52 @@ namespace HyperShoot.Weapon
 				return m_Shooter;
 			}
 		}
-		//protected fp_UnitBankType m_UnitBankType = null;
-		//public fp_UnitBankType UnitBankType
-		//{
-		//	get
-		//	{
-		//		if (ItemIdentifier == null)
-		//			return null;
-		//		fp_ItemType iType = m_ItemIdentifier.GetItemType();
-		//		if (iType == null)
-		//			return null;
-		//		fp_UnitBankType uType;
-		//		uType = iType as fp_UnitBankType;
-		//		if (uType == null)
-		//			return null;
-		//		return uType;
-		//	}
-		//}
+		protected ItemIdentifier m_ItemIdentifier = null;
+		public ItemIdentifier ItemIdentifier
+		{
+			get
+			{
+				if (m_ItemIdentifier == null)
+					m_ItemIdentifier = (ItemIdentifier)transform.GetComponent(typeof(ItemIdentifier));
+				return m_ItemIdentifier;
+			}
+		}
+		protected UnitBankType m_UnitBankType = null;
+        public UnitBankType UnitBankType
+        {
+            get
+            {
+                if (ItemIdentifier == null)
+                    return null;
+                ItemType iType = m_ItemIdentifier.GetItemType();
+                if (iType == null)
+                    return null;
+                UnitBankType uType;
+                uType = iType as UnitBankType;
+                if (uType == null)
+                    return null;
+                return uType;
+            }
+        }
 
-		//protected fp_UnitBankInstance m_UnitBank = null;
-		//public fp_UnitBankInstance UnitBank
-		//{
-		//	get
-		//	{
-		//		if ((m_UnitBank == null) && (UnitBankType != null) && (Inventory != null))
-		//		{
-		//			foreach (fp_UnitBankInstance iu in Inventory.UnitBankInstances)
-		//			{
-		//				if (iu.UnitType == UnitBankType.Unit)
-		//					m_UnitBank = iu;
-		//			}
-		//		}
-		//		return m_UnitBank;
-		//	}
-		//}
+        protected UnitBankInstance m_UnitBank = null;
+        public UnitBankInstance UnitBank
+        {
+            get
+            {
+                if ((m_UnitBank == null) && (UnitBankType != null) && (Inventory != null))
+                {
+                    foreach (UnitBankInstance iu in Inventory.UnitBankInstances)
+                    {
+                        if (iu.UnitType == UnitBankType.Unit)
+                            m_UnitBank = iu;
+                    }
+                }
+                return m_UnitBank;
+            }
+        }
 
-		//protected fp_ItemIdentifier m_ItemIdentifier = null;
-		//public fp_ItemIdentifier ItemIdentifier
-		//{
-		//	get
-		//	{
-		//		if (m_ItemIdentifier == null)
-		//			m_ItemIdentifier = (fp_ItemIdentifier)Transform.GetComponent(typeof(fp_ItemIdentifier));
-		//		return m_ItemIdentifier;
-		//	}
-		//}
-
-		protected CharacterEventHandler m_Player = null;
+        protected CharacterEventHandler m_Player = null;
 		public CharacterEventHandler Player
 		{
 			get
@@ -98,18 +98,18 @@ namespace HyperShoot.Weapon
 			}
 		}
 
-		//protected fp_PlayerInventory m_Inventory = null;
-		//public fp_PlayerInventory Inventory
-		//{
-		//	get
-		//	{
-		//		if (m_Inventory == null)
-		//			m_Inventory = (fp_PlayerInventory)Root.GetComponentInChildren(typeof(fp_PlayerInventory));
-		//		return m_Inventory;
-		//	}
-		//}
+        protected PlayerInventory m_Inventory = null;
+        public PlayerInventory Inventory
+        {
+            get
+            {
+                if (m_Inventory == null)
+                    m_Inventory = (PlayerInventory)transform.root.GetComponentInChildren(typeof(PlayerInventory));
+                return m_Inventory;
+            }
+        }
 
-		protected virtual void OnEnable()
+        protected virtual void OnEnable()
 		{
 			if (Player == null)
 				return;
@@ -119,8 +119,8 @@ namespace HyperShoot.Weapon
 			TryStoreAttackMinDuration();
 
 			// cap the amount of weaponthrowers of this type to one
-			//Inventory.SetItemCap(ItemIdentifier.Type, 1, true);
-			//Inventory.CapsEnabled = true;
+			Inventory.SetItemCap(ItemIdentifier.Type, 1, true);
+			Inventory.CapsEnabled = true;
 		}
 
 		protected virtual void OnDisable()
@@ -170,19 +170,19 @@ namespace HyperShoot.Weapon
 			}
 		}
 
-		//protected virtual bool TryReload()
-		//{
-		//	if (UnitBank == null)
-		//		return false;
+        protected virtual bool TryReload()
+        {
+            if (UnitBank == null)
+                return false;
 
-		//	return Inventory.TryReload(UnitBank);
-		//}
+            return Inventory.TryReload(UnitBank);
+        }
 
 
-		protected virtual void OnStart_Attack()
+        protected virtual void OnStart_Attack()
 		{
-			//if (Player.CurrentWeaponAmmoCount.Get() < 1)
-			//	TryReload();
+			if (Player.CurrentWeaponAmmoCount.Get() < 1)
+				TryReload();
 
 			fp_Timer.In(Shooter.ProjectileSpawnDelay + 0.5f, delegate ()
 			{
@@ -197,13 +197,12 @@ namespace HyperShoot.Weapon
 
 		protected virtual void OnStop_Attack()
 		{
-		//	TryReload();
+			TryReload();
 		}
 
 		protected virtual void OnStop_SetWeapon()
 		{
-		//	m_UnitBank = null;
-
+			m_UnitBank = null;
 		}
 	}
 }

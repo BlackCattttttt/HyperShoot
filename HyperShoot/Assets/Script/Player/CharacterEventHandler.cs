@@ -64,15 +64,15 @@ namespace HyperShoot.Player
         public fp_Value<float> CurrentWeaponReloadDuration;
 
         //// inventory
-        //public fp_Message<string, int> GetItemCount;
+        public fp_Message<string, int> GetItemCount;
         public fp_Attempt RefillCurrentWeapon;
         public fp_Value<int> CurrentWeaponAmmoCount;
         public fp_Value<int> CurrentWeaponMaxAmmoCount;
         public fp_Value<int> CurrentWeaponClipCount;
-        //public fp_Value<int> CurrentWeaponType;
+        public fp_Value<int> CurrentWeaponType;
         //public fp_Value<int> CurrentWeaponGrip;
-        //public fp_Attempt<object> AddItem;
-        //public fp_Attempt<object> RemoveItem;
+        public fp_Attempt<object> AddItem;
+        public fp_Attempt<object> RemoveItem;
         public fp_Attempt DepleteAmmo;
 
         // physics

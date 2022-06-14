@@ -62,7 +62,7 @@ namespace HyperShoot.Combat
 
 			//if (Respawner == null)
 			//{
-			//	vp_Utility.Destroy(gameObject);
+			//	fp_Utility.Destroy(gameObject);
 			//}
 			//else
 			//{

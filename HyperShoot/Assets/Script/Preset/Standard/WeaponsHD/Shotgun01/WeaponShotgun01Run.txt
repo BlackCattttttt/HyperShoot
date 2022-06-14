@@ -7,7 +7,6 @@ PositionOffset -0.32 -0.57 0.5
 RenderingClippingPlanes 0.26 10
 RotationOffset 9.5 -23.55 4.6
 PositionSpringDamping 0.55
-PositionFallRetract 0
 PositionWalkSlide 1 0 0.5
 PositionPivot -0.32 -0.4 -0.08
 RotationSpringDamping 0.55

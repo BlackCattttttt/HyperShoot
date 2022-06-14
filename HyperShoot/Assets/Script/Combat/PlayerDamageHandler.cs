@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HyperShoot.Player;
+using HyperShoot.Inventory;
 
 namespace HyperShoot.Combat
 {
@@ -12,6 +13,7 @@ namespace HyperShoot.Combat
 		public float FallDamageThreshold = 0.15f;
 		public bool DeathOnFallImpactThreshold = false;
 		protected float m_FallImpactMultiplier = 2;
+		protected bool m_InventoryWasEnabledAtStart = true;
 
 		private CharacterEventHandler m_Player = null;  // should never be referenced directly
 		protected CharacterEventHandler Player  // lazy initialization of the event handler field
@@ -41,6 +43,16 @@ namespace HyperShoot.Combat
 					}
 				}
 				return m_Colliders;
+			}
+		}
+		private PlayerInventory m_Inventory = null;
+		protected PlayerInventory Inventory
+		{
+			get
+			{
+				if (m_Inventory == null)
+					m_Inventory = transform.root.GetComponentInChildren<PlayerInventory>();
+				return m_Inventory;
 			}
 		}
 		protected virtual void OnEnable()
@@ -103,14 +115,37 @@ namespace HyperShoot.Combat
 				c.enabled = true;
 			}
 
-			//if ((Inventory != null) && !Inventory.enabled)
-			//	Inventory.enabled = m_InventoryWasEnabledAtStart;
+            if ((Inventory != null) && !Inventory.enabled)
+                Inventory.enabled = m_InventoryWasEnabledAtStart;
 
-			//if (m_Audio != null)
-			//{
-			//	m_Audio.pitch = Time.timeScale;
-			//	m_Audio.PlayOneShot(RespawnSound);
-			//}
+            //if (m_Audio != null)
+            //{
+            //	m_Audio.pitch = Time.timeScale;
+            //	m_Audio.PlayOneShot(RespawnSound);
+            //}
+        }
+		protected virtual float OnValue_Health
+		{
+			get
+			{
+				return HealthProperty.Value;
+			}
+			set
+			{
+				HealthProperty.Value = Mathf.Min(value, MaxHealth);    // health is not allowed to go above max, but negative health is allowed (for gibbing)
+			}
+		}
+		protected virtual float OnValue_MaxHealth
+		{
+			get
+			{
+				return MaxHealth;
+			}
+			set
+			{
+				MaxHealth = value;
+				HealthProperty.Value = Mathf.Max(HealthProperty.Value, MaxHealth);
+			}
 		}
 		protected virtual void OnMessage_FallImpact(float impact)
 		{

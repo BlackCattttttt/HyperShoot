@@ -16,4 +16,3 @@ RotationSpringStiffness 0.05
 RotationSpringDamping 0.5
 PositionWalkSlide -2.5 0 0
 RotationStrafeSway 0 1 0
-RotationInputVelocityScale 0.5

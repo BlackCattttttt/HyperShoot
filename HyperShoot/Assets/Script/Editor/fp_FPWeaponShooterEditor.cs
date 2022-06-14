@@ -231,7 +231,7 @@ public class fp_FPWeaponShooterEditor : Editor
 					m_Component.MuzzleFlashScale != currentScale)
 					m_MuzzleFlashVisible = true;
 
-				fp_MuzzleFlash mf = (fp_MuzzleFlash)m_Component.MuzzleFlash.GetComponent("fp_MuzzleFlash");
+				MuzzleFlash mf = (MuzzleFlash)m_Component.MuzzleFlash.GetComponent("fp_MuzzleFlash");
                 if (mf != null) {
                     mf.transform.localPosition = currentPosition;
                     mf.transform.localScale = currentScale;

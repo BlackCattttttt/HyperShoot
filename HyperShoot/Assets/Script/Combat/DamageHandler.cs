@@ -11,9 +11,7 @@ namespace HyperShoot.Combat
 		// health and death
 		public float MaxHealth = 1.0f;                      // initial health of the object instance, to be reset on respawn
 		public GameObject[] DeathSpawnObjects = null;       // gameobjects to spawn when object dies.
-															// TIP: could be fx, could also be rigidbody rubble
-		public float MinDeathDelay = 0.0f;                  // random timespan in seconds to delay death. good for cool serial explosions
-		public float MaxDeathDelay = 0.0f;
+
 		public ReactiveProperty<float> HealthProperty;
 		public ReadOnlyReactiveProperty<float> HealthObservable =>
 	                     HealthProperty.ToReadOnlyReactiveProperty();
@@ -34,10 +32,10 @@ namespace HyperShoot.Combat
 
 			if (HealthProperty.Value < 0)
             {
-				if (m_InstaKill)
+				//if (m_InstaKill)
 					Die();
-				else
-					fp_Timer.In(UnityEngine.Random.Range(MinDeathDelay, MaxDeathDelay), delegate () { Die(); });
+				//else
+				//	fp_Timer.In(UnityEngine.Random.Range(MinDeathDelay, MaxDeathDelay), delegate () { Die(); });
 			}
 		}
 		public virtual void Die()

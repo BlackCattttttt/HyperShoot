@@ -447,6 +447,8 @@
 "Assets/Script/Enemy/BomberBugEnemy.cs"
 "Assets/Script/Enemy/FlameThrower.cs"
 "Assets/Script/Enemy/SecurityCamTurret.cs"
+"Assets/Script/Enemy/SpawnEnemy.cs"
+"Assets/Script/Enemy/SpawnManager.cs"
 "Assets/Script/Inventory/Inventory.cs"
 "Assets/Script/Inventory/InventoryItemsAttribute.cs"
 "Assets/Script/Inventory/ItemIdentifier.cs"

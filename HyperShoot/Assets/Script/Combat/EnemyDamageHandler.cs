@@ -35,7 +35,7 @@ namespace HyperShoot.Combat
             {
                 if (random <= temp[i].rate)
                 {
-                    SimplePool.Spawn(temp[i].item, transform.position, Quaternion.identity);
+                    SimplePool.Spawn(temp[i].item, transform.position + Vector3.up * 1.2f, Quaternion.identity);
                     return;
                 }
             }

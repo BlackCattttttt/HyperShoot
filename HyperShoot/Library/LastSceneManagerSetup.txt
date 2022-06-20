@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/CleanScene/UFPS_CleanScene.unity
+- path: Assets/Scenes/Scenes/Scene_A.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

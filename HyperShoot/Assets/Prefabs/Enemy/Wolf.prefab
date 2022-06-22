@@ -24651,10 +24651,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 10
   DeathSpawnObjects: []
-  MinDeathDelay: 0
-  MaxDeathDelay: 0
   HealthProperty:
     value: 0
+  _enemyType: 3
+  itemRates: []
 --- !u!143 &8437954560571334969
 CharacterController:
   m_ObjectHideFlags: 0

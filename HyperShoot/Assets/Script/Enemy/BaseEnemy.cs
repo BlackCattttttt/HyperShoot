@@ -26,6 +26,7 @@ namespace HyperShoot.Enemy
         protected float _delayAttack;
         protected bool isDead;
         protected readonly CompositeDisposable _healthDisposables = new CompositeDisposable();
+
         protected virtual void Awake()
         {
             if (player == null)

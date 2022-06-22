@@ -479,10 +479,10 @@ MonoBehaviour:
   MaxHealth: 1
   DeathSpawnObjects:
   - {fileID: 0}
-  MinDeathDelay: 0
-  MaxDeathDelay: 0
   HealthProperty:
     value: 0
+  _enemyType: 8
+  itemRates: []
 --- !u!114 &5793029203665886631
 MonoBehaviour:
   m_ObjectHideFlags: 0

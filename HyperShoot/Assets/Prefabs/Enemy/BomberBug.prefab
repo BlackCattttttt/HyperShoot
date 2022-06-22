@@ -1394,6 +1394,7 @@ MonoBehaviour:
   DeathSpawnObjects: []
   HealthProperty:
     value: 0
+  _enemyType: 4
   itemRates: []
 --- !u!1 &2891719254499771687
 GameObject:

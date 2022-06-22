@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using HyperShoot.Weapon;
+using HyperShoot.Enemy;
 
 public class BaseTurret : MonoBehaviour
-{ 
-    [SerializeField] protected float ViewRange = 10.0f;
+{
+	[SerializeField] protected float ViewRange = 10.0f;
 	[SerializeField] protected float AimSpeed = 50.0f;
 	[SerializeField] protected float WakeInterval = 2.0f;
 	[SerializeField] protected float FireAngle = 10.0f;
@@ -16,7 +17,7 @@ public class BaseTurret : MonoBehaviour
 	protected fp_Timer.Handle m_Timer = new fp_Timer.Handle();
 	protected bool isDead;
 
-	protected virtual void Start()
+    protected virtual void Start()
 	{
 		m_Shooter = GetComponent<BaseShooter>();
 		m_Transform = transform;

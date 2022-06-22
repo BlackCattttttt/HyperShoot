@@ -1,18 +1,34 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissonData : MonoBehaviour
+namespace HyperShoot.Manager
 {
-    // Start is called before the first frame update
-    void Start()
+    [CreateAssetMenu(fileName = "MissonData", menuName = "ScriptableObjects/Database/MissonData", order = 0)]
+    [System.Serializable]
+    public class MissonData : ScriptableObject
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        [SerializeField] private List<LevelDesign> levelDesigns;
+        [System.Serializable]
+        public class LevelDesign
+        {
+            public int level;
+            public List<MissonAtribute> missons;
+        }
+        [System.Serializable]
+        public class MissonAtribute
+        {
+            public enum MissonType
+            {
+                KILL_ENEMY = 0,
+                COLLECT = 1,
+                FIND = 2
+            }
+            public int missonId;
+            public string missonDes;
+            public MissonType skillType;
+            public BaseMisson misson;
+        }
+    } 
 }

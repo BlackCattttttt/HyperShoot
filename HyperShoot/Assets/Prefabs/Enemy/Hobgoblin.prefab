@@ -547,10 +547,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 10
   DeathSpawnObjects: []
-  MinDeathDelay: 0
-  MaxDeathDelay: 0
   HealthProperty:
     value: 0
+  _enemyType: 2
+  itemRates: []
 --- !u!114 &290290039952433360
 MonoBehaviour:
   m_ObjectHideFlags: 0

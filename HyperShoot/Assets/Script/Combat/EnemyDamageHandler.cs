@@ -1,5 +1,7 @@
+using HyperShoot.Enemy;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace HyperShoot.Combat
@@ -19,10 +21,21 @@ namespace HyperShoot.Combat
             }
         }
 
+        [SerializeField] private EnemyType _enemyType;
         [SerializeField] private List<ItemRate> itemRates;
+
+        public EnemyType EnemyType { get => _enemyType; set => _enemyType = value; }
+
         public override void Die()
         {
             base.Die();
+
+            SpawnManager.Instance.currentEnemy--;
+
+            MessageBroker.Default.Publish(new BaseMessage.EnemyDieMessage
+            {
+                enemyType = EnemyType
+            });
             List<ItemRate> temp = new List<ItemRate>();
             float rate = 0;
             for (int i = 0; i < itemRates.Count; i++)

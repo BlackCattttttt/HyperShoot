@@ -459,6 +459,8 @@
 "Assets/Script/Inventory/ItemTypes/UnitType.cs"
 "Assets/Script/Inventory/PlayerInventory.cs"
 "Assets/Script/Inventory/UnitBankInstance.cs"
+"Assets/Script/Manager/BaseMisson.cs"
+"Assets/Script/Manager/KillEnemyMisson.cs"
 "Assets/Script/Manager/MissonData.cs"
 "Assets/Script/Player/BaseController.cs"
 "Assets/Script/Player/CharacterEventHandler.cs"

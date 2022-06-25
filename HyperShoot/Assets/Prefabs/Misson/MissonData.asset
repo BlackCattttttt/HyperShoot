@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b8f41051d3ed740993d004547ba36e, type: 3}
   m_Name: MissonData
   m_EditorClassIdentifier: 
-  levelDesigns: []
+  levelDesigns:
+  - level: 1
+    missons:
+    - missonId: 0
+      missonDes: 
+      skillType: 0
+      misson: {fileID: 1658645101496491228, guid: 4b340024076e7094fa3fbb9d3de2d368, type: 3}

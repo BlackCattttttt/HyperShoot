@@ -9,4 +9,8 @@ public class BaseMessage
     {
         public EnemyType enemyType;
     }
+    public struct FindMessage
+    {
+        
+    }
 }

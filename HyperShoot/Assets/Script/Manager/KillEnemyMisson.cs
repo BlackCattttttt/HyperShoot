@@ -28,7 +28,11 @@ namespace HyperShoot.Manager
                 currentSkill++;
                 if (currentSkill >= numberOfSkill)
                 {
-                    Debug.Log("Xoai");
+                    MessageBroker.Default.Publish(new BaseMessage.MissonComplete
+                    {
+                        
+                    });
+                    SimplePool.Despawn(gameObject);
                 }
             }
         }

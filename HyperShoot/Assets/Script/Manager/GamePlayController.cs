@@ -1,0 +1,72 @@
+using System.Collections;
+using System.Collections.Generic;
+using UniRx;
+using UnityEngine;
+using static HyperShoot.Manager.MissonData;
+
+namespace HyperShoot.Manager
+{
+    public class GamePlayController : MonoBehaviour
+    {
+        [System.Serializable] 
+        public class SpawnMissonData
+        {
+            public int index;
+            public MissonSpawn missonSpawn;
+        }
+        [SerializeField] private MissonData missonData;
+        [SerializeField] private List<SpawnMissonData> spawnMissons;
+
+        private BaseMisson currenMisson;
+        private int currentLevel = 1;
+        private int currentMissonIndex = 0;
+        private List<MissonAtribute> missonDatas;
+
+        private readonly CompositeDisposable _disposables = new CompositeDisposable();
+
+        private void Start()
+        {
+            MessageBroker.Default.Receive<BaseMessage.SpawnMissonMessage>()
+               .Subscribe(SpawnMisson)
+               .AddTo(_disposables);
+            MessageBroker.Default.Receive<BaseMessage.MissonComplete>()
+               .Subscribe(MissonComplete)
+               .AddTo(_disposables);
+            missonDatas = missonData.GetMissonInLevel(currentLevel);
+
+            for (int i = 0; i < spawnMissons.Count; i++)
+            {
+                if (spawnMissons[i].index == currentMissonIndex)
+                    spawnMissons[i].missonSpawn.gameObject.SetActive(true);
+                else
+                    spawnMissons[i].missonSpawn.gameObject.SetActive(false);
+            }
+        }
+        public void SpawnMisson(BaseMessage.SpawnMissonMessage missonMessage)
+        {
+            if (currentMissonIndex < missonDatas.Count)
+            {
+                BaseMisson misson = SimplePool.Spawn(missonDatas[currentMissonIndex].misson, transform, Vector3.zero, Quaternion.identity);
+                currenMisson = misson;
+            }
+        }
+        public void MissonComplete(BaseMessage.MissonComplete message)
+        {
+            if (currentMissonIndex < missonDatas.Count)
+            {
+                currentMissonIndex++;
+                for (int i = 0; i < spawnMissons.Count; i++)
+                {
+                    if (spawnMissons[i].index == currentMissonIndex)
+                        spawnMissons[i].missonSpawn.gameObject.SetActive(true);
+                    else
+                        spawnMissons[i].missonSpawn.gameObject.SetActive(false);
+                }
+            }
+        }
+        private void OnDisable()
+        {
+            _disposables.Dispose();
+        }
+    }
+}

@@ -16,7 +16,11 @@ namespace HyperShoot.Manager
         }
         public void FindArtifact(BaseMessage.FindMessage message)
         {
-            Debug.Log("xoai");
+            MessageBroker.Default.Publish(new BaseMessage.MissonComplete
+            {
+
+            });
+            SimplePool.Despawn(gameObject);
         }
         private void OnDisable()
         {

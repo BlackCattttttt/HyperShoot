@@ -33,7 +33,11 @@ namespace HyperShoot.Manager
                         currentCollect++;
                         if (currentCollect >= numberOfCollect)
                         {
-                            Debug.Log("xoai");
+                            MessageBroker.Default.Publish(new BaseMessage.MissonComplete
+                            {
+
+                            });
+                            SimplePool.Despawn(gameObject);
                         }
                     }
                 }

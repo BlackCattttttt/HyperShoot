@@ -10,6 +10,15 @@ namespace HyperShoot.Manager
     public class MissonData : ScriptableObject
     {
         [SerializeField] private List<LevelDesign> levelDesigns;
+        public List<MissonAtribute> GetMissonInLevel(int lv)
+        {
+            for (int i = 0; i < levelDesigns.Count; i++)
+            {
+                if (levelDesigns[i].level == lv)
+                    return levelDesigns[i].missons;
+            }
+            return null;
+        }
         [System.Serializable]
         public class LevelDesign
         {

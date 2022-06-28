@@ -13,4 +13,12 @@ public class BaseMessage
     {
         
     }
+    public struct SpawnMissonMessage
+    {
+
+    }
+    public struct MissonComplete
+    {
+
+    }
 }

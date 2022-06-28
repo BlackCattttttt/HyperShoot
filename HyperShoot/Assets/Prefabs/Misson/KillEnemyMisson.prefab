@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfSkill: 2
-  enemyType: 0
+  enemyType: 2

@@ -6,9 +6,6 @@ public class GameManager : Singleton<GameManager>
 {
     public GameData Data;
 
-    public Sprite[] locationIcons;
-    public Material[] skyBox;
-
     public List<int[]> jumpVersion = new List<int[]>();
     // Start is called before the first frame update
     void Start()

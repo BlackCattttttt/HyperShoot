@@ -15,4 +15,4 @@ MonoBehaviour:
   IndefiniteArticle: a
   DisplayName: bullet
   Description: 
-  Icon: {fileID: 0}
+  Icon: {fileID: 2800000, guid: 5f0f88702fe3baa4793a297bced9d8c0, type: 3}

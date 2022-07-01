@@ -55,7 +55,7 @@ public class GUIManager : Singleton<GUIManager>
         DestroyChildren(LayerNotify.transform);
         ReloadCamera();
 
-       // EvenGlobalManager.Instance.OnStartLoadScene.AddListener(StartLoading);
+        EvenGlobalManager.Instance.OnStartLoadScene.AddListener(StartLoading);
         EvenGlobalManager.Instance.OnFinishLoadScene.AddListener(ReloadCamera);
     }
     public UIPanel NewPanel(UI_PANEL id)

@@ -65,7 +65,7 @@ namespace HyperShoot.Combat
 
 			base.TakeDamage(damageInfo);
 
-			//FPPlayer.HUDDamageFlash.Send(damageInfo);
+			FPPlayer.HUDDamageFlash.Send(damageInfo);
 
 			// shake camera to left or right depending on direction of damage
 			if (damageInfo.ImpactObject != null)

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfea88801ece7646b9d474c34325695, type: 3}
   m_Name: List UI Panel
   m_EditorClassIdentifier: 
-  Instances: []
-  path: 
+  Instances:
+  - {fileID: 6239695152366162268, guid: 4e31252072dbeda419346956256e1de5, type: 3}
+  path: Assets/Prefabs/UI

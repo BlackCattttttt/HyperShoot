@@ -1,3 +1,4 @@
+using HyperShoot.Combat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace HyperShoot.Player
 	public class FPCharacterEventHandler : CharacterEventHandler
 	{
 		// gui
-		//public fp_Message<fp_DamageInfo> HUDDamageFlash;
+		public fp_Message<DamageData> HUDDamageFlash;
 		public fp_Message<string> HUDText;
 		public fp_Value<Texture> Crosshair;
 		public fp_Value<Texture2D> CurrentAmmoIcon;

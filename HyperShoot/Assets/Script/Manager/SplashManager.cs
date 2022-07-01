@@ -19,6 +19,6 @@ public class SplashManager : MonoBehaviour
     }
     public void Load()
     {
-        LoadingManager.Instance.LoadScene(SCENE_INDEX.Gameplay, () => MainScreen.Show());
+        LoadingManager.Instance.LoadScene(SCENE_INDEX.Main, () => MainScreen.Show());
     }
 }

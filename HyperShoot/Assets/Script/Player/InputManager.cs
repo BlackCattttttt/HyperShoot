@@ -24,9 +24,9 @@ public class InputManager : Singleton<InputManager>
 	// Unity Input Axis
 	public List<string> UnityAxis = new List<string>();
 
-    protected override void OnAwake()
+    protected override void Awake()
     {
-        base.OnAwake();
+        base.Awake();
 		SetupDefaults();
     }
     [Button]

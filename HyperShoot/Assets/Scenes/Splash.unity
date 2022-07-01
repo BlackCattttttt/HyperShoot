@@ -158,7 +158,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -450}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &207493204
 MonoBehaviour:
@@ -207,8 +207,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -604,11 +604,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Root: {fileID: 1822274156}
   MainCamera: {fileID: 2080037707}
-  LayerScreen: {fileID: 0}
-  LayerPopup: {fileID: 0}
-  LayerNotify: {fileID: 0}
-  Prefabs: {fileID: 0}
-  LoadingUI: {fileID: 0}
+  LayerScreen: {fileID: 1105459631}
+  LayerPopup: {fileID: 2040906519}
+  LayerNotify: {fileID: 1872434847}
+  Prefabs: {fileID: 11400000, guid: 26ef8e63b17e5e847bb819e59092141b, type: 2}
+  LoadingUI: {fileID: 1838962881}
 --- !u!114 &1822274154
 MonoBehaviour:
   m_ObjectHideFlags: 0

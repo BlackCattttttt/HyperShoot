@@ -23,17 +23,23 @@ namespace HyperShoot.Manager
         private List<MissonAtribute> missonDatas;
 
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
+        private void OnEnable()
+        {
+            EvenGlobalManager.Instance.OnFinishLoadScene.AddListener(OnLoadLevel);
+            EvenGlobalManager.Instance.OnLoadLevel.AddListener(OnLoadLevel);
+            EvenGlobalManager.Instance.OnStartPlay.AddListener(OnStartPlay);
+           // EvenGlobalManager.Instance.OnEndPlay.AddListener(OnEnd);
 
-        private void Start()
+        }
+        public void OnLoadLevel()
         {
             MessageBroker.Default.Receive<BaseMessage.SpawnMissonMessage>()
-               .Subscribe(SpawnMisson)
-               .AddTo(_disposables);
+                 .Subscribe(SpawnMisson)
+                 .AddTo(_disposables);
             MessageBroker.Default.Receive<BaseMessage.MissonComplete>()
                .Subscribe(MissonComplete)
                .AddTo(_disposables);
             missonDatas = missonData.GetMissonInLevel(currentLevel);
-
             for (int i = 0; i < spawnMissons.Count; i++)
             {
                 if (spawnMissons[i].index == currentMissonIndex)
@@ -42,6 +48,11 @@ namespace HyperShoot.Manager
                     spawnMissons[i].missonSpawn.gameObject.SetActive(false);
             }
         }
+        public void OnStartPlay()
+        {
+
+        }
+
         public void SpawnMisson(BaseMessage.SpawnMissonMessage missonMessage)
         {
             if (currentMissonIndex < missonDatas.Count)

@@ -6,7 +6,6 @@ public class GameManager : Singleton<GameManager>
 {
     public GameData Data;
 
-    public List<int[]> jumpVersion = new List<int[]>();
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +20,7 @@ public class GameManager : Singleton<GameManager>
             Data.playerName = "Player";
             Database.SaveData();
         }
-       // SplashManager.Instance.Load();
+        SplashManager.Instance.Load();
         // Application.targetFrameRate = 60;
     }
 }

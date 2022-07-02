@@ -5,13 +5,8 @@ using UnityEngine;
 public class GameData 
 {
     public int Level = 0;
-    public int Gold = 0;
-
-    public string playerName;
-    public bool Vibrate;
+    public int CurrentMissonIndex = 2;
     public bool Sound;
-
-    public bool NoAds;
 }
 public class Database
 {
@@ -28,5 +23,9 @@ public class Database
             return null;
 
         return JsonUtility.FromJson<GameData>(PlayerPrefs.GetString("GameData"));
+    }
+    public static void ClearData()
+    {
+        PlayerPrefs.DeleteKey("GameData");
     }
 }

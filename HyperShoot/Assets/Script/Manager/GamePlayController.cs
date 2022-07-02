@@ -17,12 +17,14 @@ namespace HyperShoot.Manager
         [SerializeField] private MissonData missonData;
         [SerializeField] private List<SpawnMissonData> spawnMissons;
 
-        private BaseMisson currenMisson;
-        private int currentLevel = 1;
-        private int currentMissonIndex = 2;
+        private MissonAtribute currenMisson;
+
         private List<MissonAtribute> missonDatas;
 
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
+
+        public MissonAtribute CurrenMisson { get => currenMisson; set => currenMisson = value; }
+
         private void OnEnable()
         {
             EvenGlobalManager.Instance.OnFinishLoadScene.AddListener(OnLoadLevel);
@@ -39,10 +41,10 @@ namespace HyperShoot.Manager
             MessageBroker.Default.Receive<BaseMessage.MissonComplete>()
                .Subscribe(MissonComplete)
                .AddTo(_disposables);
-            missonDatas = missonData.GetMissonInLevel(currentLevel);
+            missonDatas = missonData.GetMissonInLevel(GameManager.Instance.Data.Level);
             for (int i = 0; i < spawnMissons.Count; i++)
             {
-                if (spawnMissons[i].index == currentMissonIndex)
+                if (spawnMissons[i].index == GameManager.Instance.Data.CurrentMissonIndex)
                     spawnMissons[i].missonSpawn.gameObject.SetActive(true);
                 else
                     spawnMissons[i].missonSpawn.gameObject.SetActive(false);
@@ -55,26 +57,29 @@ namespace HyperShoot.Manager
 
         public void SpawnMisson(BaseMessage.SpawnMissonMessage missonMessage)
         {
-            if (currentMissonIndex < missonDatas.Count)
+            if (GameManager.Instance.Data.CurrentMissonIndex < missonDatas.Count)
             {
-                BaseMisson misson = SimplePool.Spawn(missonDatas[currentMissonIndex].misson, transform, Vector3.zero, Quaternion.identity);
-                currenMisson = misson;
-                if (missonDatas[currentMissonIndex].skillType == MissonAtribute.MissonType.FIND)
+                BaseMisson misson = SimplePool.Spawn(missonDatas[GameManager.Instance.Data.CurrentMissonIndex].misson, transform, Vector3.zero, Quaternion.identity);
+                currenMisson = missonDatas[GameManager.Instance.Data.CurrentMissonIndex];
+                if (missonDatas[GameManager.Instance.Data.CurrentMissonIndex].skillType == MissonAtribute.MissonType.FIND)
                 {
                     MessageBroker.Default.Publish(new BaseMessage.ActiveArtifact
                     {
 
                     });
                 }
-                PlayScreen.Instance.SetMisson(missonDatas[currentMissonIndex]);
+                PlayScreen.Instance.SetMisson(missonDatas[GameManager.Instance.Data.CurrentMissonIndex]);
             }
         }
         public void MissonComplete(BaseMessage.MissonComplete message)
         {
-            if (currentMissonIndex < missonDatas.Count)
+            if (GameManager.Instance.Data.CurrentMissonIndex < missonDatas.Count)
             {
-                currentMissonIndex++;
-                if (currentMissonIndex == missonDatas.Count)
+                GameManager.Instance.Data.CurrentMissonIndex++;
+                Database.SaveData();
+                currenMisson = null;
+                PlayScreen.Instance.NoMisson();
+                if (GameManager.Instance.Data.CurrentMissonIndex == missonDatas.Count)
                 {
                     LoadingManager.Instance.LoadScene(SCENE_INDEX.Lose, () => WinScreen.Show());
                 }
@@ -82,7 +87,7 @@ namespace HyperShoot.Manager
                 {
                     for (int i = 0; i < spawnMissons.Count; i++)
                     {
-                        if (spawnMissons[i].index == currentMissonIndex)
+                        if (spawnMissons[i].index == GameManager.Instance.Data.CurrentMissonIndex)
                             spawnMissons[i].missonSpawn.gameObject.SetActive(true);
                         else
                             spawnMissons[i].missonSpawn.gameObject.SetActive(false);

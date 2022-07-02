@@ -258,8 +258,8 @@ namespace HyperShoot.Weapon
 
 		protected virtual bool CanStart_Zoom()
 		{
-		//	if (Player.CurrentWeaponType.Get() == (int)fp_Weapon.Type.Melee)
-		//		return false;
+			if (Player.CurrentWeaponType.Get() == (int)BaseWeapon.Type.Melee)
+				return false;
 
 			return true;
 		}

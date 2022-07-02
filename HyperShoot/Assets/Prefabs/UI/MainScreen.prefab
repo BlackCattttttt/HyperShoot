@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: New Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ddbb229d38fa5747bafa6807bb44485, type: 2}
   m_sharedMaterial: {fileID: -4771902560331541968, guid: 7ddbb229d38fa5747bafa6807bb44485, type: 2}
@@ -950,8 +950,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6239695152366162268}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ButtonPlay
+        m_TargetAssemblyTypeName: MainScreen, Assembly-CSharp
+        m_MethodName: ButtonContinue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

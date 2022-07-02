@@ -46,7 +46,7 @@ public class InputManager : Singleton<InputManager>
 				AddButton("Jump", KeyCode.Space);
 				AddButton("Crouch", KeyCode.C);
 				AddButton("Run", KeyCode.LeftShift);
-				AddButton("Interact", KeyCode.F);
+				AddButton("Misson", KeyCode.M);
 				AddButton("Accept1", KeyCode.Return);
 				AddButton("Accept2", KeyCode.KeypadEnter);
 				AddButton("Pause", KeyCode.P);

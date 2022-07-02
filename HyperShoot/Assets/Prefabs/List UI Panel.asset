@@ -16,5 +16,6 @@ MonoBehaviour:
   - {fileID: 8818661773998471020, guid: 6d6f5170c60ee49408f0cc893df0adad, type: 3}
   - {fileID: 6239695152366162268, guid: 4e31252072dbeda419346956256e1de5, type: 3}
   - {fileID: 2013312543318464337, guid: 6c79b8c063f175e48850d226fb6a2c99, type: 3}
+  - {fileID: 5166714925102043164, guid: 0db4fb9dff62099439233a94a63fb587, type: 3}
   - {fileID: 6682993531552982050, guid: 550605c0d47e3f44796106a501c16873, type: 3}
   path: Assets/Prefabs/UI

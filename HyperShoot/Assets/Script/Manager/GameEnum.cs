@@ -26,7 +26,7 @@ public enum UI_PANEL
     PopupListSong,
     PopupPause,
     PopupSetting,
-    PopupNoAds,
+    PopupMisson,
     PopupContinue,
     PopupWarning,
     PopupNoInternet,

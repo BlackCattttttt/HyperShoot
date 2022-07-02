@@ -266,8 +266,8 @@ namespace HyperShoot.Weapon
         protected virtual void OnStart_SetWeapon()
         {
             // prevent these player activities during the weapon switch (unless switching to a melee weapon)
-            if ((WeaponBeingSet == null))
-            //|| (WeaponBeingSet.AnimationType != (int)BaseWeapon.Type.Melee))
+            if ((WeaponBeingSet == null)
+            || (WeaponBeingSet.AnimationType != (int)BaseWeapon.Type.Melee))
             {
                 m_Player.Reload.Stop(SetWeaponDuration + SetWeaponReloadSleepDuration);
                 m_Player.Zoom.Stop(SetWeaponDuration + SetWeaponZoomSleepDuration);
@@ -333,14 +333,21 @@ namespace HyperShoot.Weapon
             if (CurrentWeapon == null)
                 return false;
 
-            //if (CurrentWeapon.AnimationType == (int)BaseWeapon.Type.Melee)
-            //    return false;
+            if (CurrentWeapon.AnimationType == (int)BaseWeapon.Type.Melee)
+                return false;
 
             return m_Player.Reload.TryStart();
         }
         public virtual void OnMessage_Unwield()
         {
             m_Player.SetWeapon.TryStart(0);
+        }
+        public virtual int OnValue_CurrentWeaponType
+        {
+            get
+            {
+                return ((CurrentWeapon == null) ? 0 : CurrentWeapon.AnimationType);
+            }
         }
     }
 }

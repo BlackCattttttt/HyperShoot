@@ -5,16 +5,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UniRx;
+using DG.Tweening;
 using static HyperShoot.Manager.MissonData;
 
 public class PlayScreen : UIPanel
 {
     [SerializeField] private MissonData missonData;
     [SerializeField] private GameObject missonBackground;
+    [SerializeField] private GameObject noMissonBackground;
     [SerializeField] private Image iconImage;
-    [SerializeField] private TMP_Text count;
+    [SerializeField] private TMP_Text count, pickUp;
 
-    private GamePlayController gamePlayController;
     private MissonAtribute currenMisson;
 
     public override UI_PANEL GetID()
@@ -37,11 +38,12 @@ public class PlayScreen : UIPanel
 
         base.OnAppear();
 
-        gamePlayController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GamePlayController>();
         missonBackground.SetActive(false);
+        noMissonBackground.SetActive(true);
     }
     public void SetMisson(MissonAtribute misson)
     {
+        noMissonBackground.SetActive(false);
         missonBackground.SetActive(true);
         iconImage.sprite = misson.icon;
         currenMisson = misson;
@@ -61,8 +63,23 @@ public class PlayScreen : UIPanel
             count.text = "0/1";
         }
     }
+    public void NoMisson()
+    {
+        noMissonBackground.SetActive(true);
+        missonBackground.SetActive(false);
+    }
     public void Updatecount(int current, int max)
     {
         count.text = current.ToString() + "/" + max.ToString();
+    }
+    public void PickUpItem(string msg)
+    {
+        pickUp.text = msg;
+        pickUp.color = new Color(1, 1, 1, 1);
+        pickUp.gameObject.SetActive(true);
+        pickUp.DOColor(new Color(1, 1, 1, 0), 1).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            pickUp.gameObject.SetActive(false);
+        });
     }
 }

@@ -14,10 +14,9 @@ public class GameManager : Singleton<GameManager>
         {
             Data = new GameData();
 
-            Data.Vibrate = true;
+            Data.Level = 1;
+            Data.CurrentMissonIndex = 0;
             Data.Sound = true;
-            Data.NoAds = false;
-            Data.playerName = "Player";
             Database.SaveData();
         }
         SplashManager.Instance.Load();

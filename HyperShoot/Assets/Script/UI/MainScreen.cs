@@ -29,10 +29,18 @@ public class MainScreen : UIPanel
     public void ButtonPlay()
     {
         //  PlayScreen.Show(false);
+        GameManager.Instance.Data.Level = 1;
+        GameManager.Instance.Data.CurrentMissonIndex = 0;
+        Database.SaveData();
         LoadingManager.Instance.LoadScene(SCENE_INDEX.Gameplay, () => PlayScreen.Show());
         EvenGlobalManager.Instance.OnStartPlay.Dispatch();
     }
-
+    public void ButtonContinue()
+    {
+        //  PlayScreen.Show(false);
+        LoadingManager.Instance.LoadScene(SCENE_INDEX.Gameplay, () => PlayScreen.Show());
+        EvenGlobalManager.Instance.OnStartPlay.Dispatch();
+    }
     public void ButtonSetting()
     {
         //PopupSetting.Show();

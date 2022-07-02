@@ -55,18 +55,18 @@ namespace HyperShoot.Player
             UpdateCursorLock();
 
             // toggle pausing and abort if paused
-            //	UpdatePause();
+            UpdatePause();
+            InputInteract();
 
-            //if (FPPlayer.Pause.Get() == true)
-            //	return;
+            if (FPPlayer.Pause.Get() == true)
+                return;
 
             //// --- NOTE: everything below this line will be disabled on pause! ---
 
             //if (!m_AllowGameplayInput)
-            //	return;
+            //    return;
 
             // interaction
-            //InputInteract();
 
             // manage input for moving
             InputMove();
@@ -84,15 +84,18 @@ namespace HyperShoot.Player
 
         }
 
-        //protected virtual void InputInteract()
-        //{
-
-        //	if (InputManager.GetButtonDown("Interact"))
-        //		FPPlayer.Interact.TryStart();
-        //	else
-        //		FPPlayer.Interact.TryStop();
-
-        //}
+        protected virtual void InputInteract()
+        {
+            if (InputManager.GetButtonDown("Misson"))
+            {
+                //fp_Utility.LockCursor = false;
+                Time.timeScale = 1 - Time.timeScale;
+                if (Time.timeScale == 1)
+                    PopupMisson.Instance.Close();
+                else
+                    PopupMisson.Show();
+            }
+        }
 
         protected virtual void InputMove()
         {
@@ -136,7 +139,7 @@ namespace HyperShoot.Player
         protected virtual void InputAttack()
         {
             if (FPPlayer.Run.Active)
-            	return;
+                return;
 
             // if mouse cursor is visible, an extra click is needed
             // before we can attack
@@ -160,8 +163,8 @@ namespace HyperShoot.Player
             //if (InputManager.GetButtonDown("SetPrevWeapon"))
             //    FPPlayer.SetPrevWeapon.Try();
 
-           // if (InputManager.GetButtonDown("SetNextWeapon"))
-           //     FPPlayer.SetNextWeapon.Try();
+            // if (InputManager.GetButtonDown("SetNextWeapon"))
+            //     FPPlayer.SetNextWeapon.Try();
 
             if (InputManager.GetButtonDown("SetWeapon1")) FPPlayer.SetWeapon.TryStart(1);
             if (InputManager.GetButtonDown("SetWeapon2")) FPPlayer.SetWeapon.TryStart(2);
@@ -180,17 +183,13 @@ namespace HyperShoot.Player
                 FPPlayer.SetWeapon.TryStart(0);
         }
 
-
-        /// <summary>
-        /// toggles the game's pause state on / off
-        /// </summary>
-        //protected virtual void UpdatePause()
-        //{
-
-        //	if (InputManager.GetButtonDown("Pause"))
-        //		FPPlayer.Pause.Set(!FPPlayer.Pause.Get());
-
-        //}
+        protected virtual void UpdatePause()
+        {
+            if (InputManager.GetButtonDown("Pause"))
+            {
+                Time.timeScale = 1 - Time.timeScale;
+            }
+        }
 
         protected virtual void UpdateCursorLock()
         {

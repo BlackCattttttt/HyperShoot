@@ -17,13 +17,16 @@ MonoBehaviour:
     missons:
     - missonId: 0
       missonDes: 
+      icon: {fileID: 21300000, guid: 36c54d03b3fe05a4eac2feff10dc61c3, type: 3}
       skillType: 0
       misson: {fileID: 1658645101496491228, guid: 4b340024076e7094fa3fbb9d3de2d368, type: 3}
     - missonId: 1
       missonDes: 
+      icon: {fileID: 21300000, guid: 8e2b48d3790474444a6ec8768be4e776, type: 3}
       skillType: 1
       misson: {fileID: 9046052721266309735, guid: 9dbdaeef712e6044dac638c770a43488, type: 3}
     - missonId: 2
       missonDes: 
+      icon: {fileID: 21300000, guid: efaef523e5fb30a4ebdf2cca07781f40, type: 3}
       skillType: 2
       misson: {fileID: 7470612791005625770, guid: 3494552ad478266448d0c04ea8e507ae, type: 3}

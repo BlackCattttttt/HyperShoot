@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HyperShoot.Player;
+using UniRx;
+using System;
 
 namespace HyperShoot.Combat
 {
@@ -10,6 +12,8 @@ namespace HyperShoot.Combat
 		public float CameraShakeFactor = 0.02f;
 		protected float m_DamageAngle = 0.0f;
 		protected float m_DamageAngleFactor = 1.0f;
+		private readonly CompositeDisposable _disposables = new CompositeDisposable();
+		private bool _isDead = false;
 
 		protected FPCharacterEventHandler m_FPPlayer = null;    // should never be referenced directly
 		protected FPCharacterEventHandler FPPlayer  // lazy initialization of the event handler field
@@ -88,6 +92,17 @@ namespace HyperShoot.Combat
 				return;
 
 			FPPlayer.InputAllowGameplay.Set(false);
+			if (!_isDead)
+			{
+				Observable.Timer(TimeSpan.FromSeconds(2))
+						 .Subscribe(_ =>
+						 {
+							 fp_Utility.LockCursor = false;
+							 LoadingManager.Instance.LoadScene(SCENE_INDEX.Lose, () => LoseScreen.Show());
+						 })
+						 .AddTo(_disposables);
+			}
+			_isDead = true;
 		}
 		public virtual void RefreshColliders()
 		{

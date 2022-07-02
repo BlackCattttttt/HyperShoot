@@ -15,7 +15,8 @@ public class LoadingManager : Singleton<LoadingManager>
         if (SceneLoadedSpecialAction.ContainsKey(index))
         {
             SceneLoadedSpecialAction[index] = action;
-        } else
+        }
+        else
         {
             SceneLoadedSpecialAction.Add(index, action);
         }
@@ -53,7 +54,8 @@ public class LoadingManager : Singleton<LoadingManager>
         System.GC.Collect(2, GCCollectionMode.Forced);
         Resources.UnloadUnusedAssets();
 
-        EvenGlobalManager.Instance.OnFinishLoadScene.Dispatch();
+        if (index == SCENE_INDEX.Gameplay)
+            EvenGlobalManager.Instance.OnFinishLoadScene.Dispatch();
         if (SceneLoadedSpecialAction.ContainsKey(index) && SceneLoadedSpecialAction[index] != null)
         {
             SceneLoadedSpecialAction[index].Invoke();

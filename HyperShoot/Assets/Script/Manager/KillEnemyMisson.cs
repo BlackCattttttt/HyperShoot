@@ -14,6 +14,9 @@ namespace HyperShoot.Manager
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
         private int currentSkill;
 
+        public int NumberOfSkill { get => numberOfSkill; }
+        public int CurrentSkill { get => currentSkill;}
+
         private void Start()
         {
             currentSkill = 0;
@@ -26,6 +29,7 @@ namespace HyperShoot.Manager
             if (message.enemyType == enemyType)
             {
                 currentSkill++;
+                PlayScreen.Instance.Updatecount(currentSkill, numberOfSkill);
                 if (currentSkill >= numberOfSkill)
                 {
                     MessageBroker.Default.Publish(new BaseMessage.MissonComplete

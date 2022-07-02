@@ -44,6 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCollect: 5
-  rate: 30
-  enemyTypes: 000000000100000002000000
-  currentCollect: 0
+  rate: 100
+  enemyTypes: 0000000001000000020000000300000004000000

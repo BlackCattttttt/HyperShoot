@@ -36,6 +36,7 @@ namespace HyperShoot.Manager
             }
             public int missonId;
             public string missonDes;
+            public Sprite icon;
             public MissonType skillType;
             public BaseMisson misson;
         }

@@ -19,7 +19,7 @@ namespace HyperShoot.Manager
 
         private BaseMisson currenMisson;
         private int currentLevel = 1;
-        private int currentMissonIndex = 0;
+        private int currentMissonIndex = 2;
         private List<MissonAtribute> missonDatas;
 
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
@@ -59,6 +59,14 @@ namespace HyperShoot.Manager
             {
                 BaseMisson misson = SimplePool.Spawn(missonDatas[currentMissonIndex].misson, transform, Vector3.zero, Quaternion.identity);
                 currenMisson = misson;
+                if (missonDatas[currentMissonIndex].skillType == MissonAtribute.MissonType.FIND)
+                {
+                    MessageBroker.Default.Publish(new BaseMessage.ActiveArtifact
+                    {
+
+                    });
+                }
+                PlayScreen.Instance.SetMisson(missonDatas[currentMissonIndex]);
             }
         }
         public void MissonComplete(BaseMessage.MissonComplete message)
@@ -66,18 +74,26 @@ namespace HyperShoot.Manager
             if (currentMissonIndex < missonDatas.Count)
             {
                 currentMissonIndex++;
-                for (int i = 0; i < spawnMissons.Count; i++)
+                if (currentMissonIndex == missonDatas.Count)
                 {
-                    if (spawnMissons[i].index == currentMissonIndex)
-                        spawnMissons[i].missonSpawn.gameObject.SetActive(true);
-                    else
-                        spawnMissons[i].missonSpawn.gameObject.SetActive(false);
+                    LoadingManager.Instance.LoadScene(SCENE_INDEX.Lose, () => WinScreen.Show());
+                }
+                else
+                {
+                    for (int i = 0; i < spawnMissons.Count; i++)
+                    {
+                        if (spawnMissons[i].index == currentMissonIndex)
+                            spawnMissons[i].missonSpawn.gameObject.SetActive(true);
+                        else
+                            spawnMissons[i].missonSpawn.gameObject.SetActive(false);
+                    }
                 }
             }
         }
         private void OnDisable()
         {
             _disposables.Dispose();
+            spawnMissons.Clear();
         }
     }
 }

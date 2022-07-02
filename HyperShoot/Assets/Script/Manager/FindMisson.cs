@@ -20,6 +20,7 @@ namespace HyperShoot.Manager
             {
 
             });
+            PlayScreen.Instance.Updatecount(1, 1);
             SimplePool.Despawn(gameObject);
         }
         private void OnDisable()

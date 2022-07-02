@@ -109,11 +109,10 @@ namespace HyperShoot.Enemy
                     AddForce();
                     
                     TryDamage();
-
-                    Die();
                 }
-
             }
+
+            Die();
         }
         public override void Die()
         {

@@ -402,7 +402,7 @@ MonoBehaviour:
   followDistance: 20
   attackDistance: 8
   delayAttack: 1
-  damage: 1
+  damage: 10
   prefabBullet: {fileID: 4042375646740859533, guid: c493f73578e906944889d29a509d4604, type: 3}
   shootPoint: {fileID: 7007178007071910100}
   preloadCount: 5

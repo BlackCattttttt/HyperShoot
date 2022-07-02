@@ -3,7 +3,8 @@
     NONE = -1,
     Splash = 0,
     Main = 1,
-    Gameplay = 2
+    Gameplay = 2,
+    Lose = 3
 }
 public enum STATE
 {

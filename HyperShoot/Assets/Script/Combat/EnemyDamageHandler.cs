@@ -30,8 +30,6 @@ namespace HyperShoot.Combat
         {
             base.Die();
 
-            SpawnManager.Instance.currentEnemy--;
-
             MessageBroker.Default.Publish(new BaseMessage.EnemyDieMessage
             {
                 enemyType = EnemyType

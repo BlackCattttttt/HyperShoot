@@ -6,8 +6,6 @@ using HyperShoot.Manager;
 
 public class MainScreen : UIPanel
 {
-    private GamePlayController gamePlayController;
-
     public override UI_PANEL GetID()
     {
         return UI_PANEL.MainScreen;
@@ -31,7 +29,7 @@ public class MainScreen : UIPanel
     public void ButtonPlay()
     {
         //  PlayScreen.Show(false);
-        LoadingManager.Instance.LoadScene(SCENE_INDEX.Gameplay, () => Close());
+        LoadingManager.Instance.LoadScene(SCENE_INDEX.Gameplay, () => PlayScreen.Show());
         EvenGlobalManager.Instance.OnStartPlay.Dispatch();
     }
 

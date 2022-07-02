@@ -2,6 +2,7 @@ using HyperShoot.Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static HyperShoot.Manager.MissonData;
 
 public class BaseMessage
 {
@@ -15,10 +16,12 @@ public class BaseMessage
     }
     public struct SpawnMissonMessage
     {
-
+        
     }
     public struct MissonComplete
     {
 
     }
+    public struct ActiveArtifact { }
+
 }

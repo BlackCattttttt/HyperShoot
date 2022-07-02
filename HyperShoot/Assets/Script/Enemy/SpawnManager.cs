@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
-public class SpawnManager : Singleton<SpawnManager>
+public class SpawnManager : MonoBehaviour
 {
     public SpawnEnemy[] spawners;
   //  public int numberOfSpawns;
@@ -12,14 +13,21 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public int maxEnemy = 4;
     public int currentEnemy;
+    private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        MessageBroker.Default.Receive<BaseMessage.EnemyDieMessage>()
+               .Subscribe(CountEnemy)
+               .AddTo(_disposables);
         nearSpawns = new List<SpawnEnemy>();
         currentEnemy = 0;
     }
-
+    public void CountEnemy(BaseMessage.EnemyDieMessage message)
+    {
+        currentEnemy--;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -44,5 +52,9 @@ public class SpawnManager : Singleton<SpawnManager>
                 nearSpawns.Add(spawners[i]);
             }
         }
+    }
+    private void OnDisable()
+    {
+        _disposables.Dispose();
     }
 }

@@ -21,8 +21,11 @@ namespace HyperShoot.Combat
 
 		private readonly Subject<DamageData> _takeDamageSubject = new Subject<DamageData>();
 
+		private bool _isDie;
+
 		private void Awake()
         {
+			_isDie = false;
 			HealthProperty = new ReactiveProperty<float>(MaxHealth);
 			TakeDamageObservable.Subscribe(TakeDamage).AddTo(this);
 		}
@@ -32,10 +35,8 @@ namespace HyperShoot.Combat
 
 			if (HealthProperty.Value < 0)
             {
-				//if (m_InstaKill)
+				if (!_isDie)
 					Die();
-				//else
-				//	fp_Timer.In(UnityEngine.Random.Range(MinDeathDelay, MaxDeathDelay), delegate () { Die(); });
 			}
 		}
 		public virtual void Die()
@@ -49,7 +50,7 @@ namespace HyperShoot.Combat
 			//	m_Audio.pitch = Time.timeScale;
 			//	m_Audio.PlayOneShot(DeathSound);
 			//}
-
+			_isDie = true;
 			foreach (GameObject o in DeathSpawnObjects)
 			{
 				if (o != null)
@@ -72,6 +73,7 @@ namespace HyperShoot.Combat
 		}
 		protected virtual void Reset()
 		{
+			_isDie = false;
 			HealthProperty.Value = MaxHealth;
 		}
 	}

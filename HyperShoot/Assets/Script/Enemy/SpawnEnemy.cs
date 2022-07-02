@@ -8,6 +8,7 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] private BaseEnemy[] enemies;
     [SerializeField] private ParticleSystem spawnParticle;
     [SerializeField] private float spawnTime = 5f;
+    [SerializeField] private SpawnManager spawnManager;
 
     public float range = 30f;
 
@@ -26,7 +27,7 @@ public class SpawnEnemy : MonoBehaviour
             {
                 Instantiate(spawnParticle, transform.position, Quaternion.identity);
             }
-            SpawnManager.Instance.currentEnemy++;
+            spawnManager.currentEnemy++;
             Vector3 circlePos = Random.insideUnitSphere;
             var spawnPos = circlePos * Random.Range(5f, 15f);
             SimplePool.Spawn(enemies[Random.Range(0, enemies.Length)], transform.position + new Vector3(spawnPos.x,0,spawnPos.z), Quaternion.identity);

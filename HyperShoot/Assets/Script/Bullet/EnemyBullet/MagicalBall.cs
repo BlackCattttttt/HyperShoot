@@ -16,7 +16,7 @@ namespace HyperShoot.Bullet
         {
             if (other.CompareTag("Player"))
             {
-                var damageable = other.GetComponent<IDamageable>();
+                var damageable = other.GetComponentInParent<IDamageable>();
                 if (damageable != null)
                 {
                     damageable.TakeDamage(new DamageData

@@ -24630,7 +24630,7 @@ MonoBehaviour:
   aIPath: {fileID: 8437954560571334973}
   anim: {fileID: 8437954560561853804}
   enemyDamageHandler: {fileID: 8437954560571334945}
-  walkPointRange: 6
+  walkPointRange: 15
   followDistance: 30
   attackDistance: 3
   delayAttack: 2

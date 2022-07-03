@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3389486}
   - component: {fileID: 2338632}
   - component: {fileID: 6552552}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_FloodWall_B_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3312202}
   - component: {fileID: 2343834}
   - component: {fileID: 6538548}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_FloodWall_B_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 3381652}
   - component: {fileID: 2310520}
   - component: {fileID: 6556256}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_FloodWall_B_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 498234}
   - component: {fileID: 20517222}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_FloodWall_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}

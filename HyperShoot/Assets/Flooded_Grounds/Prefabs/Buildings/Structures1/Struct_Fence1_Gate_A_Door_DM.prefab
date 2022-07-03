@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3333540}
   - component: {fileID: 2347908}
   - component: {fileID: 6488360}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_Fence1_Gate_A_Door_DM
   m_TagString: Untagged
   m_Icon: {fileID: 0}

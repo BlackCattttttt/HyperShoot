@@ -63,6 +63,20 @@ namespace HyperShoot.Player
         protected Vector3 CapsuleBottom = Vector3.zero;
         protected Vector3 CapsuleTop = Vector3.zero;
 
+        //run
+        private float sprintDuration = 2f;
+        private float sprintRecoverDuration = 2f;
+        private float sprintRealDuration = 0f;
+        private float timeStartSprint = 0f;
+        private float timeEndSprint = 0f;
+
+        private float sprintDurationLeft = 1f;
+        private bool sprinting = false;
+        public float SprintStamiaPercentage
+        {
+            get => sprinting ? ((sprintRealDuration - (Time.time - timeStartSprint)) / sprintDuration) : Mathf.Clamp01((Time.time - timeEndSprint + sprintDurationLeft) / sprintRecoverDuration);
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -177,6 +191,7 @@ namespace HyperShoot.Player
             m_MotorThrottle = fp_MathUtility.SnapToZero(m_MotorThrottle);
 
         }
+
         protected virtual void UpdateThrottleWalk()
         {
             // if on the ground, make movement speed dependent on ground slope
@@ -667,11 +682,28 @@ namespace HyperShoot.Player
             // can't start running while crouching
             if (Player.Crouch.Active)
                 return false;
-
+            //if (Time.time > timeStartSprint + sprintRealDuration)
+            //{
+            //    return false;
+            //}
             return true;
 
         }
+        protected virtual void OnStart_Run()
+        {
+            timeStartSprint = Time.time;
 
+            float sprintRecoverPercentage = Mathf.Clamp01((Time.time - timeEndSprint + sprintDurationLeft) / sprintRecoverDuration);
+            sprintRealDuration = sprintDuration * sprintRecoverPercentage;
+
+            sprinting = true;
+        }
+        protected virtual void OnStop_Run()
+        {
+            sprintDurationLeft = Mathf.Clamp(sprintRealDuration - (Time.time - timeStartSprint), 0f, sprintRealDuration);
+            timeEndSprint = Time.time;
+            sprinting = false;
+        }
         protected virtual bool CanStop_Crouch()
         {
             // can't stop crouching if there is a blocking object above us

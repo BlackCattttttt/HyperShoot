@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 471630}
   - component: {fileID: 3319410}
   - component: {fileID: 2336914}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: lo_CobbleRock_A_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 490386}
   - component: {fileID: 3369606}
   - component: {fileID: 2363742}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: lo_CobbleRock_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 493642}
   - component: {fileID: 20547628}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: CobbleRock_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 441120}
   - component: {fileID: 3381624}
   - component: {fileID: 2369264}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: lo_CobbleRock_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -114,10 +114,23 @@ MonoBehaviour:
   MaxHealth: 1
   DeathSpawnObjects:
   - {fileID: 100000, guid: 40b73606d45c7e0408551e587b60fae4, type: 3}
-  MinDeathDelay: 0
-  MaxDeathDelay: 0
   HealthProperty:
     value: 0
+  itemRates:
+  - item: {fileID: 100000, guid: 9cee664fe857690489829e13843a34b2, type: 3}
+    rate: 10
+  - item: {fileID: 100000, guid: 073ca3fffcff9754aa51d50d1c09dae9, type: 3}
+    rate: 10
+  - item: {fileID: 100000, guid: 5fc60a82b78b993439cbbcd8e842bf22, type: 3}
+    rate: 10
+  - item: {fileID: 100000, guid: 9ecdeb4dfe970634ebc469123d3a02a6, type: 3}
+    rate: 20
+  - item: {fileID: 100000, guid: 5e5834f891ba5f44c929767bb50880b2, type: 3}
+    rate: 20
+  - item: {fileID: 100000, guid: f4954ef8413e16c43a6a83a7310140cb, type: 3}
+    rate: 20
+  - item: {fileID: 100000, guid: 8b963fe6d1b74c94da542772c42bd64e, type: 3}
+    rate: 20
 --- !u!54 &5436586
 Rigidbody:
   m_ObjectHideFlags: 0

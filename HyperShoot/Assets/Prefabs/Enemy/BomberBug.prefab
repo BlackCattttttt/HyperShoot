@@ -1973,7 +1973,7 @@ MonoBehaviour:
   radius: 0.5
   height: 1
   canMove: 1
-  maxSpeed: 3
+  maxSpeed: 5
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -1994,7 +1994,7 @@ MonoBehaviour:
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 2
-  endReachedDistance: 0.2
+  endReachedDistance: 0.1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -2048,8 +2048,8 @@ MonoBehaviour:
   aIPath: {fileID: 3534680766654535248}
   anim: {fileID: 3534680766654535254}
   enemyDamageHandler: {fileID: 2717375736024796422}
-  walkPointRange: 0
-  followDistance: 20
+  walkPointRange: 10
+  followDistance: 50
   attackDistance: 2
   delayAttack: 0
   damage: 1

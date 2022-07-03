@@ -1016,9 +1016,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 5
   radius: 0.3
-  height: 2
+  height: 1.8
   canMove: 1
-  maxSpeed: 2
+  maxSpeed: 4
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -1032,17 +1032,17 @@ MonoBehaviour:
     mode: 2
     interval: 0.5
     sensitivity: 10
-    maximumInterval: 2
+    maximumInterval: 3
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 2
-  endReachedDistance: 0.2
+  endReachedDistance: 0.1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
+  whenCloseToDestination: 1
   constrainInsideGraph: 0
 --- !u!114 &6301896113748099355
 MonoBehaviour:
@@ -1058,10 +1058,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 1
   DeathSpawnObjects: []
-  MinDeathDelay: 0
-  MaxDeathDelay: 0
   HealthProperty:
     value: 0
+  _enemyType: 0
+  itemRates: []
 --- !u!114 &6301896113748099354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,8 +1077,8 @@ MonoBehaviour:
   aIPath: {fileID: 6301896113748099352}
   anim: {fileID: 6301896113748099357}
   enemyDamageHandler: {fileID: 6301896113748099355}
-  walkPointRange: 6
-  followDistance: 20
+  walkPointRange: 10
+  followDistance: 40
   attackDistance: 2
   delayAttack: 1
   damage: 1
@@ -1112,8 +1112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  radius: 0.5
-  height: 2
+  radius: 0.3
+  height: 1.8
   locked: 0
   lockWhenNotMoving: 0
   agentTimeHorizon: 2

@@ -222,7 +222,7 @@ MonoBehaviour:
   PickupSoundSlomo: 0
   FailSoundSlomo: 0
   RespawnSoundSlomo: 0
-  Health: 2
+  Health: 10
 --- !u!114 &-8930115825879418906
 MonoBehaviour:
   m_ObjectHideFlags: 0

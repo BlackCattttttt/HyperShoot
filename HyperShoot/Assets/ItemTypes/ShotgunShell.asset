@@ -15,4 +15,4 @@ MonoBehaviour:
   IndefiniteArticle: a
   DisplayName: ShotgunShell
   Description: 
-  Icon: {fileID: 0}
+  Icon: {fileID: 2800000, guid: 7f16cada731089d46a6d936d91bd8958, type: 3}

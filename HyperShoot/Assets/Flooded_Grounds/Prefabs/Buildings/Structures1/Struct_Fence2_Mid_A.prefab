@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3324768}
   - component: {fileID: 2327090}
   - component: {fileID: 6581810}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_Fence2_Mid_A_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3350744}
   - component: {fileID: 2383128}
   - component: {fileID: 6547330}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_Fence2_Mid_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 3342250}
   - component: {fileID: 2308928}
   - component: {fileID: 6505332}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_Fence2_Mid_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 490552}
   - component: {fileID: 20592644}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_Fence2_Mid_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

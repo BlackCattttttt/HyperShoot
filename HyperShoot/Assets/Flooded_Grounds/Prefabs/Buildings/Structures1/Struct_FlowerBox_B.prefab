@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3343712}
   - component: {fileID: 2364880}
   - component: {fileID: 6523044}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Struct_FlowerBox_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}

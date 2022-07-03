@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3300260}
   - component: {fileID: 2358644}
   - component: {fileID: 6580254}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Barn2_Door_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

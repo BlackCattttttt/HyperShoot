@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3307864}
   - component: {fileID: 2393410}
   - component: {fileID: 6532458}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Villa1_Deco_IntDivider_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

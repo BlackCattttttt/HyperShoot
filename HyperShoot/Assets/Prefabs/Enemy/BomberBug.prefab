@@ -1973,7 +1973,7 @@ MonoBehaviour:
   radius: 0.5
   height: 1
   canMove: 1
-  maxSpeed: 5
+  maxSpeed: 7
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -2052,8 +2052,8 @@ MonoBehaviour:
   followDistance: 50
   attackDistance: 2
   delayAttack: 0
-  damage: 1
-  Radius: 5
+  damage: 5
+  Radius: 10
   Force: 45
   explodeParticle: {fileID: 198446458854354212, guid: c1f6cdb2c74adb7478cff00c3a2454a6, type: 3}
 --- !u!1 &3543973807371027712

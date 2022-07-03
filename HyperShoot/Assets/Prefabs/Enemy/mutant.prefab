@@ -1056,12 +1056,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf20740988fac4fa3bba01f4adefc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1
+  MaxHealth: 10
   DeathSpawnObjects: []
   HealthProperty:
     value: 0
   _enemyType: 0
-  itemRates: []
+  itemRates:
+  - item: {fileID: 100000, guid: 9cee664fe857690489829e13843a34b2, type: 3}
+    rate: 5
+  - item: {fileID: 100000, guid: 5fc60a82b78b993439cbbcd8e842bf22, type: 3}
+    rate: 5
+  - item: {fileID: 100000, guid: 9ecdeb4dfe970634ebc469123d3a02a6, type: 3}
+    rate: 5
+  - item: {fileID: 100000, guid: 073ca3fffcff9754aa51d50d1c09dae9, type: 3}
+    rate: 5
+  - item: {fileID: 100000, guid: 5e5834f891ba5f44c929767bb50880b2, type: 3}
+    rate: 10
+  - item: {fileID: 100000, guid: f4954ef8413e16c43a6a83a7310140cb, type: 3}
+    rate: 10
+  - item: {fileID: 100000, guid: 8b963fe6d1b74c94da542772c42bd64e, type: 3}
+    rate: 10
+  - item: {fileID: 100000, guid: 23637b29baa7a674c97aa12b8415c3e8, type: 3}
+    rate: 5
+  - item: {fileID: 100000, guid: 622368ce414f75548987a7cedd2be6d0, type: 3}
+    rate: 5
 --- !u!114 &6301896113748099354
 MonoBehaviour:
   m_ObjectHideFlags: 0

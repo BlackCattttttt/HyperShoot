@@ -45,4 +45,8 @@ public class MainScreen : UIPanel
     {
         //PopupSetting.Show();
     }
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }

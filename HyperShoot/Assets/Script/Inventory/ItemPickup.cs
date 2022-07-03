@@ -377,7 +377,7 @@ namespace HyperShoot.Inventory
 			else
 				msg = string.Format(m_Messages.SuccessMultiple, m_Item.Type.IndefiniteArticle, m_Item.Type.DisplayName, m_Item.Type.DisplayNameFull, m_Item.Type.Description, m_PickedUpAmount.ToString());
 
-			PlayScreen.Instance.PickUpItem(msg);
+		//	PlayScreen.Instance.PickUpItem(msg);
 			//fp_LocalPlayer.EventHandler.HUDText.Send(msg);
 
 			//if (fp_Gameplay.IsMultiplayer && fp_Gameplay.IsMaster)

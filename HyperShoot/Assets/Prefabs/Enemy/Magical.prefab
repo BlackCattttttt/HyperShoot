@@ -278,7 +278,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 2.5
+  maxSpeed: 5
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf20740988fac4fa3bba01f4adefc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1
+  MaxHealth: 10
   DeathSpawnObjects: []
   HealthProperty:
     value: 0
@@ -398,15 +398,15 @@ MonoBehaviour:
   aIPath: {fileID: 1129980368781521878}
   anim: {fileID: 1129980368781521876}
   enemyDamageHandler: {fileID: 1129980368781521864}
-  walkPointRange: 5
-  followDistance: 20
-  attackDistance: 8
+  walkPointRange: 10
+  followDistance: 40
+  attackDistance: 10
   delayAttack: 1
   damage: 10
   prefabBullet: {fileID: 4042375646740859533, guid: c493f73578e906944889d29a509d4604, type: 3}
   shootPoint: {fileID: 7007178007071910100}
   preloadCount: 5
-  shootForce: 15
+  shootForce: 20
 --- !u!1 &1295461910918822256
 GameObject:
   m_ObjectHideFlags: 0

@@ -407,8 +407,8 @@ MonoBehaviour:
   PhysicsPushForce: 5
   PhysicsCrouchHeightModifier: 0.5
   PhysicsHasCollisionTrigger: 1
-  MotorAcceleration: 0.18
-  MotorDamping: 0.27
+  MotorAcceleration: 0.15
+  MotorDamping: 0.25
   MotorBackwardsSpeed: 0.65
   MotorAirSpeed: 0.35
   MotorSlopeSpeedUp: 1
@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833862e9f23059244aa60daee598d276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
+  MaxHealth: 100
   DeathSpawnObjects: []
   HealthProperty:
     value: 0

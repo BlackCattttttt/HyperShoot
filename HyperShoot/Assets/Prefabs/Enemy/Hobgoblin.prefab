@@ -452,7 +452,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 6
+  maxSpeed: 4.5
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -473,7 +473,7 @@ MonoBehaviour:
   rotationSpeed: 360
   slowdownDistance: 0.5
   pickNextWaypointDist: 2
-  endReachedDistance: 0.1
+  endReachedDistance: 0.2
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -528,7 +528,7 @@ MonoBehaviour:
   enemyDamageHandler: {fileID: 3798964345645776492}
   walkPointRange: 15
   followDistance: 30
-  attackDistance: 1.5
+  attackDistance: 2.5
   delayAttack: 5
   damage: 1
   checkPoint: {fileID: 8770832478708027621}

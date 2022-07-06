@@ -1042,7 +1042,7 @@ MonoBehaviour:
   endReachedDistance: 0.1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 1
+  whenCloseToDestination: 0
   constrainInsideGraph: 0
 --- !u!114 &6301896113748099355
 MonoBehaviour:
@@ -1097,7 +1097,7 @@ MonoBehaviour:
   enemyDamageHandler: {fileID: 6301896113748099355}
   walkPointRange: 10
   followDistance: 40
-  attackDistance: 2
+  attackDistance: 1.5
   delayAttack: 1
   damage: 1
   checkPoint: {fileID: 6608395775469398449}

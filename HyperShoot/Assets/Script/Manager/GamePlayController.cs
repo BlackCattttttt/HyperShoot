@@ -68,6 +68,11 @@ namespace HyperShoot.Manager
 
                     });
                 }
+                else if (missonDatas[GameManager.Instance.Data.CurrentMissonIndex].skillType == MissonAtribute.MissonType.SURVIVAL)
+                {
+                    SurvivalMisson m = (SurvivalMisson)misson;
+                    m.OnActive(missonMessage.position);
+                }
                 PlayScreen.Instance.SetMisson(missonDatas[GameManager.Instance.Data.CurrentMissonIndex]);
             }
         }

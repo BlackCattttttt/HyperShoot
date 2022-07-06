@@ -13,7 +13,7 @@ namespace HyperShoot.Manager
             {
                 MessageBroker.Default.Publish(new BaseMessage.SpawnMissonMessage
                 {
-
+                    position = transform
                 });
                 gameObject.SetActive(false);
             }

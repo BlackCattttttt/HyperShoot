@@ -16,7 +16,7 @@ public class BaseMessage
     }
     public struct SpawnMissonMessage
     {
-        
+        public Transform position;
     }
     public struct MissonComplete
     {

@@ -32,7 +32,8 @@ namespace HyperShoot.Manager
             {
                 KILL_ENEMY = 0,
                 COLLECT = 1,
-                FIND = 2
+                SURVIVAL = 2,
+                FIND = 3,
             }
             public int missonId;
             public string missonDes;

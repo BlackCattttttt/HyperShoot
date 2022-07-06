@@ -9,7 +9,6 @@ namespace HyperShoot.Player
         // player type
         public fp_Value<bool> IsFirstPerson;    // always returns true if this a local player in 1st person mode, false if 3rd person mode or multiplayer remote player or AI
         public fp_Value<bool> IsLocal;          // returns true if a fp_FPCamera is present on this player
-        public fp_Value<bool> IsAI;             // should return true if this player is controlled by an AI script
 
         // health
         public fp_Value<float> Health;

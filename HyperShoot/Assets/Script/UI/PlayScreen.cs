@@ -17,6 +17,8 @@ public class PlayScreen : UIPanel
     [SerializeField] private TMP_Text count, pickUp;
 
     private MissonAtribute currenMisson;
+    private float timeRemaining = 10;
+    private bool timerIsRunning;
 
     public override UI_PANEL GetID()
     {
@@ -41,6 +43,22 @@ public class PlayScreen : UIPanel
         missonBackground.SetActive(false);
         noMissonBackground.SetActive(true);
     }
+    private void Update()
+    {
+
+        if (timerIsRunning)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                DisplayTime(timeRemaining);
+            }
+            else
+            {
+                StopCountDown(true);
+            }
+        }
+    }
     public void SetMisson(MissonAtribute misson)
     {
         noMissonBackground.SetActive(false);
@@ -62,6 +80,25 @@ public class PlayScreen : UIPanel
             var m = misson.misson as FindMisson;
             count.text = "0/1";
         }
+        else if (misson.skillType == MissonAtribute.MissonType.SURVIVAL)
+        {
+            var m = misson.misson as SurvivalMisson;
+            StartCountDown(m.TimeSurvival);
+        }
+    }
+    public void StartCountDown(float s)
+    {
+        timeRemaining = s;
+        timerIsRunning = true;
+    }
+    public void StopCountDown(bool b)
+    {
+        timeRemaining = 0;
+        timerIsRunning = false;
+    }
+    public void DisplayTime(float timeToDisplay)
+    {
+        count.text = string.Format("{0:00}", timeToDisplay);
     }
     public void NoMisson()
     {

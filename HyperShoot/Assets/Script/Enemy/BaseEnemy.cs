@@ -25,6 +25,7 @@ namespace HyperShoot.Enemy
         protected bool canAttack;
         protected float _delayAttack;
         protected bool isDead;
+        protected AudioSource m_Audio = null;
         protected readonly CompositeDisposable _healthDisposables = new CompositeDisposable();
 
         protected virtual void Awake()
@@ -33,6 +34,7 @@ namespace HyperShoot.Enemy
                 player = GameObject.FindGameObjectWithTag("Player");
             isDead = false;
             _delayAttack = delayAttack;
+            m_Audio = GetComponent<AudioSource>();
         }
         protected virtual void Start()
         {

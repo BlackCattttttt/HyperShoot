@@ -81,7 +81,7 @@ public class fp_FPWeaponShooterEditor : Editor
 			DoProjectileFoldout();
 			DoMotionFoldout();
 			DoMuzzleFlashFoldout();
-			//DoSoundFoldout();
+			DoSoundFoldout();
 			DoAnimationFoldout();
 
 		}
@@ -254,31 +254,31 @@ public class fp_FPWeaponShooterEditor : Editor
 
 
 
-	/// <summary>
-	/// 
-	/// </summary>
-	//public virtual void DoSoundFoldout()
-	//{
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void DoSoundFoldout()
+    {
 
-	//	m_SoundFoldout = EditorGUILayout.Foldout(m_SoundFoldout, "Sound");
-	//	if (m_SoundFoldout)
-	//	{
-	//		m_Component.SoundFire = (AudioClip)EditorGUILayout.ObjectField("Fire", m_Component.SoundFire, typeof(AudioClip), false);
-	//		m_Component.SoundDryFire = (AudioClip)EditorGUILayout.ObjectField("Dry Fire", m_Component.SoundDryFire, typeof(AudioClip), false);
-	//		//m_Component.SoundReload = (AudioClip)EditorGUILayout.ObjectField("Reload", m_Component.SoundReload, typeof(AudioClip), false);
-	//		m_Component.SoundFirePitch = EditorGUILayout.Vector2Field("Fire Pitch (Min:Max)", m_Component.SoundFirePitch);
-	//		EditorGUILayout.MinMaxSlider(ref m_Component.SoundFirePitch.x, ref m_Component.SoundFirePitch.y, 0.5f, 1.5f);
-	//		m_Component.SoundFireDelay = Mathf.Abs(EditorGUILayout.FloatField("Fire Sound Delay", m_Component.SoundFireDelay));
-	//		fp_EditorGUIUtility.Separator();
-	//	}
+        m_SoundFoldout = EditorGUILayout.Foldout(m_SoundFoldout, "Sound");
+        if (m_SoundFoldout)
+        {
+            m_Component.SoundFire = (AudioClip)EditorGUILayout.ObjectField("Fire", m_Component.SoundFire, typeof(AudioClip), false);
+            m_Component.SoundDryFire = (AudioClip)EditorGUILayout.ObjectField("Dry Fire", m_Component.SoundDryFire, typeof(AudioClip), false);
+            //m_Component.SoundReload = (AudioClip)EditorGUILayout.ObjectField("Reload", m_Component.SoundReload, typeof(AudioClip), false);
+            m_Component.SoundFirePitch = EditorGUILayout.Vector2Field("Fire Pitch (Min:Max)", m_Component.SoundFirePitch);
+            EditorGUILayout.MinMaxSlider(ref m_Component.SoundFirePitch.x, ref m_Component.SoundFirePitch.y, 0.5f, 1.5f);
+            m_Component.SoundFireDelay = Mathf.Abs(EditorGUILayout.FloatField("Fire Sound Delay", m_Component.SoundFireDelay));
+            fp_EditorGUIUtility.Separator();
+        }
 
-	//}
+    }
 
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public virtual void DoAnimationFoldout()
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void DoAnimationFoldout()
 	{
 
 		m_AnimationFoldout = EditorGUILayout.Foldout(m_AnimationFoldout, "Animation");

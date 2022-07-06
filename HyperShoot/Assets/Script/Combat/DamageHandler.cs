@@ -21,10 +21,15 @@ namespace HyperShoot.Combat
 
 		private readonly Subject<DamageData> _takeDamageSubject = new Subject<DamageData>();
 
+		// sounds
+		public AudioClip DeathSound = null;                 // sound to play upon death
+		protected AudioSource m_Audio = null;
+
 		private bool _isDie;
 
 		private void Awake()
         {
+			m_Audio = GetComponent<AudioSource>();
 			_isDie = false;
 			HealthProperty = new ReactiveProperty<float>(MaxHealth);
 			TakeDamageObservable.Subscribe(TakeDamage).AddTo(this);
@@ -45,12 +50,13 @@ namespace HyperShoot.Combat
 			if (!enabled || !fp_Utility.IsActive(gameObject))
 				return;
 
-			//if (m_Audio != null)
-			//{
-			//	m_Audio.pitch = Time.timeScale;
-			//	m_Audio.PlayOneShot(DeathSound);
-			//}
-			_isDie = true;
+            if (m_Audio != null)
+            {
+                m_Audio.pitch = Time.timeScale;
+                m_Audio.PlayOneShot(DeathSound);
+            }
+
+            _isDie = true;
 			foreach (GameObject o in DeathSpawnObjects)
 			{
 				if (o != null)
@@ -58,16 +64,6 @@ namespace HyperShoot.Combat
 					GameObject g = (GameObject)fp_Utility.Instantiate(o, transform.position, transform.rotation);
 				}
 			}
-
-			//if (Respawner == null)
-			//{
-			//	fp_Utility.Destroy(gameObject);
-			//}
-			//else
-			//{
-			//	RemoveBulletHoles();
-			//	vp_Utility.Activate(gameObject, false);
-			//}
 
 			m_InstaKill = false;
 		}

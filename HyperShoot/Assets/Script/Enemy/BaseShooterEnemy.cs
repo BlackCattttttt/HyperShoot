@@ -32,6 +32,7 @@ namespace HyperShoot.Enemy
         }
         public void Shoot()
         {
+            AudioManager.Instance.Play("MagicalAttack");
             var bullet = SpawnBullets(prefabBullet, shootPoint.position);
             var bulletTransform = bullet.transform;
             bulletTransform.SetParent(BulletContainer.Instance.transform, true);

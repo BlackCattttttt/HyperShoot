@@ -212,8 +212,8 @@ MonoBehaviour:
   RotationFallSway: {x: 1, y: -0.5, z: -3}
   RotationSlopeSway: 0.5
   RotationMaxInputVelocity: 15
-  SoundWield: {fileID: 0}
-  SoundUnWield: {fileID: 0}
+  SoundWield: {fileID: 8300000, guid: 1121f8e8542b4ad4db2becdfb8edf6a8, type: 3}
+  SoundUnWield: {fileID: 8300000, guid: 99482ac48e3acbd478c5c7d5ce6a3241, type: 3}
   AnimationWield: {fileID: 0}
   AnimationUnWield: {fileID: 0}
   PositionExitOffset: {x: 0, y: -1, z: 0}
@@ -257,6 +257,9 @@ MonoBehaviour:
   MuzzleFlashDelay: 0
   m_MuzzleFlashSpawnPoint: {fileID: 0}
   FirePosition: {x: 0, y: 0, z: 0}
+  SoundFire: {fileID: 8300000, guid: 8cd7742bec7548348bdc9d18a33b2bbf, type: 3}
+  SoundFireDelay: 0
+  SoundFirePitch: {x: 1, y: 1}
   ProjectileTapFiringRate: 1
   MotionPositionRecoil: {x: 0, y: 0, z: 0}
   MotionRotationRecoil: {x: 0, y: 0, z: 0}
@@ -555,6 +558,7 @@ MonoBehaviour:
   DeathSpawnObjects: []
   HealthProperty:
     value: 0
+  DeathSound: {fileID: 8300000, guid: 0405e24c9af9fce44b774de2c723967a, type: 3}
   AllowFallDamage: 1
   FallDamageThreshold: 0.15
   DeathOnFallImpactThreshold: 0
@@ -919,8 +923,8 @@ MonoBehaviour:
   RotationFallSway: {x: 2, y: -0.5, z: -5}
   RotationSlopeSway: 0.5
   RotationMaxInputVelocity: 2
-  SoundWield: {fileID: 0}
-  SoundUnWield: {fileID: 0}
+  SoundWield: {fileID: 8300000, guid: 473a74db115d813438612532f0f79436, type: 3}
+  SoundUnWield: {fileID: 8300000, guid: 1121f8e8542b4ad4db2becdfb8edf6a8, type: 3}
   AnimationWield: {fileID: 0}
   AnimationUnWield: {fileID: 0}
   PositionExitOffset: {x: 0, y: -1, z: 0}
@@ -968,6 +972,9 @@ MonoBehaviour:
   MuzzleFlashDelay: 0
   m_MuzzleFlashSpawnPoint: {fileID: 0}
   FirePosition: {x: 0, y: 0, z: 0}
+  SoundFire: {fileID: 8300000, guid: 5afc1e4e7999b844abd6b398674426bf, type: 3}
+  SoundFireDelay: 0
+  SoundFirePitch: {x: 1, y: 1}
   ProjectileTapFiringRate: 0.1
   MotionPositionRecoil: {x: 0, y: 0, z: -0.04}
   MotionRotationRecoil: {x: -0.25, y: 0, z: 1}
@@ -975,7 +982,7 @@ MonoBehaviour:
   MotionDryFireRecoil: -0.075
   MotionRecoilDelay: 0
   MuzzleFlashFirstShotMaxDeviation: 180
-  SoundDryFire: {fileID: 0}
+  SoundDryFire: {fileID: 8300000, guid: 17a20244025722c4387359c88bd319a1, type: 3}
   MotionPositionReset: 0.5
   MotionRotationReset: 0.5
   MotionPositionPause: 0.5
@@ -994,6 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293ed848a8f5a4d4ab89cc1ab464d265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundReload: {fileID: 8300000, guid: 4e06e9d7cb985264fbd988f16ae47efc, type: 3}
   ReloadDuration: 1
   AnimationReload: {fileID: 7400010, guid: 3d25da4cbf8ae454db23f4ecf74572e1, type: 3}
 --- !u!114 &2270274689701712376
@@ -1245,8 +1253,8 @@ MonoBehaviour:
   RotationFallSway: {x: 2, y: 0, z: 0}
   RotationSlopeSway: 1
   RotationMaxInputVelocity: 15
-  SoundWield: {fileID: 0}
-  SoundUnWield: {fileID: 0}
+  SoundWield: {fileID: 8300000, guid: 99482ac48e3acbd478c5c7d5ce6a3241, type: 3}
+  SoundUnWield: {fileID: 8300000, guid: 1121f8e8542b4ad4db2becdfb8edf6a8, type: 3}
   AnimationWield: {fileID: 0}
   AnimationUnWield: {fileID: 0}
   PositionExitOffset: {x: 0, y: -1, z: 0}
@@ -1314,7 +1322,8 @@ MonoBehaviour:
   ImpactRotationSpringRecoil: {x: 0, y: 0, z: 0}
   ImpactRotationSpring2Recoil: {x: 0, y: 0, z: 10}
   AttackPickRandomState: 1
-  SoundSwing: []
+  SoundSwing:
+  - {fileID: 8300000, guid: 6e0770a2d68e00d418bf0bc750316198, type: 3}
   SoundSwingPitch: {x: 0.5, y: 1.5}
 --- !u!114 &2270274689835303259
 MonoBehaviour:
@@ -1538,8 +1547,8 @@ MonoBehaviour:
   RotationFallSway: {x: 5, y: 0, z: 0}
   RotationSlopeSway: 0.75
   RotationMaxInputVelocity: 5
-  SoundWield: {fileID: 0}
-  SoundUnWield: {fileID: 0}
+  SoundWield: {fileID: 8300000, guid: b4cd8a9529b474345bc2954e7818f399, type: 3}
+  SoundUnWield: {fileID: 8300000, guid: 1121f8e8542b4ad4db2becdfb8edf6a8, type: 3}
   AnimationWield: {fileID: 0}
   AnimationUnWield: {fileID: 0}
   PositionExitOffset: {x: 0.13, y: -1, z: -0.01}
@@ -1587,6 +1596,9 @@ MonoBehaviour:
   MuzzleFlashDelay: 0
   m_MuzzleFlashSpawnPoint: {fileID: 0}
   FirePosition: {x: 0, y: 0, z: 0}
+  SoundFire: {fileID: 8300000, guid: 30f5cbdf1957a432c83532eac605fdcf, type: 3}
+  SoundFireDelay: 0
+  SoundFirePitch: {x: 1, y: 1}
   ProjectileTapFiringRate: 0.15
   MotionPositionRecoil: {x: 0, y: 0, z: -0.035}
   MotionRotationRecoil: {x: -10, y: 0, z: 0}
@@ -1594,7 +1606,7 @@ MonoBehaviour:
   MotionDryFireRecoil: -0.1
   MotionRecoilDelay: 0
   MuzzleFlashFirstShotMaxDeviation: 180
-  SoundDryFire: {fileID: 0}
+  SoundDryFire: {fileID: 8300000, guid: 17a20244025722c4387359c88bd319a1, type: 3}
   MotionPositionReset: 0.5
   MotionRotationReset: 0.5
   MotionPositionPause: 0
@@ -1613,6 +1625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293ed848a8f5a4d4ab89cc1ab464d265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundReload: {fileID: 8300000, guid: 91a9e20cb129f4d08ac32242e79fc514, type: 3}
   ReloadDuration: 1
   AnimationReload: {fileID: 7400020, guid: 6430f79e6f5e5d943985886a1fb8d3c0, type: 3}
 --- !u!114 &2270274690111392241
@@ -1985,8 +1998,8 @@ MonoBehaviour:
   RotationFallSway: {x: 2, y: -0.5, z: -5}
   RotationSlopeSway: 0.5
   RotationMaxInputVelocity: 2
-  SoundWield: {fileID: 0}
-  SoundUnWield: {fileID: 0}
+  SoundWield: {fileID: 8300000, guid: 473a74db115d813438612532f0f79436, type: 3}
+  SoundUnWield: {fileID: 8300000, guid: 1121f8e8542b4ad4db2becdfb8edf6a8, type: 3}
   AnimationWield: {fileID: 0}
   AnimationUnWield: {fileID: 0}
   PositionExitOffset: {x: 0, y: -1, z: 0}
@@ -2034,6 +2047,9 @@ MonoBehaviour:
   MuzzleFlashDelay: 0
   m_MuzzleFlashSpawnPoint: {fileID: 0}
   FirePosition: {x: 0, y: 0, z: 0}
+  SoundFire: {fileID: 8300000, guid: 4dd74b34a92947345bb35986e921d4e1, type: 3}
+  SoundFireDelay: 0
+  SoundFirePitch: {x: 1, y: 1}
   ProjectileTapFiringRate: 1
   MotionPositionRecoil: {x: 0.025, y: 0, z: -0.25}
   MotionRotationRecoil: {x: -2, y: 0, z: 0}
@@ -2060,6 +2076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293ed848a8f5a4d4ab89cc1ab464d265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundReload: {fileID: 8300000, guid: 51d950494f51c784086995ce9274cbdc, type: 3}
   ReloadDuration: 1
   AnimationReload: {fileID: 7400008, guid: 6d025852331c0bc4a9f2ce2c72ee7a38, type: 3}
 --- !u!114 &2270274690213766877

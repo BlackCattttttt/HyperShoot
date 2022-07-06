@@ -79,17 +79,6 @@ namespace HyperShoot.Inventory
 			}
 		}
 
-		//protected fp_Respawner m_Respawner = null;
-		//protected fp_Respawner Respawner
-		//{
-		//	get
-		//	{
-		//		if (m_Respawner == null)
-		//			m_Respawner = GetComponent<fp_Respawner>();
-		//		return m_Respawner;
-		//	}
-		//}
-
 		protected Collider[] m_Colliders = null;
 		protected Collider[] Colliders
 		{
@@ -223,10 +212,6 @@ namespace HyperShoot.Inventory
 
 			if (Audio.isPlaying)
 				return;
-			//if (Respawner != null)
-			//	SendMessage("Die", SendMessageOptions.DontRequireReceiver);
-			//else
-			//	fp_Utility.Destroy(gameObject);
 		}
 
 		protected virtual void TryDisableColliderOnSleep()
@@ -347,7 +332,7 @@ namespace HyperShoot.Inventory
 			}
 			else
 			{
-				OnFail(col.transform);
+			//	OnFail(col.transform);
 			}
 		}
 
@@ -377,46 +362,13 @@ namespace HyperShoot.Inventory
 			else
 				msg = string.Format(m_Messages.SuccessMultiple, m_Item.Type.IndefiniteArticle, m_Item.Type.DisplayName, m_Item.Type.DisplayNameFull, m_Item.Type.Description, m_PickedUpAmount.ToString());
 
-		//	PlayScreen.Instance.PickUpItem(msg);
-			//fp_LocalPlayer.EventHandler.HUDText.Send(msg);
-
-			//if (fp_Gameplay.IsMultiplayer && fp_Gameplay.IsMaster)
-			//	fp_GlobalEvent<fp_ItemPickup, Transform>.Send("TransmitPickup", this, recipient);   // will only execute on the master in multiplayer
+			PlayScreen.Instance.PickUpItem(msg);
 		}
 
 		protected virtual void Die()
 		{
 			fp_Utility.Activate(gameObject, false);
 		}
-		protected virtual void OnFail(Transform recipient)
-		{
-			//fp_FPPlayerEventHandler localPlayer = recipient.transform.root.GetComponentInChildren<fp_FPPlayerEventHandler>();
-			//if (localPlayer != null)
-			//	if (localPlayer.Dead.Active)
-			//		return;
-
-			//if (!m_AlreadyFailed
-			//	&& (m_Sound.PickupFailSound != null)
-			//	&& (!fp_Gameplay.IsMultiplayer || (fp_Gameplay.IsMultiplayer && (recipient.GetComponent<fp_FPPlayerEventHandler>() != null)))
-			//	)
-			//{
-			//	Audio.pitch = m_Sound.FailSoundSlomo ? Time.timeScale : 1.0f;
-			//	Audio.PlayOneShot(m_Sound.PickupFailSound);
-			//}
-			//m_AlreadyFailed = true;
-
-			//string msg = "";
-
-			//if ((m_PickedUpAmount < 2) || (ItemType == typeof(fp_UnitBankType)) || (ItemType.BaseType == typeof(fp_UnitBankType)))
-			//	msg = string.Format(m_Messages.FailSingle, m_Item.Type.IndefiniteArticle, m_Item.Type.DisplayName, m_Item.Type.DisplayNameFull, m_Item.Type.Description, Amount.ToString());
-			//else
-			//	msg = string.Format(m_Messages.FailMultiple, m_Item.Type.IndefiniteArticle, m_Item.Type.DisplayName, m_Item.Type.DisplayNameFull, m_Item.Type.Description, Amount.ToString());
-
-			//fp_GlobalEvent<Transform, string>.Send("HUDText", recipient, msg);
-
-		}
-
-
 	}
 }
 

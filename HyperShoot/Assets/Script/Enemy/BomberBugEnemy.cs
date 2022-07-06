@@ -11,6 +11,7 @@ namespace HyperShoot.Enemy
         [SerializeField] private float Radius = 15.0f;                    // any objects within radius will be affected by the explosion
         [SerializeField] private float Force = 1000.0f;                   // amount of positional force to apply to affected objects
         [SerializeField] private ParticleSystem explodeParticle;
+        [SerializeField] private AudioClip explosionSound;
 
         // physics
         protected Ray m_Ray;
@@ -91,6 +92,11 @@ namespace HyperShoot.Enemy
             if (explodeParticle != null)
             {
                 SimplePool.Spawn(explodeParticle.gameObject, EffectContainer.Instance.transform, transform.position, Quaternion.identity);
+            }
+            if (m_Audio != null)
+            {
+                m_Audio.pitch = Time.timeScale;
+                m_Audio.PlayOneShot(explosionSound);
             }
             Collider[] colliders = Physics.OverlapSphere(transform.position, Radius, fp_Layer.Mask.IgnoreWalkThru);
             foreach (Collider hit in colliders)

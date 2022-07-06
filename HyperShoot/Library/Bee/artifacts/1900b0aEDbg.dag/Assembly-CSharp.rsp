@@ -497,6 +497,8 @@
 "Assets/Script/Powerups/HealthPowerup.cs"
 "Assets/Script/Powerups/Powerup.cs"
 "Assets/Script/Powerups/StatePowerup.cs"
+"Assets/Script/Sound/AudioManager.cs"
+"Assets/Script/Sound/Sound.cs"
 "Assets/Script/UI/Crosshair.cs"
 "Assets/Script/UI/GUIManager.cs"
 "Assets/Script/UI/LoadingUI.cs"

@@ -527,6 +527,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1221989181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1221989183}
+  - component: {fileID: 1221989182}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1221989182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221989181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab545f7f4174e24d8306123526d99f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BomberBugExplosion
+    clip: {fileID: 8300000, guid: 4fea5a43a82b9484c99952ac14254f0a, type: 3}
+    volume: 0.455
+    pitch: 1.97
+    loop: 0
+    source: {fileID: 0}
+  - name: MutanAttack
+    clip: {fileID: 8300000, guid: b6528a5ca7bf7e74fb7c9a276b6ce313, type: 3}
+    volume: 0.64
+    pitch: 1.26
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordAttack
+    clip: {fileID: 8300000, guid: 42d75a06d8c718941aba700217530d5e, type: 3}
+    volume: 0.78
+    pitch: 1.97
+    loop: 0
+    source: {fileID: 0}
+  - name: MagicalAttack
+    clip: {fileID: 8300000, guid: 4336efc18ee20564d8ce6ce2c4798d9a, type: 3}
+    volume: 0.455
+    pitch: 1.97
+    loop: 0
+    source: {fileID: 0}
+  - name: FlameThrower
+    clip: {fileID: 8300000, guid: 2e5538cc0a150a343bc21c43996201b9, type: 3}
+    volume: 0.565
+    pitch: 1.97
+    loop: 1
+    source: {fileID: 0}
+--- !u!4 &1221989183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221989181}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -23.489527, y: -10.912893, z: 4.0290875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1444721836
 GameObject:
   m_ObjectHideFlags: 0

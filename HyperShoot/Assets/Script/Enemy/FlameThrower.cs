@@ -54,7 +54,7 @@ namespace HyperShoot.Enemy
                 }
                 else
                 {
-                    // AudioManager.Instance.Stop("FlameThrower");
+                    AudioManager.Instance.Stop("FlameThrower");
                     fireParticle.Stop();
                 }
             }
@@ -68,7 +68,7 @@ namespace HyperShoot.Enemy
         }
         void Fire()
         {
-            // AudioManager.Instance.Play("FlameThrower");
+            AudioManager.Instance.Play("FlameThrower");
             fireParticle.Play();
         }
 

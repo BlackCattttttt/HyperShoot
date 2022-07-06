@@ -11,18 +11,7 @@ namespace HyperShoot.Bullet
         public float Range = 100.0f;                // max travel distance of this type of bullet in meters
         public float Force = 100.0f;                // force applied to any rigidbody hit by the bullet
         public float Damage = 1.0f;                 // the damage transmitted to target by the bullet
-                                                    //public fp_DamageInfo.DamageMode DamageMode = fp_DamageInfo.DamageMode.DamageHandler;    // should the bullet transmit UFPS damage, or a Unity Message, or both
-        public string DamageMethodName = "Damage";  // user defined name of damage method on target
-                                                    // TIP: this can be used to call specialized damage methods directly,
-                                                    // for example: magical, freezing, poison, electric
-
-        //[System.Obsolete("Please use 'DamageMode instead.")]
-        //public bool RequireDamageHandler            // deprecated (retained for external script backwards compatibility only)
-        //{
-        //	get { return ((DamageMode == fp_DamageInfo.DamageMode.DamageHandler) || (DamageMode == fp_DamageInfo.DamageMode.Both)); }
-        //	set { DamageMode = (value ? fp_DamageInfo.DamageMode.DamageHandler : fp_DamageInfo.DamageMode.UnityMessage); }
-        //}
-
+                                                  
         // components
         protected Transform m_Transform = null;
         protected Renderer m_Renderer = null;
@@ -88,7 +77,7 @@ namespace HyperShoot.Bullet
             TrySpawnFX();
 
             // play sound if we have an audio source + clip
-            //TryPlaySound();
+            TryPlaySound();
 
             // if hit object has physics, add the bullet force to it
             TryAddForce();
@@ -170,6 +159,11 @@ namespace HyperShoot.Bullet
             if ((m_Renderer != null) && m_Renderer.enabled)
                 return;
 
+            if ((m_Audio != null) && (m_Audio.isPlaying))
+            {
+                fp_Timer.In(1, TryDestroy);
+                return;
+            }
             // restore the renderer for pooling (recycling)
             if (m_Renderer != null)
                 m_Renderer.enabled = true;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +8,13 @@ public class GameData
     public int Level = 0;
     public int CurrentMissonIndex = 2;
     public bool Sound;
+    public Dictionary<string, KeyCode> Buttons = new Dictionary<string, KeyCode>();
 }
 public class Database
 {
     public static void SaveData()
     {
-        string dataString = JsonUtility.ToJson(GameManager.Instance.Data);
+        string dataString = JsonConvert.SerializeObject(GameManager.Instance.Data);
         PlayerPrefs.SetString("GameData", dataString);
         PlayerPrefs.Save();
     }
@@ -22,7 +24,7 @@ public class Database
         if (!PlayerPrefs.HasKey("GameData"))
             return null;
 
-        return JsonUtility.FromJson<GameData>(PlayerPrefs.GetString("GameData"));
+        return JsonConvert.DeserializeObject<GameData>(PlayerPrefs.GetString("GameData"));
     }
     public static void ClearData()
     {

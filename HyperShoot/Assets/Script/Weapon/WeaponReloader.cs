@@ -68,11 +68,14 @@ namespace HyperShoot.Weapon
 			// end the Reload activity in 'ReloadDuration' seconds
 			m_Player.Reload.AutoDuration = m_Player.CurrentWeaponReloadDuration.Get();
 
-            if (m_Audio != null)
-            {
-                m_Audio.pitch = Time.timeScale;
-                m_Audio.PlayOneShot(SoundReload);
-            }
+			if (GameManager.Instance.Data.Sound)
+			{
+				if (m_Audio != null)
+				{
+					m_Audio.pitch = Time.timeScale;
+					m_Audio.PlayOneShot(SoundReload);
+				}
+			}
         }
 
 		protected virtual void OnStop_Reload()

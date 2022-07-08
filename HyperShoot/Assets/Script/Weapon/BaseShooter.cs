@@ -173,6 +173,8 @@ namespace HyperShoot.Weapon
         }
         protected virtual void PlayFireSound()
         {
+            if (!GameManager.Instance.Data.Sound)
+                return;
             if (Audio == null)
                 return;
 

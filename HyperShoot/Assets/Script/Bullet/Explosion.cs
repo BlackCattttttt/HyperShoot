@@ -166,10 +166,13 @@ public class Explosion : MonoBehaviour
         }
 
         // play explosion sound
-        Audio.clip = Sound;
-        Audio.pitch = Random.Range(SoundMinPitch, SoundMaxPitch) * Time.timeScale;
-        if (!Audio.playOnAwake)
-            Audio.Play();
+        if (GameManager.Instance.Data.Sound)
+        {
+            Audio.clip = Sound;
+            Audio.pitch = Random.Range(SoundMinPitch, SoundMaxPitch) * Time.timeScale;
+            if (!Audio.playOnAwake)
+                Audio.Play();
+        }
     }
 
     protected virtual void TryDamage()

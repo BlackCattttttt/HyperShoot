@@ -174,8 +174,11 @@ public class SimpleHUD : MonoBehaviour
 			if ((HealthLowSound != null) && (Time.time >= m_NextAllowedPlayHealthLowSoundTime))
 			{
 				m_NextAllowedPlayHealthLowSoundTime = Time.time + HealthLowSoundInterval;
-				m_Audio.pitch = 1.0f;
-				m_Audio.PlayOneShot(HealthLowSound);
+				if (GameManager.Instance.Data.Sound)
+				{
+					m_Audio.pitch = 1.0f;
+					m_Audio.PlayOneShot(HealthLowSound);
+				}
 			}
 		}
 		else

@@ -17,6 +17,22 @@ public class GameManager : Singleton<GameManager>
             Data.Level = 1;
             Data.CurrentMissonIndex = 0;
             Data.Sound = true;
+
+            Data.Buttons = new Dictionary<string, KeyCode>();
+
+            Data.Buttons.Add("Forward", KeyCode.W);
+            Data.Buttons.Add("Back", KeyCode.S);
+            Data.Buttons.Add("Left", KeyCode.A);
+            Data.Buttons.Add("Right", KeyCode.D);
+            Data.Buttons.Add("Attack", KeyCode.Mouse0);
+            Data.Buttons.Add("Zoom", KeyCode.Mouse1);
+            Data.Buttons.Add("Run", KeyCode.LeftShift);
+            Data.Buttons.Add("Crouch", KeyCode.C);
+            Data.Buttons.Add("Jump", KeyCode.Space);
+            Data.Buttons.Add("Reload", KeyCode.R);
+            Data.Buttons.Add("Misson", KeyCode.M);
+            Data.Buttons.Add("Pause", KeyCode.P);
+
             Database.SaveData();
         }
         SplashManager.Instance.Load();

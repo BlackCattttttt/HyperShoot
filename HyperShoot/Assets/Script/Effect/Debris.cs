@@ -87,12 +87,15 @@ public class Debris : MonoBehaviour
 		});
 
 		// play sound
-		if ((Audio != null) && (Sounds.Count > 0))
+		if (GameManager.Instance.Data.Sound)
 		{
-			Audio.rolloffMode = AudioRolloffMode.Linear;
-			Audio.clip = Sounds[(int)Random.Range(0, (Sounds.Count))];
-			Audio.pitch = Random.Range(SoundMinPitch, SoundMaxPitch) * Time.timeScale;
-			Audio.Play();
+			if ((Audio != null) && (Sounds.Count > 0))
+			{
+				Audio.rolloffMode = AudioRolloffMode.Linear;
+				Audio.clip = Sounds[(int)Random.Range(0, (Sounds.Count))];
+				Audio.pitch = Random.Range(SoundMinPitch, SoundMaxPitch) * Time.timeScale;
+				Audio.Play();
+			}
 		}
 
 	}

@@ -576,15 +576,18 @@ namespace HyperShoot.Weapon
 			StateManager.CombineStates();
 
 			// play sound
-			if (Audio != null)
+			if (GameManager.Instance.Data.Sound)
 			{
-
-				if ((isWielding ? SoundWield : SoundUnWield) != null)
+				if (Audio != null)
 				{
-					if (fp_Utility.IsActive(gameObject))
+
+					if ((isWielding ? SoundWield : SoundUnWield) != null)
 					{
-						Audio.pitch = Time.timeScale;
-						Audio.PlayOneShot((isWielding ? SoundWield : SoundUnWield));
+						if (fp_Utility.IsActive(gameObject))
+						{
+							Audio.pitch = Time.timeScale;
+							Audio.PlayOneShot((isWielding ? SoundWield : SoundUnWield));
+						}
 					}
 				}
 			}

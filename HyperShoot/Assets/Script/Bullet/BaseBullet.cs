@@ -104,6 +104,8 @@ namespace HyperShoot.Bullet
 
             if (m_Audio.clip == null)
                 return;
+            if (!GameManager.Instance.Data.Sound)
+                return;
 
             m_Audio.pitch = Time.timeScale;
             m_Audio.Stop();

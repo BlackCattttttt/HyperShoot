@@ -43,7 +43,7 @@ public class MainScreen : UIPanel
     }
     public void ButtonSetting()
     {
-        //PopupSetting.Show();
+        PopupSetting.Show();
     }
     public void QuitButton()
     {

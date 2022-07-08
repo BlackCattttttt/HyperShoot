@@ -345,14 +345,16 @@ namespace HyperShoot.Inventory
 		{
 			m_Depleted = true;
 
-			if ((m_Sound.PickupSound != null)
+			if (GameManager.Instance.Data.Sound)
+			{
+				if ((m_Sound.PickupSound != null)
 				&& fp_Utility.IsActive(gameObject)
 				&& Audio.enabled)
-			{
-				Audio.pitch = (m_Sound.PickupSoundSlomo ? Time.timeScale : 1.0f);
-				Audio.Play();
+				{
+					Audio.pitch = (m_Sound.PickupSoundSlomo ? Time.timeScale : 1.0f);
+					Audio.Play();
+				}
 			}
-
 			Renderer.enabled = false;
 
 			string msg = "";

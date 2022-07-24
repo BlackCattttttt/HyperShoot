@@ -45,5 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Range: 100
   Force: 100
-  Damage: 3
-  DamageMethodName: Damage
+  Damage: 1

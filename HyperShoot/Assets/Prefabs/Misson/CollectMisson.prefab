@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092f17679d3aebd438a91bd7e4f98692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCollect: 5
-  rate: 100
-  enemyTypes: 0000000001000000020000000300000004000000
+  numberOfCollect: 20
+  rate: 30
+  enemyTypes: 0000000003000000040000000600000007000000

@@ -1259,7 +1259,7 @@ MonoBehaviour:
   followDistance: 25
   attackDistance: 2
   delayAttack: 1
-  damage: 1
+  damage: 8
   checkPoint: {fileID: 4264396206313453051}
   radius: 0.8
 --- !u!114 &4066005768275798295
@@ -1274,10 +1274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf20740988fac4fa3bba01f4adefc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
+  MaxHealth: 50
   DeathSpawnObjects: []
   HealthProperty:
     value: 0
+  DeathSound: {fileID: 0}
   _enemyType: 1
   itemRates:
   - item: {fileID: 100000, guid: 9cee664fe857690489829e13843a34b2, type: 3}

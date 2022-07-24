@@ -223,11 +223,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a31316eecd9f0244bc8a7184928449e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 2
+  MaxHealth: 10
   DeathSpawnObjects:
   - {fileID: 100018, guid: 7957ebb5ffcb6604a8036e97b3c4369f, type: 3}
   HealthProperty:
     value: 0
+  DeathSound: {fileID: 0}
   itemRates:
   - item: {fileID: 100000, guid: 5fc60a82b78b993439cbbcd8e842bf22, type: 3}
     rate: 10

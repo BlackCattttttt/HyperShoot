@@ -464,6 +464,9 @@ MonoBehaviour:
   MuzzleFlashDelay: 0
   m_MuzzleFlashSpawnPoint: {fileID: 0}
   FirePosition: {x: 0, y: 0, z: 0}
+  SoundFire: {fileID: 0}
+  SoundFireDelay: 0
+  SoundFirePitch: {x: 1, y: 1}
 --- !u!114 &4216717699697268824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,11 +479,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf20740988fac4fa3bba01f4adefc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1
+  MaxHealth: 65
   DeathSpawnObjects:
   - {fileID: 0}
   HealthProperty:
     value: 0
+  DeathSound: {fileID: 0}
   _enemyType: 8
   itemRates: []
 --- !u!114 &5793029203665886631

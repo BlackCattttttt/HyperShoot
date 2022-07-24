@@ -331,10 +331,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf20740988fac4fa3bba01f4adefc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
+  MaxHealth: 80
   DeathSpawnObjects: []
   HealthProperty:
     value: 0
+  DeathSound: {fileID: 0}
   _enemyType: 5
   itemRates: []
 --- !u!114 &1129980368781521865
@@ -402,7 +403,7 @@ MonoBehaviour:
   followDistance: 40
   attackDistance: 10
   delayAttack: 1
-  damage: 10
+  damage: 6
   prefabBullet: {fileID: 4042375646740859533, guid: c493f73578e906944889d29a509d4604, type: 3}
   shootPoint: {fileID: 7007178007071910100}
   preloadCount: 5

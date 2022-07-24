@@ -410,16 +410,16 @@ MonoBehaviour:
   PhysicsPushForce: 5
   PhysicsCrouchHeightModifier: 0.5
   PhysicsHasCollisionTrigger: 1
-  MotorAcceleration: 0.15
-  MotorDamping: 0.25
+  MotorAcceleration: 0.16
+  MotorDamping: 0.15
   MotorBackwardsSpeed: 0.65
   MotorAirSpeed: 0.35
   MotorSlopeSpeedUp: 1
   MotorSlopeSpeedDown: 1
-  MotorJumpForce: 0.11
-  MotorJumpForceDamping: 0.08
-  MotorJumpForceHold: 0.003
-  MotorJumpForceHoldDamping: 0.5
+  MotorJumpForce: 0.2
+  MotorJumpForceDamping: 0.1
+  MotorJumpForceHold: 0.00401
+  MotorJumpForceHoldDamping: 0.4
   PhysicsForceDamping: 0.05
   PhysicsSlopeSlideLimit: 30
   PhysicsSlopeSlidiness: 0.15

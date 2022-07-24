@@ -27,13 +27,16 @@ public class LoseScreen : UIPanel
     public void ButtonRePlay()
     {
         //  PlayScreen.Show(false);
-        LoadingManager.Instance.LoadScene(SCENE_INDEX.Gameplay, () => PlayScreen.Show());
-      //  EvenGlobalManager.Instance.OnLoadLevel.Dispatch();
+        if (GameManager.Instance.Data.Level == 1)
+            LoadingManager.Instance.LoadScene(SCENE_INDEX.Level1, () => PlayScreen.Show());
+        else if (GameManager.Instance.Data.Level == 2)
+            LoadingManager.Instance.LoadScene(SCENE_INDEX.Level2, () => PlayScreen.Show());
+        //  EvenGlobalManager.Instance.OnLoadLevel.Dispatch();
     }
     public void ButtonMain()
     {
         //  PlayScreen.Show(false);
         LoadingManager.Instance.LoadScene(SCENE_INDEX.Main, () => MainScreen.Show());
-      //  EvenGlobalManager.Instance.OnLoadLevel.Dispatch();
+        //  EvenGlobalManager.Instance.OnLoadLevel.Dispatch();
     }
 }

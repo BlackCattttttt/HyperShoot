@@ -31,14 +31,22 @@ public class MainScreen : UIPanel
         //  PlayScreen.Show(false);
         GameManager.Instance.Data.Level = 1;
         GameManager.Instance.Data.CurrentMissonIndex = 0;
+        GameManager.Instance.Data.PlayerPosition = new Vector3(457.64f, 28.25f, 123.2f);
+        GameManager.Instance.Data.isLoadPosition = false;
         Database.SaveData();
-        LoadingManager.Instance.LoadScene(SCENE_INDEX.Gameplay, () => PlayScreen.Show());
+        if (GameManager.Instance.Data.Level == 1)
+            LoadingManager.Instance.LoadScene(SCENE_INDEX.Level1, () => PlayScreen.Show());
+        else if (GameManager.Instance.Data.Level == 2)
+            LoadingManager.Instance.LoadScene(SCENE_INDEX.Level2, () => PlayScreen.Show());
         EvenGlobalManager.Instance.OnStartPlay.Dispatch();
     }
     public void ButtonContinue()
     {
         //  PlayScreen.Show(false);
-        LoadingManager.Instance.LoadScene(SCENE_INDEX.Gameplay, () => PlayScreen.Show());
+        if (GameManager.Instance.Data.Level == 1)
+            LoadingManager.Instance.LoadScene(SCENE_INDEX.Level1, () => PlayScreen.Show());
+        else if (GameManager.Instance.Data.Level == 2)
+            LoadingManager.Instance.LoadScene(SCENE_INDEX.Level2, () => PlayScreen.Show());
         EvenGlobalManager.Instance.OnStartPlay.Dispatch();
     }
     public void ButtonSetting()

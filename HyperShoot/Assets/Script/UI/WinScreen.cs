@@ -24,11 +24,12 @@ public class WinScreen : UIPanel
 
         base.OnAppear();
     }
-    public void ButtonRePlay()
+    public void ButtonNextLevel()
     {
-        //  PlayScreen.Show(false);
-        //LoadingManager.Instance.LoadScene(SCENE_INDEX.Gameplay, () => PlayScreen.Show());
-        //  EvenGlobalManager.Instance.OnLoadLevel.Dispatch();
+        if (GameManager.Instance.Data.Level == 1)
+            LoadingManager.Instance.LoadScene(SCENE_INDEX.Level1, () => PlayScreen.Show());
+        else if (GameManager.Instance.Data.Level == 2)
+            LoadingManager.Instance.LoadScene(SCENE_INDEX.Level2, () => PlayScreen.Show());
     }
     public void ButtonMain()
     {

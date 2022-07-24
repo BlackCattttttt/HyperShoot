@@ -7,6 +7,8 @@ public class GameData
 {
     public int Level = 0;
     public int CurrentMissonIndex = 2;
+    public Vector3 PlayerPosition;
+    public bool isLoadPosition;
     public bool Sound;
     public Dictionary<string, KeyCode> Buttons = new Dictionary<string, KeyCode>();
 }

@@ -16,6 +16,7 @@ namespace HyperShoot.Manager
         }
         [SerializeField] private MissonData missonData;
         [SerializeField] private List<SpawnMissonData> spawnMissons;
+        [SerializeField] private Transform player;
 
         private MissonAtribute currenMisson;
 
@@ -49,6 +50,15 @@ namespace HyperShoot.Manager
                 else
                     spawnMissons[i].missonSpawn.gameObject.SetActive(false);
             }
+            if (GameManager.Instance.Data.isLoadPosition)
+            {
+                if (player == null)
+                {
+                    player = GameObject.FindGameObjectWithTag("Player").transform;
+                }
+                player.position = GameManager.Instance.Data.PlayerPosition;
+            }
+
         }
         public void OnStartPlay()
         {
@@ -86,6 +96,9 @@ namespace HyperShoot.Manager
                 PlayScreen.Instance.NoMisson();
                 if (GameManager.Instance.Data.CurrentMissonIndex == missonDatas.Count)
                 {
+                    GameManager.Instance.Data.Level++;
+                    GameManager.Instance.Data.isLoadPosition = false;
+                    Database.SaveData();
                     LoadingManager.Instance.LoadScene(SCENE_INDEX.Lose, () => WinScreen.Show());
                 }
                 else

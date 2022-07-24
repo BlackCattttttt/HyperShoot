@@ -40,8 +40,9 @@ namespace HyperShoot.Enemy
                 float distance = Vector3.Distance(transform.position, player.transform.position);
                 if (distance <= range)
                 {
-                    Vector3 dir = player.transform.position - transform.position;
-                    Quaternion lookRotation = Quaternion.LookRotation(dir);
+                    Vector3 dir = (player.transform.position - transform.position).normalized;
+                    Vector3 direction = new Vector3(dir.x, 0, dir.z).normalized;
+                    Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
                     Vector3 rotation = Quaternion.Lerp(pathToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
                     pathToRotate.rotation = Quaternion.Euler(rotation);
 

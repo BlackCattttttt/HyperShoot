@@ -92,6 +92,11 @@ namespace HyperShoot.Combat
 				return;
 
 			FPPlayer.InputAllowGameplay.Set(false);
+			
+			GameManager.Instance.Data.PlayerPosition = transform.position;
+			GameManager.Instance.Data.isLoadPosition = true;
+			Database.SaveData();
+
 			if (!_isDead)
 			{
 				Observable.Timer(TimeSpan.FromSeconds(2))

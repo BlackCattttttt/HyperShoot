@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public SpawnEnemy[] spawners;
+    public List<SpawnEnemy> spawners;
   //  public int numberOfSpawns;
 
     private List<SpawnEnemy> nearSpawns;
@@ -23,6 +24,18 @@ public class SpawnManager : MonoBehaviour
                .AddTo(_disposables);
         nearSpawns = new List<SpawnEnemy>();
         currentEnemy = 0;
+    }
+    [Button]
+    public void GetSpawn()
+    {
+        spawners.Clear();
+        foreach (Transform child in transform)
+        {
+            if (child.GetComponent<SpawnEnemy>() != null)
+            {
+                spawners.Add(child.GetComponent<SpawnEnemy>());
+            }
+        }
     }
     public void CountEnemy(BaseMessage.EnemyDieMessage message)
     {
@@ -44,7 +57,7 @@ public class SpawnManager : MonoBehaviour
     void findNearSpawns ()
     {
         nearSpawns.Clear();
-        for (int i = 0; i < spawners.Length; i++)
+        for (int i = 0; i < spawners.Count; i++)
         {
             float distance = Vector3.Distance(spawners[i].transform.position, player.transform.position);
             if (distance < spawners[i].range)

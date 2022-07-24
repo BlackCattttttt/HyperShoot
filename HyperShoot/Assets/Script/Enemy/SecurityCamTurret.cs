@@ -62,7 +62,8 @@ public class SecurityCamTurret : BaseTurret
             {
                 fp_Timer.In(WakeInterval * 2.0f, delegate ()
                 {
-                    m_AngleBob.enabled = true;
+                    if (m_AngleBob != null)
+                        m_AngleBob.enabled = true;
                 }, fp_ResumeSwivelTimer);
             }
 

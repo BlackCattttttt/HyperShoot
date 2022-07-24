@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager>
 
             Data.Level = 1;
             Data.CurrentMissonIndex = 0;
+            Data.PlayerPosition = new Vector3(457.64f, 28.25f, 123.2f);
+            Data.isLoadPosition = false;
             Data.Sound = true;
 
             Data.Buttons = new Dictionary<string, KeyCode>();

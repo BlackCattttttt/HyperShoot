@@ -54,7 +54,7 @@ public class LoadingManager : Singleton<LoadingManager>
         System.GC.Collect(2, GCCollectionMode.Forced);
         Resources.UnloadUnusedAssets();
 
-        if (index == SCENE_INDEX.Gameplay)
+        if (index == SCENE_INDEX.Level1 || index == SCENE_INDEX.Level2)
             EvenGlobalManager.Instance.OnFinishLoadScene.Dispatch();
         if (SceneLoadedSpecialAction.ContainsKey(index) && SceneLoadedSpecialAction[index] != null)
         {

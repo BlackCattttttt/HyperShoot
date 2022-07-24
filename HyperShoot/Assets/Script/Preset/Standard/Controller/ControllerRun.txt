@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////
 
 ComponentType HyperShoot.Player.FPCharacterController
-MotorAcceleration 0.22
+MotorAcceleration 0.25
 MotorDamping 0.15
 MotorAirSpeed 0.9
 PhysicsPushForce 8 // makes the player stronger when pushing rigidbodies around with the 'Run' modifier key held down

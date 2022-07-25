@@ -28,5 +28,5 @@ MonoBehaviour:
     - missonId: 2
       missonDes: Find emerald
       icon: {fileID: 21300000, guid: efaef523e5fb30a4ebdf2cca07781f40, type: 3}
-      skillType: 2
+      skillType: 3
       misson: {fileID: 7470612791005625770, guid: 3494552ad478266448d0c04ea8e507ae, type: 3}

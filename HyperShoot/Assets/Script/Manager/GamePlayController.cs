@@ -91,14 +91,19 @@ namespace HyperShoot.Manager
             if (GameManager.Instance.Data.CurrentMissonIndex < missonDatas.Count)
             {
                 GameManager.Instance.Data.CurrentMissonIndex++;
+                GameManager.Instance.Data.PlayerPosition = player.position;
+                GameManager.Instance.Data.isLoadPosition = true;
+                Database.SaveData();
                 Database.SaveData();
                 currenMisson = null;
                 PlayScreen.Instance.NoMisson();
                 if (GameManager.Instance.Data.CurrentMissonIndex == missonDatas.Count)
                 {
                     GameManager.Instance.Data.Level++;
+                    GameManager.Instance.Data.CurrentMissonIndex = 0;
                     GameManager.Instance.Data.isLoadPosition = false;
                     Database.SaveData();
+                    fp_Utility.LockCursor = false;
                     LoadingManager.Instance.LoadScene(SCENE_INDEX.Lose, () => WinScreen.Show());
                 }
                 else

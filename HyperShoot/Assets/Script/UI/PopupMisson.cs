@@ -7,6 +7,7 @@ using HyperShoot.Manager;
 public class PopupMisson : UIPanel
 {
     [SerializeField] private TMP_Text missonText;
+    [SerializeField] private TMP_Text countMissonText;
     private GamePlayController gamePlayController;
     public override UI_PANEL GetID()
     {
@@ -28,10 +29,13 @@ public class PopupMisson : UIPanel
         gamePlayController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GamePlayController>();
         if (gamePlayController.CurrenMisson != null)
         {
+            countMissonText.gameObject.SetActive(true);
+            countMissonText.text = (GameManager.Instance.Data.CurrentMissonIndex + 1).ToString() + "/3";
             missonText.text = gamePlayController.CurrenMisson.missonDes;
         }
         else
         {
+            countMissonText.gameObject.SetActive(false);
             missonText.text = "Move on to the next mission";
         }
     }

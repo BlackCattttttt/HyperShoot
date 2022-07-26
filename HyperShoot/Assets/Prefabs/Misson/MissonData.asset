@@ -30,3 +30,20 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: efaef523e5fb30a4ebdf2cca07781f40, type: 3}
       skillType: 3
       misson: {fileID: 7470612791005625770, guid: 3494552ad478266448d0c04ea8e507ae, type: 3}
+  - level: 2
+    missons:
+    - missonId: 0
+      missonDes: Survive for 5 minutes
+      icon: {fileID: 21300000, guid: 6ca6403aeece2e7469a858e7ff653789, type: 3}
+      skillType: 2
+      misson: {fileID: 6409339768295174458, guid: f0c0056be4877ca408bad6fb766c3577, type: 3}
+    - missonId: 1
+      missonDes: Collect 20 cosmic egg
+      icon: {fileID: 21300000, guid: 8e2b48d3790474444a6ec8768be4e776, type: 3}
+      skillType: 1
+      misson: {fileID: 9046052721266309735, guid: 9dbdaeef712e6044dac638c770a43488, type: 3}
+    - missonId: 2
+      missonDes: Find emerald
+      icon: {fileID: 21300000, guid: efaef523e5fb30a4ebdf2cca07781f40, type: 3}
+      skillType: 3
+      misson: {fileID: 7470612791005625770, guid: 7d0f51fe90c944d44807cb7456afb1f3, type: 3}

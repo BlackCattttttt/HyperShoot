@@ -19,7 +19,14 @@ namespace HyperShoot.Enemy
         }
         public override void AttackPlayer()
         {
-            aIPath.destination = transform.position;
+            if (isNav)
+            {
+                agent.SetDestination(transform.position);
+            }
+            else
+            {
+                aIPath.destination = transform.position;
+            }
             transform.LookAt(player.transform.position);
             if (!canAttack)
             {

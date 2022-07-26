@@ -54,7 +54,14 @@ namespace HyperShoot.Enemy
 
             if (walkPointSet)
             {
-                aIPath.destination = walkPoint;
+                if (isNav)
+                {
+                    agent.SetDestination(walkPoint);
+                }
+                else
+                {
+                    aIPath.destination = walkPoint;
+                }
                 anim.SetBool("walk", true);
                 anim.SetBool("fly", false);
             }
@@ -70,14 +77,28 @@ namespace HyperShoot.Enemy
         {
             if (canAttack)
                 return;
-            aIPath.destination = player.transform.position;
+            if (isNav)
+            {
+                agent.SetDestination(player.transform.position);
+            }
+            else
+            {
+                aIPath.destination = player.transform.position;
+            }
             transform.LookAt(player.transform.position);
             anim.SetBool("fly", true);
             anim.SetBool("walk", false);
         }
         public override void AttackPlayer()
         {
-            aIPath.destination = transform.position;
+            if (isNav)
+            {
+                agent.SetDestination(transform.position);
+            }
+            else
+            {
+                aIPath.destination = transform.position;
+            }
             transform.LookAt(player.transform.position);
             anim.SetBool("fly", false);
             anim.SetBool("walk", false);

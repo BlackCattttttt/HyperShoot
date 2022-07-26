@@ -1,15 +1,19 @@
 using HyperShoot.Combat;
 using Pathfinding;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace HyperShoot.Enemy
 {
     public class BaseEnemy : MonoBehaviour
     {
-        [SerializeField] protected AIPath aIPath;
+        [SerializeField] protected bool isNav;
+        [HideIf("isNav")] [SerializeField] protected AIPath aIPath;
+        [ShowIf("isNav")] [SerializeField] protected NavMeshAgent agent;
         [SerializeField] protected Animator anim;
         [SerializeField] protected EnemyDamageHandler enemyDamageHandler;
         [SerializeField] protected float walkPointRange;
@@ -62,7 +66,14 @@ namespace HyperShoot.Enemy
             }
             else
             {
-                aIPath.destination = transform.position;
+                if (isNav)
+                {
+                    agent.SetDestination(transform.position);
+                }
+                else
+                {
+                    aIPath.destination = transform.position;
+                }
             }
         }
         protected virtual void FixedUpdate()
@@ -84,7 +95,14 @@ namespace HyperShoot.Enemy
 
             if (walkPointSet)
             {
-                aIPath.destination = walkPoint;
+                if (isNav)
+                {
+                    agent.SetDestination(walkPoint);
+                }
+                else
+                {
+                    aIPath.destination = walkPoint;
+                }
                 anim.SetBool("walk", true);
                 anim.SetBool("run", false);
             }
@@ -109,7 +127,14 @@ namespace HyperShoot.Enemy
         public virtual void ChasePlayer()
         {
             if (canAttack) canAttack = false;
-            aIPath.destination = player.transform.position;
+            if (isNav)
+            {
+                agent.SetDestination(player.transform.position);
+            }
+            else
+            {
+                aIPath.destination = player.transform.position;
+            }
             transform.LookAt(player.transform.position);
             anim.SetBool("run", true);
             anim.SetBool("walk", false);
@@ -117,7 +142,14 @@ namespace HyperShoot.Enemy
 
         public virtual void AttackPlayer()
         {
-            aIPath.destination = transform.position;
+            if (isNav)
+            {
+                agent.SetDestination(transform.position);
+            }
+            else
+            {
+                aIPath.destination = transform.position;
+            }
             transform.LookAt(player.transform.position);
             anim.SetBool("run", false);
             anim.SetBool("walk", false);

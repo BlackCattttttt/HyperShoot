@@ -222,7 +222,10 @@ namespace HyperShoot.Inventory
         }
         protected override void DoAddUnitBank(UnitBankType unitBankType, int id, int unitsLoaded)
         {
-            bool alreadyHaveIt = HaveItem(unitBankType, id); 
+            bool alreadyHaveIt = HaveItem(unitBankType, id);
+
+            if (alreadyHaveIt)
+                TryGiveUnits(unitBankType.Unit, unitBankType.Capacity);
 
             base.DoAddUnitBank(unitBankType, id, unitsLoaded);
 
@@ -302,7 +305,7 @@ namespace HyperShoot.Inventory
                 }
                 catch
                 {
-                    
+
                 }
 
                 if (!((Application.isPlaying) && WeaponHandler.CurrentWeaponIndex == 0))
@@ -560,7 +563,7 @@ namespace HyperShoot.Inventory
                     }
                     else
                     {
-                        if (!TryReload(uType, weaponIdentifier.ID)) 
+                        if (!TryReload(uType, weaponIdentifier.ID))
                         {
                             return false;
                         }

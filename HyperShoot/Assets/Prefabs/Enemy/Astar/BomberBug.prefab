@@ -2047,7 +2047,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f401b3c58ea87745b3387388d313bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isNav: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 131073
   aIPath: {fileID: 3534680766654535248}
+  agent: {fileID: 0}
   anim: {fileID: 3534680766654535254}
   enemyDamageHandler: {fileID: 2717375736024796422}
   walkPointRange: 10

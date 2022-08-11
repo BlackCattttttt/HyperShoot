@@ -523,11 +523,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd8597d98a984645881a95e36d91094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isNav: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 131073
   aIPath: {fileID: 3798964345645776788}
+  agent: {fileID: 0}
   anim: {fileID: 3798964345636375827}
   enemyDamageHandler: {fileID: 3798964345645776492}
   walkPointRange: 15
   followDistance: 30
+  fov: 75
   attackDistance: 2.5
   delayAttack: 5
   damage: 5

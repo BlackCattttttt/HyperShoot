@@ -12,12 +12,14 @@ namespace HyperShoot.Enemy
     public class BaseEnemy : MonoBehaviour
     {
         [SerializeField] protected bool isNav;
+        [SerializeField] protected LayerMask layerMask;
         [HideIf("isNav")] [SerializeField] protected AIPath aIPath;
         [ShowIf("isNav")] [SerializeField] protected NavMeshAgent agent;
         [SerializeField] protected Animator anim;
         [SerializeField] protected EnemyDamageHandler enemyDamageHandler;
         [SerializeField] protected float walkPointRange;
         [SerializeField] protected float followDistance = 20.0f;
+        [SerializeField] [Range(45,90)] protected float fov = 90f;
         [SerializeField] protected float attackDistance = 12f;
         [SerializeField] protected float delayAttack;
         [SerializeField] protected float damage;
@@ -50,9 +52,29 @@ namespace HyperShoot.Enemy
         protected virtual void Update()
         {
             float distance = Vector3.Distance(transform.position, player.transform.position);
+            Vector3 dirToPlayer = player.transform.position - transform.position;
 
-            playerInSightRange = (distance < followDistance) ? true : false;
-            playerInAttackRange = (distance < attackDistance) ? true : false;
+            if (!Physics.Raycast(transform.position, dirToPlayer, distance, layerMask))
+            {
+                float angleToPlayer = (Vector3.Angle(dirToPlayer, transform.forward));
+
+                if (angleToPlayer >= -fov && angleToPlayer <= fov) // 180° FOV
+                {
+                    playerInSightRange = (distance < followDistance) ? true : false;
+                    playerInAttackRange = (distance < attackDistance) ? true : false;
+                }
+                else
+                {
+                    playerInSightRange = false;
+                    playerInAttackRange = false;
+                }
+            }
+            else
+            {
+                playerInSightRange = false;
+                playerInAttackRange = false;
+            }
+            
 
             if (!isDead)
             {

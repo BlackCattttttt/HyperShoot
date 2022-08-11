@@ -30,7 +30,6 @@ namespace HyperShoot.Player
 
         // input
         public fp_Value<Vector2> InputMoveVector;
-        public fp_Value<float> InputClimbVector;
 
         // activities
         public fp_Activity Dead;
@@ -40,8 +39,6 @@ namespace HyperShoot.Player
         public fp_Activity Zoom;
         public fp_Activity Attack;
         public fp_Activity Reload;
-        //public fp_Activity Climb;
-        //public fp_Activity Interact;
         public fp_Activity<int> SetWeapon;
         public fp_Activity OutOfControl;
 
@@ -52,12 +49,7 @@ namespace HyperShoot.Player
         public fp_Message DryFire;
 
         //// weapon handler events
-        //public fp_Attempt SetPrevWeapon;
-        //public fp_Attempt SetNextWeapon;
-        //public fp_Attempt<string> SetWeaponByName;
-        //public fp_Value<int> CurrentWeaponID;   // renamed to avoid confusion with fp_ItemType.ID
         public fp_Value<int> CurrentWeaponIndex;
-        //public fp_Value<string> CurrentWeaponName;
         public fp_Value<bool> CurrentWeaponWielded;
         public fp_Attempt AutoReload;
         public fp_Value<float> CurrentWeaponReloadDuration;
@@ -69,7 +61,6 @@ namespace HyperShoot.Player
         public fp_Value<int> CurrentWeaponMaxAmmoCount;
         public fp_Value<int> CurrentWeaponClipCount;
         public fp_Value<int> CurrentWeaponType;
-        //public fp_Value<int> CurrentWeaponGrip;
         public fp_Attempt<object> AddItem;
         public fp_Attempt<object> RemoveItem;
         public fp_Attempt DepleteAmmo;
@@ -83,11 +74,8 @@ namespace HyperShoot.Player
         public fp_Value<float> Height;
         public fp_Value<float> FallSpeed;
         public fp_Message<float> FallImpact;
-        public fp_Message<float> HeadImpact;
         public fp_Message<Vector3> ForceImpact;
         public fp_Message Stop;
-        public fp_Value<Transform> Platform;
-        public fp_Value<Vector3> PositionOnPlatform;
         public fp_Value<bool> Grounded;
 
         // interaction
@@ -104,7 +92,6 @@ namespace HyperShoot.Player
             BindStateToActivity(Zoom);
             BindStateToActivity(Reload);
             BindStateToActivity(Dead);
-            //BindStateToActivity(Climb);
             BindStateToActivity(OutOfControl);
             BindStateToActivityOnStart(Attack);
 

@@ -59,11 +59,6 @@ namespace HyperShoot.Player
             }
         }
 
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void Awake()
         {
 
@@ -73,38 +68,18 @@ namespace HyperShoot.Player
 
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void Start()
         {
-
             base.Start();
 
-            RefreshCollider();
-
+           RefreshCollider();
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void Update()
         {
-
             base.Update();
-
-            // platform rotation is done in Update rather than FixedUpdate for
-            // smooth remote player movement on platforms in multiplayer
-            //UpdatePlatformRotation();
-
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void FixedUpdate()
         {
 
@@ -120,16 +95,12 @@ namespace HyperShoot.Player
             // respond to environment collisions that may have happened during the move
             UpdateCollisions();
 
-            // move and rotate player along with rigidbodies & moving platforms
-            //UpdatePlatformMove();
-
             // store final position and velocity for next frame's physics calculations
             UpdateVelocity();
 
         }
         protected virtual void UpdateForces()
         {
-
             // store ground for detecting fall impact and loss of grounding this frame
             m_LastGroundHitTransform = m_GroundHitTransform;
 
@@ -142,23 +113,15 @@ namespace HyperShoot.Player
             }
             else
             {
-
                 m_FallSpeed += (Physics.gravity.y * (PhysicsGravityModifier * PHYSICS_GRAVITY_MODIFIER_INTERNAL) * fp_TimeUtility.AdjustedTimeScale);
 
                 // detect starting to fall MID-JUMP (for fall impact)
                 if ((m_Velocity.y < 0) && (m_PrevVelocity.y >= 0.0f))
                     SetFallHeight(Transform.position.y);
-
             }
-
         }
         protected virtual void UpdateCollisions()
         {
-
-            // if climbing, abort any ongoing fall
-            //if (Player.Climb.Active)
-            //    m_FallStartHeight = NOFALL;
-
             m_FallImpact = 0.0f;
             m_OnNewGround = false;
             m_WasFalling = false;
@@ -167,15 +130,8 @@ namespace HyperShoot.Player
             if ((m_GroundHitTransform != null)
              && (m_GroundHitTransform != m_LastGroundHitTransform))
             {
-
-                // just standing on a new surface (important to detect even if
-                // not falling, e.g. if walking onto a moving platform)
                 m_OnNewGround = true;
 
-                // if we were falling, transmit fall impact to the player. fall impact
-                // is based on the distance from the impact position to the start point
-                // of a mid-jump fall (detected in 'UpdateForces') or off-an-edge fall
-                // (detected in 'StoreGroundInfo')
                 if (m_LastGroundHitTransform == null)
                 {
                     m_WasFalling = true;
@@ -186,77 +142,39 @@ namespace HyperShoot.Player
                         //Debug.Log("DISTANCE: " + FallDistance);
                     }
                 }
-                m_FallStartHeight = NOFALL;
-
+               m_FallStartHeight = NOFALL;
             }
-
         }
-        /// <summary>
-        /// stores final position and velocity for next frame's physics
-        /// calculations
-        /// </summary>
+
         protected virtual void UpdateVelocity()
         {
-
             m_PrevVelocity = m_Velocity;
             m_Velocity = (transform.position - m_PrevPosition) / Time.deltaTime;
             m_PrevPosition = Transform.position;
-
         }
 
-        /// <summary>
-        /// override this to completely stop the controller in one frame
-        /// IMPORTANT: remember to call this base method too
-        /// </summary>
         public virtual void Stop()
         {
-
             Player.Move.Send(Vector3.zero);
             Player.InputMoveVector.Set(Vector2.zero);
             m_FallSpeed = 0.0f;
             m_FallStartHeight = NOFALL;
-
         }
 
-
-        /// <summary>
-        /// this method should be overridden to initialize dynamic collider dimension
-        /// variables for various states as needed, depending on whether the collider
-        /// is a capsule collider, character controller or other type of collider
-        /// </summary>
         protected virtual void InitCollider()
         {
         }
 
-
-        /// <summary>
-        /// this method should be overridden to refresh collider dimension variables
-        /// depending on various states as needed
-        /// </summary>
         protected virtual void RefreshCollider()
         {
         }
 
-
-        /// <summary>
-        /// this method should be overridden to enable or disable the collider, whether
-        /// a capsule collider, character controller or other type of collider
-        /// </summary>
         public virtual void EnableCollider(bool enabled)
         {
         }
 
-
-        /// <summary>
-        /// performs a sphere cast (as wide as the character) from ~knees to ground, and
-        /// saves hit info in the 'm_GroundHit' variable. this gives access to lots of
-        /// data on the object directly below us, object transform, ground angle etc.
-        /// </summary>
         protected virtual void StoreGroundInfo()
         {
-
-            // store ground hit for detecting fall impact and loss of grounding
-            // in next frame
             m_LastGroundHitTransform = m_GroundHitTransform;
 
             m_Grounded = false;
@@ -269,17 +187,10 @@ namespace HyperShoot.Player
             {
 
                 m_GroundHitTransform = m_GroundHit.transform;
-                // SNIPPET: use this if spherecast somehow returns the non-collider parent of your platform
-                //if (m_GroundHitTransform.collider == null)
-                //{
-                //	Collider c = m_GroundHitTransform.GetComponentInChildren<Collider>();
-                //	m_GroundHitTransform = c.transform;
-                //}
 
                 m_Grounded = true;
 
                 //Debug.Log(m_GroundHitTransform);
-
             }
 
             // detect walking OFF AN EDGE into a fall (for fall impact)
@@ -289,17 +200,10 @@ namespace HyperShoot.Player
                 SetFallHeight(Transform.position.y);
 
             return;
-
         }
 
-
-        /// <summary>
-        /// sets the value used for fall impact calculation
-        /// according to certain criteria
-        /// </summary>
         protected void SetFallHeight(float height)
         {
-
             // we can only track one fall at a time
             if (m_FallStartHeight != NOFALL)
                 return;
@@ -312,21 +216,11 @@ namespace HyperShoot.Player
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         protected virtual void FixedMove()
         {
-
             StoreGroundInfo();
-
         }
 
-
-        /// <summary>
-        /// returns current fall distance, calculated as the altitude
-        /// where fall began minus current altitude 
-        /// </summary>
         float FallDistance
         {
             get
@@ -336,9 +230,6 @@ namespace HyperShoot.Player
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void LateUpdate()
         {
 
@@ -347,18 +238,11 @@ namespace HyperShoot.Player
         }
         public virtual void SetPosition(Vector3 position)
         {
-
             Transform.position = position;
             m_PrevPosition = position;
-            // must zero out 'm_PrevVelocity.y' at beginning of next frame in case
-            // we're teleporting into free fall, or fall impact detection will break
-            //fp_Timer.In(0, () => { m_PrevVelocity = vp_3DUtility.HorizontalVector(m_PrevVelocity); });
 
         }
-        /// <summary>
-        /// stops the controller in one frame, killing all forces
-        /// acting upon it
-        /// </summary>
+
         protected virtual void OnMessage_Stop()
         {
             Stop();
@@ -368,54 +252,32 @@ namespace HyperShoot.Player
         {
 
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         protected virtual void OnStart_Crouch()
         {
-
             // force-stop the run activity
             Player.Run.Stop();
 
             // modify collider size
             RefreshCollider();
-
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected virtual void OnStop_Crouch()
         {
             // modify collider size
             RefreshCollider();
         }
-        /// <summary>
-        /// gets or sets the world position of the controller
-        /// </summary>
+
         protected virtual Vector3 OnValue_Position
         {
             get { return Transform.position; }
             set { SetPosition(value); }
         }
-        /// <summary>
-        /// this method must be overridden to get/set collider radius
-        /// in a manner compatible with the current type of collider
-        /// </summary>
+
         protected abstract float OnValue_Radius { get; }
 
-
-        /// <summary>
-        /// this method must be overridden to get/set collider height
-        /// in a manner compatible with the current type of collider
-        /// </summary>
         protected abstract float OnValue_Height { get; }
 
-
-        /// <summary>
-        /// returns whether the controller is grounded
-        /// </summary>
         protected virtual bool OnValue_Grounded
         {
             get { return m_Grounded; }

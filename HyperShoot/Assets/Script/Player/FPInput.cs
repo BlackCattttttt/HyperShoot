@@ -61,13 +61,6 @@ namespace HyperShoot.Player
             if (FPPlayer.Pause.Get() == true)
                 return;
 
-            //// --- NOTE: everything below this line will be disabled on pause! ---
-
-            //if (!m_AllowGameplayInput)
-            //    return;
-
-            // interaction
-
             // manage input for moving
             InputMove();
             InputRun();
@@ -160,12 +153,6 @@ namespace HyperShoot.Player
 
         protected virtual void InputSetWeapon()
         {
-            //if (InputManager.GetButtonDown("SetPrevWeapon"))
-            //    FPPlayer.SetPrevWeapon.Try();
-
-            // if (InputManager.GetButtonDown("SetNextWeapon"))
-            //     FPPlayer.SetNextWeapon.Try();
-
             if (InputManager.GetButtonDown("SetWeapon1")) FPPlayer.SetWeapon.TryStart(1);
             if (InputManager.GetButtonDown("SetWeapon2")) FPPlayer.SetWeapon.TryStart(2);
             if (InputManager.GetButtonDown("SetWeapon3")) FPPlayer.SetWeapon.TryStart(3);
@@ -351,29 +338,6 @@ namespace HyperShoot.Player
                 return InputManager.GetAxisRaw("Vertical");
             }
         }
-
-
-        ///// <summary>
-        ///// allows or prevents first person gameplay input. NOTE:
-        ///// gui (menu) input is still allowed
-        ///// </summary>
-        //protected virtual bool OnValue_InputAllowGameplay
-        //{
-        //	get { return m_AllowGameplayInput; }
-        //	set { m_AllowGameplayInput = value; }
-        //}
-
-
-        ///// <summary>
-        ///// pauses the game by setting timescale to zero, or unpauses
-        ///// it by resuming the timescale that was active upon pause.
-        ///// NOTE: will not work in multiplayer
-        ///// </summary>
-        //protected virtual bool OnValue_Pause
-        //{
-        //	get { return fp_Gameplay.IsPaused; }
-        //	set { fp_Gameplay.IsPaused = value; }
-        //}
 
         protected virtual bool OnMessage_InputGetButton(string button)
         {

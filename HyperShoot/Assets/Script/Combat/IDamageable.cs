@@ -13,7 +13,6 @@ namespace HyperShoot.Combat
     public enum DamageType
     {
         Unknown,
-        KillZone,
         Fall,
         Impact,
         Bullet,

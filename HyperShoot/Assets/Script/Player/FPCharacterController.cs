@@ -94,7 +94,6 @@ namespace HyperShoot.Player
 
             if (PhysicsHasCollisionTrigger)
             {
-
                 m_Trigger = new GameObject("Trigger");
                 m_Trigger.tag = "Player";
                 m_Trigger.transform.parent = m_Transform;
@@ -106,22 +105,6 @@ namespace HyperShoot.Player
                 m_TriggerCollider.radius = characterController.radius + SkinWidth;
                 m_TriggerCollider.height = characterController.height + (SkinWidth * 2.0f);
                 m_TriggerCollider.center = characterController.center;
-
-            //    m_Trigger.AddComponent<Rigidbody>().isKinematic = true;
-                //  m_Trigger.gameObject.AddComponent<vp_DamageTransfer>();
-
-                // if we have a SurfaceIdentifier, copy it along with its values onto the trigger.
-                // this will make the trigger emit the same fx as the controller when hit by bullets
-                //if (SurfaceIdentifier != null)
-                //{
-                //    fp_Timer.In(0.05f, () =>    // wait atleast one frame for this to take effect properly
-                //    {
-                //        vp_SurfaceIdentifier triggerSurfaceIdentifier = m_Trigger.gameObject.AddComponent<vp_SurfaceIdentifier>();
-                //        triggerSurfaceIdentifier.SurfaceType = SurfaceIdentifier.SurfaceType;
-                //        triggerSurfaceIdentifier.AllowDecals = SurfaceIdentifier.AllowDecals;
-                //    });
-                //}
-
             }
         }
         protected override void RefreshCollider()
@@ -175,9 +158,6 @@ namespace HyperShoot.Player
             // respond to environment collisions that may have happened during the move
             UpdateCollisions();
 
-            // move and rotate player along with rigidbodies & moving platforms
-            //UpdatePlatformMove();
-
             // store final position and velocity for next frame's physics calculations
             UpdateVelocity();
         }
@@ -187,7 +167,6 @@ namespace HyperShoot.Player
             UpdateThrottleWalk();
             // snap super-small values to zero to avoid floating point issues
             m_MotorThrottle = fp_MathUtility.SnapToZero(m_MotorThrottle);
-
         }
 
         protected virtual void UpdateThrottleWalk()
@@ -196,8 +175,6 @@ namespace HyperShoot.Player
             UpdateSlopeFactor();
 
             // update air speed modifier
-            // (at 1.0, this will completely prevent the controller from altering
-            // its trajectory while in the air, and will disable motor damping)
             m_MotorAirSpeedModifier = (m_Grounded ? 1.0f : MotorAirSpeed);
 
             // convert horizontal input to forces in the motor
@@ -213,10 +190,6 @@ namespace HyperShoot.Player
         }
         protected virtual void UpdateJump()
         {
-            // abort all jumping activity for 1 second if head touches a ceiling
-            //if (m_HeadContact)
-            //    Player.Jump.Stop(1.0f);
-
             UpdateJumpForceWalk();
 
             // apply accumulated 'hold jump' force
@@ -225,7 +198,6 @@ namespace HyperShoot.Player
             // dampen forces
             m_MotorJumpForceAcc /= (1.0f + (MotorJumpForceHoldDamping * Time.timeScale));
             m_MotorThrottle.y /= (1.0f + (MotorJumpForceDamping * Time.timeScale));
-
         }
         protected virtual void UpdateJumpForceWalk()
         {
@@ -285,8 +257,6 @@ namespace HyperShoot.Player
             bool wasSliding = m_Slide;
 
             // --- handle slope sliding ---
-            // TIP: alter 'PhysicsSlopeSlidiness' and 'SlopeSlideLimit' in realtime
-            // using the state manager, depending on the current ground surface
             m_Slide = false;
             if (!m_Grounded)
             {
@@ -331,9 +301,6 @@ namespace HyperShoot.Player
                 m_SlopeSlideSpeed = 0.0f;
             }
 
-            // if player is moving by its own, external components should not
-            // consider it slow-sliding. this is intended for retaining movement
-            // fx (like weapon bob) on less slidy surfaces
             if (m_MotorThrottle != Vector3.zero)
                 m_Slide = false;
 
@@ -377,8 +344,6 @@ namespace HyperShoot.Player
                 // moving downhill
                 if (MotorSlopeSpeedDown == 1.0f)
                 {
-                    // 1.0 means 'no change' so we'll alter the value to get
-                    // roughly the same velocity as if ground was flat
                     m_SlopeFactor = 1.0f / m_SlopeFactor;
                     m_SlopeFactor *= 1.2f;
                 }
@@ -390,8 +355,6 @@ namespace HyperShoot.Player
                 // moving uphill
                 if (MotorSlopeSpeedUp == 1.0f)
                 {
-                    // 1.0 means 'no change' so we'll alter the value to get
-                    // roughly the same velocity as if ground was flat
                     m_SlopeFactor *= 1.2f;
                 }
                 else
@@ -412,9 +375,6 @@ namespace HyperShoot.Player
             m_MoveDirection.y += m_FallSpeed;
 
             // --- apply anti-bump offset ---
-            // this pushes the controller towards the ground to prevent the character
-            // from "bumpety-bumping" when walking down slopes or stairs. the strength
-            // of this effect is determined by the character controller's 'Step Offset'
             m_CurrentAntiBumpOffset = 0.0f;
             if (m_Grounded && m_MotorThrottle.y <= 0.001f)
             {
@@ -427,11 +387,6 @@ namespace HyperShoot.Player
             m_PredictedPos = Transform.position + fp_MathUtility.NaNSafeVector3(m_MoveDirection * Delta * Time.timeScale);
 
             // --- move the charactercontroller ---
-
-            // ride along with movable objects
-            //if (m_Platform != null && PositionOnPlatform != Vector3.zero)
-            //	Player.Move.Send(vp_MathUtility.NaNSafeVector3(m_Platform.TransformPoint(PositionOnPlatform) -
-            //															m_Transform.position));
             if (Player.Dead.Active)
             {
                 Player.InputMoveVector.Set(Vector2.zero);
@@ -443,31 +398,9 @@ namespace HyperShoot.Player
             // --- store ground info ---
             StoreGroundInfo();
 
-            // --- store head contact info ---
-            // spherecast upwards for some info on the surface touching the top of the collider, if any
-            //if (!m_Grounded && (Player.Velocity.Get().y > 0.0f))
-            //{
-            //	Physics.SphereCast(new Ray(Transform.position, Vector3.up),
-            //								Player.Radius.Get(), out m_CeilingHit,
-            //								Player.Height.Get() - (Player.Radius.Get() - SkinWidth) + 0.01f,
-            //								vp_Layer.Mask.ExternalBlockers);
-            //	m_HeadContact = (m_CeilingHit.collider != null);
-            //}
-            //else
-            //	m_HeadContact = false;
-
             // --- handle loss of grounding ---
             if ((m_GroundHitTransform == null) && (m_LastGroundHitTransform != null))
             {
-
-                // if we lost contact with a moving object, inherit its speed
-                // then forget about it
-                //if (m_Platform != null && PositionOnPlatform != Vector3.zero)
-                //{
-                //	AddForce(m_Platform.position - m_LastPlatformPos);
-                //	m_Platform = null;
-                //}
-
                 // undo anti-bump offset to make the fall smoother
                 if (m_CurrentAntiBumpOffset != 0.0f)
                 {
@@ -475,7 +408,6 @@ namespace HyperShoot.Player
                     m_PredictedPos += fp_MathUtility.NaNSafeVector3(m_CurrentAntiBumpOffset * Vector3.up) * Delta * Time.timeScale;
                     m_MoveDirection += m_CurrentAntiBumpOffset * Vector3.up;
                 }
-
             }
         }
         protected override void UpdateCollisions()
@@ -498,40 +430,20 @@ namespace HyperShoot.Player
                     m_MotorJumpForceAcc = 0.0f;
                     m_MotorJumpForceHoldSkipFrames = 0;
                 }
-                // detect and store moving platforms	// TODO: should be in base class for AI
-                //if (m_GroundHit.collider.gameObject.layer == fp_Layer.MovingPlatform)
-                //{
-                //    m_Platform = m_GroundHitTransform;
-                //    m_LastPlatformAngle = m_Platform.eulerAngles.y;
-                //}
-                // else
-                //    m_Platform = null;
-
             }
 
             // --- respond to wall collision ---
-            // if the controller didn't end up at the predicted position, some
-            // external object has blocked its way, so deflect the movement forces
-            // to avoid getting stuck at walls
             if ((m_PredictedPos.x != Transform.position.x) ||
                 (m_PredictedPos.z != Transform.position.z) &&
                 (m_ExternalForce != Vector3.zero))
                 DeflectHorizontalForce();
-
         }
         public virtual void DeflectDownForce()
         {
-
-            // if we land on a surface tilted above the slide limit, convert
-            // fall speed into slide speed on impact
             if (GroundAngle > PhysicsSlopeSlideLimit)
             {
                 m_SlopeSlideSpeed = m_FallImpact * (0.25f * Time.timeScale);
             }
-
-            // deflect away from nearly vertical surfaces. this serves to make
-            // falling along walls smoother, and to prevent the controller
-            // from getting stuck on vertical walls when falling into them
             if (GroundAngle > 85)
             {
                 m_MotorThrottle += (fp_3DUtility.HorizontalVector((GroundNormal * m_FallImpact)));
@@ -550,24 +462,15 @@ namespace HyperShoot.Player
             CapsuleBottom = m_PrevPosition + Vector3.up * (Player.Radius.Get());
             CapsuleTop = CapsuleBottom + Vector3.up * (Player.Height.Get() - (Player.Radius.Get() * 2));
 
-            // capsule cast from the previous position to the predicted position to find
-            // the exact impact point. this capsule cast does not include the skin width
-            // (it's not really needed plus we don't want ground collisions)
             if (!(Physics.CapsuleCast(CapsuleBottom, CapsuleTop, Player.Radius.Get(), m_PrevDir,
                 out m_WallHit, Vector3.Distance(m_PrevPosition, m_PredictedPos), fp_Layer.Mask.ExternalBlockers)))
                 return;
 
-            // the force will be deflected perpendicular to the impact normal, and to the
-            // left or right depending on whether the previous position is to our left or
-            // right when looking back at the impact point from the current position
             m_NewDir = Vector3.Cross(m_WallHit.normal, Vector3.up).normalized;
             if ((Vector3.Dot(Vector3.Cross((m_WallHit.point - Transform.position),
                 (m_PrevPosition - Transform.position)), Vector3.up)) > 0.0f)
                 m_NewDir = -m_NewDir;
 
-            // calculate how the current force gets absorbed depending on angle of impact.
-            // if we hit a wall head-on, almost all force will be absorbed, but if we
-            // barely glance it, force will be almost unaltered (depending on friction)
             m_ForceMultiplier = Mathf.Abs(Vector3.Dot(m_PrevDir, m_NewDir)) * (1.0f - (PhysicsWallFriction));
 
             // if the controller has wall bounciness, apply it
@@ -608,8 +511,7 @@ namespace HyperShoot.Player
             Transform.position = m_FixedPosition;   // restore fixedpos
 
             // reset smoothpos in these cases
-            if ((Vector3.Distance(Transform.position, m_SmoothPosition) > Player.Radius.Get())) // smoothpos deviates too much
-                                                                                                //|| (m_Platform != null) && ((m_LastPlatformPos != m_Platform.position)))        // we're on a platform thas is moving (causes jitter)
+            if ((Vector3.Distance(Transform.position, m_SmoothPosition) > Player.Radius.Get())) // smoothpos deviates too much                                                                                           
                 m_SmoothPosition = Transform.position;
 
             // lerp smoothpos back to fixedpos slowly over time
@@ -731,10 +633,6 @@ namespace HyperShoot.Player
         {
             AddForce(force);
         }
-        //protected virtual void OnStart_Dead()
-        //{
-        //    m_Platform = null;
-        //}
 
         protected virtual void OnStop_Dead()
         {

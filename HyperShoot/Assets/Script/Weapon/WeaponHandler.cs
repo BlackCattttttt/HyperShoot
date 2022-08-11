@@ -231,10 +231,6 @@ namespace HyperShoot.Weapon
         }
         protected virtual void UpdateFiring()
         {
-            //if (!m_Player.IsLocal.Get() && !m_Player.IsAI.Get())
-            //    return;
-            // we continuously try to fire the weapon while player is in attack
-            // mode, but if it's not: bail out
             if (!m_Player.Attack.Active)
                 return;
 

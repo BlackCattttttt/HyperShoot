@@ -436,6 +436,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isNav: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 131073
   aIPath: {fileID: 0}
   agent: {fileID: 6897495587074689061}
   anim: {fileID: 3798964345636375827}

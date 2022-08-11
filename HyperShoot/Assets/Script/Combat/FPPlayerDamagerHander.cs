@@ -80,8 +80,6 @@ namespace HyperShoot.Combat
 					damageInfo.ImpactObject.transform.position);
 
 				m_DamageAngleFactor = ((Mathf.Abs(m_DamageAngle) > 30.0f) ? 1 : (Mathf.Lerp(0, 1, (Mathf.Abs(m_DamageAngle) * 0.033f))));
-
-				//FPPlayer.HeadImpact.Send((damageInfo.Damage * CameraShakeFactor * m_DamageAngleFactor) * ((m_DamageAngle < 0.0f) ? 1 : -1));
 			}
 		}
 		public override void Die()

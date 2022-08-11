@@ -1961,12 +1961,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isNav: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 131073
   aIPath: {fileID: 0}
   agent: {fileID: 5490535526996212981}
   anim: {fileID: 3534680766654535254}
   enemyDamageHandler: {fileID: 2717375736024796422}
   walkPointRange: 10
   followDistance: 50
+  fov: 60
   attackDistance: 2
   delayAttack: 0
   damage: 5

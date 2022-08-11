@@ -124,21 +124,6 @@ namespace HyperShoot.Weapon
 				fp_Timer.In(MotionRecoilDelay, ApplyRecoil);
 
 			base.Fire();
-
-			//if (AnimationOutOfAmmo != null)
-			//{
-			//	if (m_Player.CurrentWeaponAmmoCount.Get() == 0)
-			//	{
-			//		if (WeaponAnimation[AnimationOutOfAmmo.name] == null)
-			//			Debug.LogError("Error (" + this + ") No animation named '" + AnimationOutOfAmmo.name + "' is listed in this prefab. Make sure the prefab has an 'Animation' component which references all the clips you wish to play on the weapon.");
-			//		else
-			//		{
-			//			WeaponAnimation[AnimationOutOfAmmo.name].time = 0.0f;
-			//			WeaponAnimation.Sample();
-			//			WeaponAnimation.Play(AnimationOutOfAmmo.name);
-			//		}
-			//	}
-			//}
 		}
 
 		protected override void ApplyRecoil()

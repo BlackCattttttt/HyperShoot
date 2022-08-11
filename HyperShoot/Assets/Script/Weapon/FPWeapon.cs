@@ -614,9 +614,5 @@ namespace HyperShoot.Weapon
 				m_RotationSpring.AddSoftForce(Vector3.right * impact * RotationKneeling, RotationKneelingSoftness);
 		}
 
-		protected virtual void OnMessage_HeadImpact(float impact)
-		{
-			AddForce(Vector3.zero, Vector3.forward * (impact * 20.0f) * Time.timeScale);
-		}
 	}
 }

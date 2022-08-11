@@ -162,9 +162,6 @@ namespace HyperShoot.Weapon
 
                 p = (GameObject)fp_Utility.Instantiate(ProjectilePrefab, m_CurrentFirePosition, m_CurrentFireRotation);
 
-                // TIP: uncomment this to debug-draw bullet paths and points of impact
-                //DrawProjectileDebugInfo(v);
-
                 p.SendMessage("SetSource", (ProjectileSourceIsRoot ? Root : Transform), SendMessageOptions.DontRequireReceiver);
                 p.transform.localScale = new Vector3(ProjectileScale, ProjectileScale, ProjectileScale);    // preset defined scale
 
@@ -186,7 +183,6 @@ namespace HyperShoot.Weapon
         {
             fp_MathUtility.SetSeed(seed);
 
-            //vp_MasterClient.DebugMsg = "Firing shot from '" + photonView.viewID + "' with seed: " + Random.seed + ".";
             target.Rotate(0, 0, Random.Range(0, 360));                                  // first, rotate up to 360 degrees around z for circular spread
             target.Rotate(0, Random.Range(-ProjectileSpread, ProjectileSpread), 0);     // then rotate around y with user defined deviation
         }

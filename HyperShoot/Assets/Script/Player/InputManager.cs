@@ -99,16 +99,10 @@ public class InputManager : Singleton<InputManager>
 		if (Buttons.ContainsKey(button))
 			return true;
 
-		Debug.LogError("Error (" + this + ") \"" + button + "\" is not declared in the UFPS Input Manager. You must add it from the 'UFPS -> Input Manager' editor menu for this button to work.");
-
 		return false;
 
 	}
 
-
-	/// <summary>
-	/// Adds a button with a specified keycode
-	/// </summary>
 	public virtual void AddButton(string n, KeyCode k = KeyCode.None)
 	{
 
@@ -122,10 +116,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// Adds an axis with a positive and negative key
-	/// </summary>
 	public virtual void AddAxis(string n, KeyCode pk = KeyCode.None, KeyCode nk = KeyCode.None)
 	{
 
@@ -139,10 +129,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// Adds a unity axis.
-	/// </summary>
 	public virtual void AddUnityAxis(string n)
 	{
 
@@ -155,10 +141,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// Updates the input dictionaries
-	/// </summary>
 	public virtual void UpdateDictionaries()
 	{
 		Buttons.Clear();
@@ -181,10 +163,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// handles keyboard, mouse and joystick input for any button state
-	/// </summary>
 	public virtual bool DoGetButtonAny(string button)
 	{
 
@@ -199,10 +177,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// handles keyboard, mouse and joystick input while a button is held
-	/// </summary>
 	public static bool GetButton(string button)
 	{
 
@@ -210,10 +184,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// handles keyboard, mouse and joystick input while a button is held
-	/// </summary>
 	public virtual bool DoGetButton(string button)
 	{
 
@@ -227,10 +197,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// handles keyboard, mouse and joystick input for a button down event
-	/// </summary>
 	public static bool GetButtonDown(string button)
 	{
 
@@ -238,10 +204,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// handles keyboard, mouse and joystick input for a button down event
-	/// </summary>
 	public virtual bool DoGetButtonDown(string button)
 	{
 
@@ -255,10 +217,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// handles keyboard, mouse and joystick input when a button is released
-	/// </summary>
 	public static bool GetButtonUp(string button)
 	{
 
@@ -266,10 +224,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// handles keyboard, mouse and joystick input when a button is released
-	/// </summary>
 	public virtual bool DoGetButtonUp(string button)
 	{
 
@@ -283,10 +237,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// handles keyboard, mouse and joystick input for axes
-	/// </summary>
 	public static float GetAxisRaw(string axis)
 	{
 
@@ -294,10 +244,6 @@ public class InputManager : Singleton<InputManager>
 
 	}
 
-
-	/// <summary>
-	/// handles keyboard, mouse and joystick input for axes
-	/// </summary>
 	public virtual float DoGetAxisRaw(string axis)
 	{
 
@@ -316,7 +262,6 @@ public class InputManager : Singleton<InputManager>
 		}
 		else
 		{
-			Debug.LogError("Error (" + this + ") \"" + axis + "\" is not declared in the UFPS Input Manager. You must add it from the 'UFPS -> Input Manager' editor menu for this axis to work.");
 			return 0;
 		}
 

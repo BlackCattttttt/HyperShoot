@@ -7,6 +7,7 @@ namespace HyperShoot.Enemy
     public class FlameThrower : MonoBehaviour
     {
         [SerializeField] private float damage = 1;
+        [SerializeField] protected LayerMask layerMask;
         [SerializeField] private float tickRate = 1;
         [SerializeField] private float range = 15f;
         [SerializeField] private float turnSpeed = 10f;
@@ -38,25 +39,30 @@ namespace HyperShoot.Enemy
             if (!isDead)
             {
                 float distance = Vector3.Distance(transform.position, player.transform.position);
-                if (distance <= range)
-                {
-                    Vector3 dir = (player.transform.position - transform.position).normalized;
-                    Vector3 direction = new Vector3(dir.x, 0, dir.z).normalized;
-                    Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
-                    Vector3 rotation = Quaternion.Lerp(pathToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-                    pathToRotate.rotation = Quaternion.Euler(rotation);
+                Vector3 dirToPlayer = player.transform.position - transform.position;
 
-                    if (fireCountDown <= 0f)
-                    {
-                        Fire();
-                        fireCountDown = 1f / fireRate;
-                    }
-                    fireCountDown -= Time.deltaTime;
-                }
-                else
+                if (!Physics.Raycast(transform.position, dirToPlayer, distance, layerMask))
                 {
-                    AudioManager.Instance.Stop("FlameThrower");
-                    fireParticle.Stop();
+                    if (distance <= range)
+                    {
+                        Vector3 dir = (player.transform.position - transform.position).normalized;
+                        Vector3 direction = new Vector3(dir.x, 0, dir.z).normalized;
+                        Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
+                        Vector3 rotation = Quaternion.Lerp(pathToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+                        pathToRotate.rotation = Quaternion.Euler(rotation);
+
+                        if (fireCountDown <= 0f)
+                        {
+                            Fire();
+                            fireCountDown = 1f / fireRate;
+                        }
+                        fireCountDown -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        AudioManager.Instance.Stop("FlameThrower");
+                        fireParticle.Stop();
+                    }
                 }
             }
         }

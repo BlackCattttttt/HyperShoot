@@ -97,8 +97,6 @@ namespace HyperShoot.Combat
 			Player.Zoom.Stop();
 			Player.Attack.Stop();
 			Player.Reload.Stop();
-			//Player.Climb.Stop();
-			//Player.Interact.Stop();
 		}
 		protected override void Reset()
 		{

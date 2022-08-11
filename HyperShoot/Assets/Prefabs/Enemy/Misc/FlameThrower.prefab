@@ -423,6 +423,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 131073
   tickRate: 0.2
   range: 15
   turnSpeed: 10

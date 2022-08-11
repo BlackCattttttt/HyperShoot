@@ -90,12 +90,8 @@ namespace HyperShoot.Player
 
 			FPController = Root.GetComponent<FPCharacterController>();
 
-			// run 'SetRotation' with the initial rotation of the camera. this is important
-			// when not using the spawnpoint system (or player rotation will snap to zero yaw)
 			SetRotation(new Vector2(Transform.eulerAngles.x, Transform.eulerAngles.y));
 
-			// set parent gameobject layer to 'LocalPlayer', so camera can exclude it
-			// this also prevents shell casings from colliding with the charactercollider
 			Parent.gameObject.layer = fp_Layer.LocalPlayer;
 
 			// main camera initialization
@@ -175,28 +171,17 @@ namespace HyperShoot.Player
 
 			UpdateZoom();
 
-			//UpdateSwaying();
-
 			UpdateSprings();
 
 		}
 
-
-		/// <summary>
-		/// actual rotation of the player model and camera is performed in
-		/// LateUpdate, since by then all game logic should be finished
-		/// </summary>
 		protected override void LateUpdate()
 		{
-
 			base.LateUpdate();
 
 			if (Time.timeScale == 0.0f)
 				return;
 
-			// fetch the FPSController's SmoothPosition. this reduces jitter
-			// by moving the camera at arbitrary update intervals while
-			// controller and springs move at the fixed update interval
 			m_Transform.position = FPController.SmoothPosition;
 
 			// apply current spring offsets
@@ -245,18 +230,8 @@ namespace HyperShoot.Player
 		}
 		public virtual void TryCameraCollision()
 		{
-			// start position is the center of the character controller
-			// and height of the camera PositionOffset. this will detect
-			// objects between the camera and controller even if the
-			// camera PositionOffset is far from the controller
-
 			m_CameraCollisionStartPos = FPController.Transform.TransformPoint(0, PositionOffset.y, 0);
 
-			// end position is the current camera position plus we'll move it
-			// back the distance of our Controller.radius in order to reduce
-			// camera clipping issues very close to walls
-			// TIP: for solving such issues, you can also try reducing the
-			// main camera's near clipping plane 
 			m_CameraCollisionEndPos = Transform.position + (Transform.position - m_CameraCollisionStartPos).normalized * FPController.characterController.radius;
 			m_CollisionVector = Vector3.zero;
 			if (Physics.Linecast(m_CameraCollisionStartPos, m_CameraCollisionEndPos, out m_CameraHit, fp_Layer.Mask.ExternalBlockers))
@@ -277,7 +252,6 @@ namespace HyperShoot.Player
 		}
 		protected virtual void UpdateInput()
 		{
-
 			if (Player.Dead.Active)
 				return;
 
@@ -295,7 +269,6 @@ namespace HyperShoot.Player
 			m_Pitch = m_Pitch < -360.0f ? m_Pitch += 360.0f : m_Pitch;
 			m_Pitch = m_Pitch > 360.0f ? m_Pitch -= 360.0f : m_Pitch;
 			m_Pitch = Mathf.Clamp(m_Pitch, -RotationPitchLimit.x, -RotationPitchLimit.y);
-
 		}
 		protected virtual void UpdateSprings()
 		{
@@ -304,7 +277,6 @@ namespace HyperShoot.Player
 		}
 		protected virtual bool CanStart_Run()
 		{
-
 			if (Player == null)
 				return true;
 
@@ -313,7 +285,6 @@ namespace HyperShoot.Player
 				return false;
 
 			return true;
-
 		}
 		public override void Refresh()
 		{
@@ -346,9 +317,7 @@ namespace HyperShoot.Player
 			Angle = eulerAngles;
 			Stop();
 		}
-		/// <summary>
-		/// stops the springs and zoom
-		/// </summary>
+
 		public virtual void Stop()
 		{
 			//SnapSprings();

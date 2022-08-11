@@ -24555,12 +24555,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isNav: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 131073
   aIPath: {fileID: 0}
   agent: {fileID: 9073855584788956093}
   anim: {fileID: 8437954560561853804}
   enemyDamageHandler: {fileID: 8437954560571334945}
   walkPointRange: 15
   followDistance: 30
+  fov: 80
   attackDistance: 2
   delayAttack: 2
   damage: 7
